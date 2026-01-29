@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit IV: Collections Framework - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Java Hub</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html" class="active">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Unit IV: Collections Framework</h1>
+        <p>Master Java's powerful data structures and algorithms</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#hierarchy">Collection Hierarchy</a></li>
+            <li><a href="#iterator">Iterator</a></li>
+            <li><a href="#list">List Interface</a></li>
+            <li><a href="#set">Set Interface</a></li>
+            <li><a href="#queue">Queue Interface</a></li>
+            <li><a href="#map">Map Interface</a></li>
+            <li><a href="#sorting">Sorting</a></li>
+            <li><a href="#comparable">Comparable vs Comparator</a></li>
+            <li><a href="#properties">Properties Class</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Introduction -->
+        <section id="intro" class="content-section">
+            <h2>Introduction to Collections Framework</h2>
+
+            <h3>Definition</h3>
+            <p>The Java Collections Framework is a unified architecture for representing and manipulating collections. It provides interfaces, implementations, and algorithms to handle groups of objects.</p>
+
+            <h3>Key Points</h3>
+            <ul>
+                <li>Provides ready-to-use data structures</li>
+                <li>Reduces programming effort</li>
+                <li>Increases performance with efficient algorithms</li>
+                <li>Provides interoperability between APIs</li>
+                <li>Located in <code>java.util</code> package</li>
+            </ul>
+
+            <h3>Core Interfaces</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Interface</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Collection</td>
+                    <td>Root interface for most collection types</td>
+                </tr>
+                <tr>
+                    <td>List</td>
+                    <td>Ordered collection, allows duplicates</td>
+                </tr>
+                <tr>
+                    <td>Set</td>
+                    <td>Unordered collection, no duplicates</td>
+                </tr>
+                <tr>
+                    <td>Queue</td>
+                    <td>Collection for holding elements prior to processing</td>
+                </tr>
+                <tr>
+                    <td>Map</td>
+                    <td>Key-value pairs, not part of Collection interface</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Collection Hierarchy -->
+        <section id="hierarchy" class="content-section">
+            <h2>Collection Hierarchy</h2>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Collection Framework Hierarchy</span>
+                </div>
+                <pre><code>                        Iterable&lt;E&gt;
+                            |
+                      Collection&lt;E&gt;
+                     /      |      \
+                   /        |        \
+               List&lt;E&gt;   Set&lt;E&gt;    Queue&lt;E&gt;
+                 |          |          |
+    ArrayList    |    HashSet    LinkedList
+    LinkedList   |  LinkedHashSet  PriorityQueue
+    Vector       |    TreeSet      ArrayDeque
+      |          |
+    Stack    SortedSet&lt;E&gt;
+                 |
+            NavigableSet&lt;E&gt;
+
+
+                       Map&lt;K,V&gt;
+                     /    |    \
+                   /      |      \
+             HashMap  Hashtable  SortedMap&lt;K,V&gt;
+           LinkedHashMap   |           |
+                           |    NavigableMap&lt;K,V&gt;
+                      Properties        |
+                                    TreeMap</code></pre>
+            </div>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>Map interface is NOT part of the Collection interface hierarchy. It represents a mapping between keys and values, not a group of objects.</p>
+            </div>
+        </section>
+
+        <!-- Iterator -->
+        <section id="iterator" class="content-section">
+            <h2>Iterator</h2>
+
+            <h3>Definition</h3>
+            <p>An Iterator is an object that enables you to traverse through a collection and remove elements if needed. It provides a uniform way to iterate over any Collection.</p>
+
+            <h3>Iterator Methods</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>boolean hasNext()</td>
+                    <td>Returns true if iteration has more elements</td>
+                </tr>
+                <tr>
+                    <td>E next()</td>
+                    <td>Returns the next element</td>
+                </tr>
+                <tr>
+                    <td>void remove()</td>
+                    <td>Removes the last element returned</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>IteratorDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> IteratorDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;String&gt; names = <span class="keyword">new</span> ArrayList&lt;&gt;();
+        names.add(<span class="string">"Alice"</span>);
+        names.add(<span class="string">"Bob"</span>);
+        names.add(<span class="string">"Charlie"</span>);
+        
+        <span class="comment">// Using Iterator</span>
+        Iterator&lt;String&gt; it = names.iterator();
+        <span class="keyword">while</span> (it.hasNext()) {
+            String name = it.next();
+            System.out.println(name);
+            
+            <span class="comment">// Safe removal during iteration</span>
+            <span class="keyword">if</span> (name.equals(<span class="string">"Bob"</span>)) {
+                it.remove();  <span class="comment">// Removes "Bob"</span>
+            }
+        }
+        
+        System.out.println(<span class="string">"After removal: "</span> + names);
+        
+        <span class="comment">// ListIterator - bidirectional</span>
+        List&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>));
+        ListIterator&lt;Integer&gt; listIt = numbers.listIterator();
+        
+        <span class="comment">// Forward</span>
+        <span class="keyword">while</span> (listIt.hasNext()) {
+            System.out.println(<span class="string">"Forward: "</span> + listIt.next());
+        }
+        
+        <span class="comment">// Backward</span>
+        <span class="keyword">while</span> (listIt.hasPrevious()) {
+            System.out.println(<span class="string">"Backward: "</span> + listIt.previous());
+        }
+    }
+}</code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>Warning</h4>
+                <p>Never modify a collection while iterating using for-each loop. Use Iterator's remove() method or use ConcurrentModificationException will be thrown.</p>
+            </div>
+        </section>
+
+        <!-- List Interface -->
+        <section id="list" class="content-section">
+            <h2>List Interface</h2>
+
+            <h3>Definition</h3>
+            <p>A List is an ordered collection (sequence) that allows duplicate elements. Elements can be accessed by their integer index (position).</p>
+
+            <h3>List Implementations Comparison</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>ArrayList</th>
+                    <th>LinkedList</th>
+                    <th>Vector</th>
+                </tr>
+                <tr>
+                    <td>Internal Structure</td>
+                    <td>Dynamic array</td>
+                    <td>Doubly linked list</td>
+                    <td>Dynamic array</td>
+                </tr>
+                <tr>
+                    <td>Thread-Safe</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Yes (synchronized)</td>
+                </tr>
+                <tr>
+                    <td>Random Access</td>
+                    <td>O(1) - Fast</td>
+                    <td>O(n) - Slow</td>
+                    <td>O(1) - Fast</td>
+                </tr>
+                <tr>
+                    <td>Insert/Delete</td>
+                    <td>O(n) - Slow</td>
+                    <td>O(1) - Fast</td>
+                    <td>O(n) - Slow</td>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>Less overhead</td>
+                    <td>More (node pointers)</td>
+                    <td>Less overhead</td>
+                </tr>
+            </table>
+
+            <h3>ArrayList</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ArrayListDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> ArrayListDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Creating ArrayList</span>
+        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();
+        
+        <span class="comment">// Adding elements</span>
+        list.add(<span class="string">"Apple"</span>);
+        list.add(<span class="string">"Banana"</span>);
+        list.add(<span class="string">"Cherry"</span>);
+        list.add(<span class="number">1</span>, <span class="string">"Avocado"</span>);  <span class="comment">// Insert at index 1</span>
+        
+        <span class="comment">// Accessing elements</span>
+        System.out.println(<span class="string">"Element at 0: "</span> + list.get(<span class="number">0</span>));
+        System.out.println(<span class="string">"Size: "</span> + list.size());
+        
+        <span class="comment">// Modifying elements</span>
+        list.set(<span class="number">0</span>, <span class="string">"Apricot"</span>);  <span class="comment">// Replace element at index 0</span>
+        
+        <span class="comment">// Searching</span>
+        System.out.println(<span class="string">"Contains Banana: "</span> + list.contains(<span class="string">"Banana"</span>));
+        System.out.println(<span class="string">"Index of Banana: "</span> + list.indexOf(<span class="string">"Banana"</span>));
+        
+        <span class="comment">// Removing elements</span>
+        list.remove(<span class="string">"Banana"</span>);      <span class="comment">// By object</span>
+        list.remove(<span class="number">0</span>);             <span class="comment">// By index</span>
+        
+        <span class="comment">// Iterating</span>
+        <span class="keyword">for</span> (String fruit : list) {
+            System.out.println(fruit);
+        }
+        
+        <span class="comment">// Converting to array</span>
+        String[] arr = list.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);
+    }
+}</code></pre>
+            </div>
+
+            <h3>LinkedList</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>LinkedListDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> LinkedListDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();
+        
+        <span class="comment">// Add at beginning/end</span>
+        list.addFirst(<span class="string">"First"</span>);
+        list.addLast(<span class="string">"Last"</span>);
+        list.add(<span class="string">"Middle"</span>);  <span class="comment">// Same as addLast</span>
+        
+        <span class="comment">// Get first/last</span>
+        System.out.println(<span class="string">"First: "</span> + list.getFirst());
+        System.out.println(<span class="string">"Last: "</span> + list.getLast());
+        
+        <span class="comment">// Remove first/last</span>
+        list.removeFirst();
+        list.removeLast();
+        
+        <span class="comment">// As Queue (FIFO)</span>
+        LinkedList&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();
+        queue.offer(<span class="string">"A"</span>);  <span class="comment">// Add to end</span>
+        queue.offer(<span class="string">"B"</span>);
+        System.out.println(<span class="string">"Poll: "</span> + queue.poll());  <span class="comment">// Remove from front: A</span>
+        System.out.println(<span class="string">"Peek: "</span> + queue.peek());  <span class="comment">// View front: B</span>
+        
+        <span class="comment">// As Stack (LIFO)</span>
+        LinkedList&lt;String&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();
+        stack.push(<span class="string">"X"</span>);  <span class="comment">// Add to front</span>
+        stack.push(<span class="string">"Y"</span>);
+        System.out.println(<span class="string">"Pop: "</span> + stack.pop());  <span class="comment">// Remove from front: Y</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Vector and Stack</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>VectorStackDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> VectorStackDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Vector - synchronized ArrayList (legacy)</span>
+        Vector&lt;Integer&gt; vector = <span class="keyword">new</span> Vector&lt;&gt;();
+        vector.add(<span class="number">10</span>);
+        vector.add(<span class="number">20</span>);
+        vector.add(<span class="number">30</span>);
+        
+        <span class="comment">// Enumeration (legacy iterator)</span>
+        Enumeration&lt;Integer&gt; e = vector.elements();
+        <span class="keyword">while</span> (e.hasMoreElements()) {
+            System.out.println(e.nextElement());
+        }
+        
+        <span class="comment">// Stack - extends Vector (LIFO)</span>
+        Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();
+        stack.push(<span class="string">"A"</span>);
+        stack.push(<span class="string">"B"</span>);
+        stack.push(<span class="string">"C"</span>);
+        
+        System.out.println(<span class="string">"Top: "</span> + stack.peek());      <span class="comment">// C</span>
+        System.out.println(<span class="string">"Pop: "</span> + stack.pop());       <span class="comment">// C</span>
+        System.out.println(<span class="string">"Search B: "</span> + stack.search(<span class="string">"B"</span>));  <span class="comment">// 2 (1-based from top)</span>
+        System.out.println(<span class="string">"Empty? "</span> + stack.empty());
+    }
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Use ArrayList for random access, LinkedList for frequent insertions/deletions. Vector and Stack are legacy classes; prefer ArrayList with Collections.synchronizedList() or ArrayDeque instead.</p>
+            </div>
+        </section>
+
+        <!-- Set Interface -->
+        <section id="set" class="content-section">
+            <h2>Set Interface</h2>
+
+            <h3>Definition</h3>
+            <p>A Set is a collection that contains no duplicate elements. It models the mathematical set abstraction.</p>
+
+            <h3>Set Implementations Comparison</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>HashSet</th>
+                    <th>LinkedHashSet</th>
+                    <th>TreeSet</th>
+                </tr>
+                <tr>
+                    <td>Ordering</td>
+                    <td>No order</td>
+                    <td>Insertion order</td>
+                    <td>Sorted order</td>
+                </tr>
+                <tr>
+                    <td>Internal Structure</td>
+                    <td>Hash table</td>
+                    <td>Hash table + Linked list</td>
+                    <td>Red-black tree</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                    <td>O(log n)</td>
+                </tr>
+                <tr>
+                    <td>Null Elements</td>
+                    <td>One null allowed</td>
+                    <td>One null allowed</td>
+                    <td>No null (NullPointerException)</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SetDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> SetDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// HashSet - no order, no duplicates</span>
+        Set&lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;&gt;();
+        hashSet.add(<span class="string">"Banana"</span>);
+        hashSet.add(<span class="string">"Apple"</span>);
+        hashSet.add(<span class="string">"Cherry"</span>);
+        hashSet.add(<span class="string">"Apple"</span>);  <span class="comment">// Duplicate - ignored</span>
+        System.out.println(<span class="string">"HashSet: "</span> + hashSet);  <span class="comment">// No specific order</span>
+        
+        <span class="comment">// LinkedHashSet - maintains insertion order</span>
+        Set&lt;String&gt; linkedSet = <span class="keyword">new</span> LinkedHashSet&lt;&gt;();
+        linkedSet.add(<span class="string">"Banana"</span>);
+        linkedSet.add(<span class="string">"Apple"</span>);
+        linkedSet.add(<span class="string">"Cherry"</span>);
+        System.out.println(<span class="string">"LinkedHashSet: "</span> + linkedSet);  <span class="comment">// Insertion order</span>
+        
+        <span class="comment">// TreeSet - sorted order</span>
+        Set&lt;String&gt; treeSet = <span class="keyword">new</span> TreeSet&lt;&gt;();
+        treeSet.add(<span class="string">"Banana"</span>);
+        treeSet.add(<span class="string">"Apple"</span>);
+        treeSet.add(<span class="string">"Cherry"</span>);
+        System.out.println(<span class="string">"TreeSet: "</span> + treeSet);  <span class="comment">// [Apple, Banana, Cherry]</span>
+        
+        <span class="comment">// Set operations</span>
+        Set&lt;Integer&gt; set1 = <span class="keyword">new</span> HashSet&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>));
+        Set&lt;Integer&gt; set2 = <span class="keyword">new</span> HashSet&lt;&gt;(Arrays.asList(<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>));
+        
+        <span class="comment">// Union</span>
+        Set&lt;Integer&gt; union = <span class="keyword">new</span> HashSet&lt;&gt;(set1);
+        union.addAll(set2);
+        System.out.println(<span class="string">"Union: "</span> + union);  <span class="comment">// [1, 2, 3, 4, 5, 6]</span>
+        
+        <span class="comment">// Intersection</span>
+        Set&lt;Integer&gt; intersection = <span class="keyword">new</span> HashSet&lt;&gt;(set1);
+        intersection.retainAll(set2);
+        System.out.println(<span class="string">"Intersection: "</span> + intersection);  <span class="comment">// [3, 4]</span>
+        
+        <span class="comment">// Difference</span>
+        Set&lt;Integer&gt; difference = <span class="keyword">new</span> HashSet&lt;&gt;(set1);
+        difference.removeAll(set2);
+        System.out.println(<span class="string">"Difference: "</span> + difference);  <span class="comment">// [1, 2]</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>TreeSet Navigation Methods</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TreeSetNavigation.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> TreeSetNavigation {
+    <span class="keyword">public static void</span> main(String[] args) {
+        TreeSet&lt;Integer&gt; set = <span class="keyword">new</span> TreeSet&lt;&gt;();
+        set.addAll(Arrays.asList(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>));
+        
+        System.out.println(<span class="string">"First: "</span> + set.first());        <span class="comment">// 10</span>
+        System.out.println(<span class="string">"Last: "</span> + set.last());          <span class="comment">// 50</span>
+        System.out.println(<span class="string">"Lower(30): "</span> + set.lower(<span class="number">30</span>)); <span class="comment">// 20 (strictly less)</span>
+        System.out.println(<span class="string">"Floor(30): "</span> + set.floor(<span class="number">30</span>)); <span class="comment">// 30 (less or equal)</span>
+        System.out.println(<span class="string">"Higher(30): "</span> + set.higher(<span class="number">30</span>)); <span class="comment">// 40 (strictly greater)</span>
+        System.out.println(<span class="string">"Ceiling(30): "</span> + set.ceiling(<span class="number">30</span>)); <span class="comment">// 30 (greater or equal)</span>
+        
+        <span class="comment">// SubSet, HeadSet, TailSet</span>
+        System.out.println(<span class="string">"SubSet(20,40): "</span> + set.subSet(<span class="number">20</span>, <span class="number">40</span>));  <span class="comment">// [20, 30]</span>
+        System.out.println(<span class="string">"HeadSet(30): "</span> + set.headSet(<span class="number">30</span>));      <span class="comment">// [10, 20]</span>
+        System.out.println(<span class="string">"TailSet(30): "</span> + set.tailSet(<span class="number">30</span>));      <span class="comment">// [30, 40, 50]</span>
+        
+        <span class="comment">// Descending</span>
+        System.out.println(<span class="string">"Descending: "</span> + set.descendingSet());
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Queue Interface -->
+        <section id="queue" class="content-section">
+            <h2>Queue Interface</h2>
+
+            <h3>Definition</h3>
+            <p>A Queue is a collection designed for holding elements prior to processing. Typically follows FIFO (First-In-First-Out) order.</p>
+
+            <h3>Queue Methods</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Operation</th>
+                    <th>Throws Exception</th>
+                    <th>Returns Special Value</th>
+                </tr>
+                <tr>
+                    <td>Insert</td>
+                    <td>add(e)</td>
+                    <td>offer(e)</td>
+                </tr>
+                <tr>
+                    <td>Remove</td>
+                    <td>remove()</td>
+                    <td>poll()</td>
+                </tr>
+                <tr>
+                    <td>Examine</td>
+                    <td>element()</td>
+                    <td>peek()</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>QueueDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> QueueDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// LinkedList as Queue</span>
+        Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();
+        
+        queue.offer(<span class="string">"First"</span>);
+        queue.offer(<span class="string">"Second"</span>);
+        queue.offer(<span class="string">"Third"</span>);
+        
+        System.out.println(<span class="string">"Queue: "</span> + queue);
+        System.out.println(<span class="string">"Peek: "</span> + queue.peek());    <span class="comment">// First</span>
+        System.out.println(<span class="string">"Poll: "</span> + queue.poll());    <span class="comment">// First (removed)</span>
+        System.out.println(<span class="string">"After poll: "</span> + queue);
+        
+        <span class="comment">// PriorityQueue - elements ordered by priority</span>
+        PriorityQueue&lt;Integer&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;();
+        pq.offer(<span class="number">30</span>);
+        pq.offer(<span class="number">10</span>);
+        pq.offer(<span class="number">20</span>);
+        
+        System.out.println(<span class="string">"PriorityQueue peek: "</span> + pq.peek());  <span class="comment">// 10 (smallest)</span>
+        
+        <span class="comment">// Poll removes in priority order</span>
+        <span class="keyword">while</span> (!pq.isEmpty()) {
+            System.out.println(<span class="string">"Poll: "</span> + pq.poll());  <span class="comment">// 10, 20, 30</span>
+        }
+        
+        <span class="comment">// PriorityQueue with custom comparator (max heap)</span>
+        PriorityQueue&lt;Integer&gt; maxPQ = <span class="keyword">new</span> PriorityQueue&lt;&gt;(
+            Collections.reverseOrder()
+        );
+        maxPQ.offer(<span class="number">30</span>);
+        maxPQ.offer(<span class="number">10</span>);
+        maxPQ.offer(<span class="number">20</span>);
+        System.out.println(<span class="string">"Max heap peek: "</span> + maxPQ.peek());  <span class="comment">// 30</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Deque (Double-Ended Queue)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>DequeDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> DequeDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// ArrayDeque - resizable array implementation</span>
+        Deque&lt;String&gt; deque = <span class="keyword">new</span> ArrayDeque&lt;&gt;();
+        
+        <span class="comment">// Add at both ends</span>
+        deque.addFirst(<span class="string">"First"</span>);
+        deque.addLast(<span class="string">"Last"</span>);
+        deque.offerFirst(<span class="string">"New First"</span>);
+        deque.offerLast(<span class="string">"New Last"</span>);
+        
+        System.out.println(<span class="string">"Deque: "</span> + deque);
+        
+        <span class="comment">// Remove from both ends</span>
+        System.out.println(<span class="string">"Remove First: "</span> + deque.removeFirst());
+        System.out.println(<span class="string">"Remove Last: "</span> + deque.removeLast());
+        
+        <span class="comment">// Use as Stack (LIFO)</span>
+        Deque&lt;Integer&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;();
+        stack.push(<span class="number">1</span>);
+        stack.push(<span class="number">2</span>);
+        stack.push(<span class="number">3</span>);
+        System.out.println(<span class="string">"Pop: "</span> + stack.pop());  <span class="comment">// 3</span>
+        
+        <span class="comment">// Use as Queue (FIFO)</span>
+        Deque&lt;Integer&gt; queue = <span class="keyword">new</span> ArrayDeque&lt;&gt;();
+        queue.offer(<span class="number">1</span>);
+        queue.offer(<span class="number">2</span>);
+        queue.offer(<span class="number">3</span>);
+        System.out.println(<span class="string">"Poll: "</span> + queue.poll());  <span class="comment">// 1</span>
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Map Interface -->
+        <section id="map" class="content-section">
+            <h2>Map Interface</h2>
+
+            <h3>Definition</h3>
+            <p>A Map is an object that maps keys to values. It cannot contain duplicate keys; each key can map to at most one value.</p>
+
+            <h3>Map Implementations Comparison</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>HashMap</th>
+                    <th>LinkedHashMap</th>
+                    <th>TreeMap</th>
+                    <th>Hashtable</th>
+                </tr>
+                <tr>
+                    <td>Ordering</td>
+                    <td>No order</td>
+                    <td>Insertion order</td>
+                    <td>Sorted by keys</td>
+                    <td>No order</td>
+                </tr>
+                <tr>
+                    <td>Null Keys</td>
+                    <td>One allowed</td>
+                    <td>One allowed</td>
+                    <td>Not allowed</td>
+                    <td>Not allowed</td>
+                </tr>
+                <tr>
+                    <td>Null Values</td>
+                    <td>Allowed</td>
+                    <td>Allowed</td>
+                    <td>Allowed</td>
+                    <td>Not allowed</td>
+                </tr>
+                <tr>
+                    <td>Thread-Safe</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>O(1)</td>
+                    <td>O(1)</td>
+                    <td>O(log n)</td>
+                    <td>O(1)</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>MapDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> MapDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// HashMap</span>
+        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();
+        
+        <span class="comment">// Adding entries</span>
+        map.put(<span class="string">"Alice"</span>, <span class="number">25</span>);
+        map.put(<span class="string">"Bob"</span>, <span class="number">30</span>);
+        map.put(<span class="string">"Charlie"</span>, <span class="number">35</span>);
+        
+        <span class="comment">// Accessing values</span>
+        System.out.println(<span class="string">"Alice's age: "</span> + map.get(<span class="string">"Alice"</span>));
+        System.out.println(<span class="string">"Contains Bob: "</span> + map.containsKey(<span class="string">"Bob"</span>));
+        System.out.println(<span class="string">"Contains 30: "</span> + map.containsValue(<span class="number">30</span>));
+        
+        <span class="comment">// Default value if key not found</span>
+        System.out.println(<span class="string">"David: "</span> + map.getOrDefault(<span class="string">"David"</span>, <span class="number">0</span>));
+        
+        <span class="comment">// Updating values</span>
+        map.put(<span class="string">"Alice"</span>, <span class="number">26</span>);  <span class="comment">// Replace</span>
+        map.replace(<span class="string">"Bob"</span>, <span class="number">31</span>);
+        
+        <span class="comment">// Removing entries</span>
+        map.remove(<span class="string">"Charlie"</span>);
+        
+        <span class="comment">// Iterating - keySet</span>
+        <span class="keyword">for</span> (String key : map.keySet()) {
+            System.out.println(key + <span class="string">": "</span> + map.get(key));
+        }
+        
+        <span class="comment">// Iterating - entrySet (preferred)</span>
+        <span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; entry : map.entrySet()) {
+            System.out.println(entry.getKey() + <span class="string">" = "</span> + entry.getValue());
+        }
+        
+        <span class="comment">// Iterating - forEach</span>
+        map.forEach((key, value) -> System.out.println(key + <span class="string">" -> "</span> + value));
+        
+        <span class="comment">// LinkedHashMap - maintains insertion order</span>
+        Map&lt;String, Integer&gt; linkedMap = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();
+        linkedMap.put(<span class="string">"C"</span>, <span class="number">3</span>);
+        linkedMap.put(<span class="string">"A"</span>, <span class="number">1</span>);
+        linkedMap.put(<span class="string">"B"</span>, <span class="number">2</span>);
+        System.out.println(<span class="string">"LinkedHashMap: "</span> + linkedMap);  <span class="comment">// {C=3, A=1, B=2}</span>
+        
+        <span class="comment">// TreeMap - sorted by keys</span>
+        Map&lt;String, Integer&gt; treeMap = <span class="keyword">new</span> TreeMap&lt;&gt;();
+        treeMap.put(<span class="string">"C"</span>, <span class="number">3</span>);
+        treeMap.put(<span class="string">"A"</span>, <span class="number">1</span>);
+        treeMap.put(<span class="string">"B"</span>, <span class="number">2</span>);
+        System.out.println(<span class="string">"TreeMap: "</span> + treeMap);  <span class="comment">// {A=1, B=2, C=3}</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>TreeMap Navigation</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TreeMapNavigation.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> TreeMapNavigation {
+    <span class="keyword">public static void</span> main(String[] args) {
+        TreeMap&lt;Integer, String&gt; map = <span class="keyword">new</span> TreeMap&lt;&gt;();
+        map.put(<span class="number">10</span>, <span class="string">"Ten"</span>);
+        map.put(<span class="number">20</span>, <span class="string">"Twenty"</span>);
+        map.put(<span class="number">30</span>, <span class="string">"Thirty"</span>);
+        map.put(<span class="number">40</span>, <span class="string">"Forty"</span>);
+        
+        System.out.println(<span class="string">"First Key: "</span> + map.firstKey());    <span class="comment">// 10</span>
+        System.out.println(<span class="string">"Last Key: "</span> + map.lastKey());      <span class="comment">// 40</span>
+        System.out.println(<span class="string">"Lower Key(25): "</span> + map.lowerKey(<span class="number">25</span>));    <span class="comment">// 20</span>
+        System.out.println(<span class="string">"Higher Key(25): "</span> + map.higherKey(<span class="number">25</span>));  <span class="comment">// 30</span>
+        
+        <span class="comment">// SubMap</span>
+        System.out.println(<span class="string">"SubMap(15,35): "</span> + map.subMap(<span class="number">15</span>, <span class="number">35</span>));
+        System.out.println(<span class="string">"HeadMap(30): "</span> + map.headMap(<span class="number">30</span>));
+        System.out.println(<span class="string">"TailMap(30): "</span> + map.tailMap(<span class="number">30</span>));
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Sorting -->
+        <section id="sorting" class="content-section">
+            <h2>Sorting Collections</h2>
+
+            <h3>Collections.sort() Method</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SortingDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> SortingDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Sorting List of Strings</span>
+        List&lt;String&gt; names = <span class="keyword">new</span> ArrayList&lt;&gt;(
+            Arrays.asList(<span class="string">"Charlie"</span>, <span class="string">"Alice"</span>, <span class="string">"Bob"</span>)
+        );
+        
+        Collections.sort(names);  <span class="comment">// Natural order (alphabetical)</span>
+        System.out.println(<span class="string">"Sorted: "</span> + names);
+        
+        Collections.sort(names, Collections.reverseOrder());  <span class="comment">// Reverse</span>
+        System.out.println(<span class="string">"Reversed: "</span> + names);
+        
+        <span class="comment">// Sorting List of Integers</span>
+        List&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;&gt;(
+            Arrays.asList(<span class="number">30</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">20</span>, <span class="number">40</span>)
+        );
+        
+        Collections.sort(numbers);
+        System.out.println(<span class="string">"Sorted numbers: "</span> + numbers);
+        
+        <span class="comment">// Sorting with custom Comparator</span>
+        Collections.sort(names, (s1, s2) -> s1.length() - s2.length());
+        System.out.println(<span class="string">"Sorted by length: "</span> + names);
+        
+        <span class="comment">// Using List.sort() method (Java 8+)</span>
+        names.sort(String::compareToIgnoreCase);
+        System.out.println(<span class="string">"Case-insensitive: "</span> + names);
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Comparable vs Comparator -->
+        <section id="comparable" class="content-section">
+            <h2>Comparable vs Comparator</h2>
+
+            <h3>Comparison</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Comparable</th>
+                    <th>Comparator</th>
+                </tr>
+                <tr>
+                    <td>Package</td>
+                    <td>java.lang</td>
+                    <td>java.util</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>compareTo(Object o)</td>
+                    <td>compare(Object o1, Object o2)</td>
+                </tr>
+                <tr>
+                    <td>Sorting Logic</td>
+                    <td>Single (natural ordering)</td>
+                    <td>Multiple (custom orderings)</td>
+                </tr>
+                <tr>
+                    <td>Modifies Class</td>
+                    <td>Yes (implements interface)</td>
+                    <td>No (separate class/lambda)</td>
+                </tr>
+                <tr>
+                    <td>Usage</td>
+                    <td>Collections.sort(list)</td>
+                    <td>Collections.sort(list, comparator)</td>
+                </tr>
+            </table>
+
+            <h3>Comparable Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ComparableDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">class</span> Student <span class="keyword">implements</span> Comparable&lt;Student&gt; {
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private int</span> age;
+    
+    <span class="keyword">public</span> Student(String name, <span class="keyword">int</span> age) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.age = age;
+    }
+    
+    <span class="comment">// Natural ordering by age</span>
+    <span class="annotation">@Override</span>
+    <span class="keyword">public int</span> compareTo(Student other) {
+        <span class="keyword">return this</span>.age - other.age;  <span class="comment">// Ascending by age</span>
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> String toString() {
+        <span class="keyword">return</span> name + <span class="string">"("</span> + age + <span class="string">")"</span>;
+    }
+    
+    <span class="keyword">public</span> String getName() { <span class="keyword">return</span> name; }
+    <span class="keyword">public int</span> getAge() { <span class="keyword">return</span> age; }
+}
+
+<span class="keyword">public class</span> ComparableDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;Student&gt; students = <span class="keyword">new</span> ArrayList&lt;&gt;();
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Alice"</span>, <span class="number">22</span>));
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Bob"</span>, <span class="number">20</span>));
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Charlie"</span>, <span class="number">25</span>));
+        
+        Collections.sort(students);  <span class="comment">// Uses compareTo</span>
+        System.out.println(<span class="string">"Sorted by age: "</span> + students);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Comparator Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ComparatorDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> ComparatorDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;Student&gt; students = <span class="keyword">new</span> ArrayList&lt;&gt;();
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Alice"</span>, <span class="number">22</span>));
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Bob"</span>, <span class="number">20</span>));
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Charlie"</span>, <span class="number">25</span>));
+        
+        <span class="comment">// Comparator using anonymous class</span>
+        Comparator&lt;Student&gt; byName = <span class="keyword">new</span> Comparator&lt;Student&gt;() {
+            <span class="annotation">@Override</span>
+            <span class="keyword">public int</span> compare(Student s1, Student s2) {
+                <span class="keyword">return</span> s1.getName().compareTo(s2.getName());
+            }
+        };
+        
+        <span class="comment">// Comparator using lambda</span>
+        Comparator&lt;Student&gt; byNameLambda = 
+            (s1, s2) -> s1.getName().compareTo(s2.getName());
+        
+        <span class="comment">// Comparator using method reference</span>
+        Comparator&lt;Student&gt; byNameRef = 
+            Comparator.comparing(Student::getName);
+        
+        <span class="comment">// Sort by name</span>
+        Collections.sort(students, byNameRef);
+        System.out.println(<span class="string">"Sorted by name: "</span> + students);
+        
+        <span class="comment">// Reverse order</span>
+        students.sort(Comparator.comparing(Student::getAge).reversed());
+        System.out.println(<span class="string">"Sorted by age (desc): "</span> + students);
+        
+        <span class="comment">// Multiple criteria</span>
+        students.sort(
+            Comparator.comparing(Student::getAge)
+                      .thenComparing(Student::getName)
+        );
+        System.out.println(<span class="string">"Sorted by age, then name: "</span> + students);
+    }
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Use Comparable when there is a single natural ordering for objects. Use Comparator when you need multiple ways to sort the same objects.</p>
+            </div>
+        </section>
+
+        <!-- Properties Class -->
+        <section id="properties" class="content-section">
+            <h2>Properties Class</h2>
+
+            <h3>Definition</h3>
+            <p>The Properties class represents a persistent set of properties that can be saved to a stream or loaded from a stream. It is used for configuration files.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>PropertiesDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+<span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> PropertiesDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Properties props = <span class="keyword">new</span> Properties();
+        
+        <span class="comment">// Setting properties</span>
+        props.setProperty(<span class="string">"database.url"</span>, <span class="string">"jdbc:mysql://localhost:3306/mydb"</span>);
+        props.setProperty(<span class="string">"database.user"</span>, <span class="string">"admin"</span>);
+        props.setProperty(<span class="string">"database.password"</span>, <span class="string">"secret"</span>);
+        
+        <span class="comment">// Getting properties</span>
+        String url = props.getProperty(<span class="string">"database.url"</span>);
+        String timeout = props.getProperty(<span class="string">"database.timeout"</span>, <span class="string">"30"</span>);  <span class="comment">// Default</span>
+        
+        System.out.println(<span class="string">"URL: "</span> + url);
+        System.out.println(<span class="string">"Timeout: "</span> + timeout);
+        
+        <span class="comment">// Saving to file</span>
+        <span class="keyword">try</span> (FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"config.properties"</span>)) {
+            props.store(fos, <span class="string">"Database Configuration"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+        
+        <span class="comment">// Loading from file</span>
+        Properties loadedProps = <span class="keyword">new</span> Properties();
+        <span class="keyword">try</span> (FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"config.properties"</span>)) {
+            loadedProps.load(fis);
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+        
+        <span class="comment">// Iterating properties</span>
+        loadedProps.forEach((key, value) -> 
+            System.out.println(key + <span class="string">" = "</span> + value));
+        
+        <span class="comment">// System properties</span>
+        System.out.println(<span class="string">"Java version: "</span> + System.getProperty(<span class="string">"java.version"</span>));
+        System.out.println(<span class="string">"OS name: "</span> + System.getProperty(<span class="string">"os.name"</span>));
+    }
+}</code></pre>
+            </div>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>Properties extends Hashtable&lt;Object, Object&gt; but should only be used with String keys and values. For type-safe configurations, consider other approaches.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="nav-buttons">
+        <a href="unit3.html" class="nav-btn">Unit III: Modern Features</a>
+        <a href="unit5.html" class="nav-btn">Unit V: Spring Concepts</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="unit1.html">Unit I - Fundamentals</a></li>
+                    <li><a href="unit2.html">Unit II - Exceptions and I/O</a></li>
+                    <li><a href="unit3.html">Unit III - Modern Features</a></li>
+                    <li><a href="unit4.html">Unit IV - Collections</a></li>
+                    <li><a href="unit5.html">Unit V - Spring Concepts</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

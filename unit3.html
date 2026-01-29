@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit III: Modern Java Features - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Java Hub</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html" class="active">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Unit III: Modern Java Features</h1>
+        <p>Explore functional programming and modern language features in Java</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#functional">Functional Interfaces</a></li>
+            <li><a href="#lambda">Lambda Expressions</a></li>
+            <li><a href="#methodref">Method References</a></li>
+            <li><a href="#streams">Stream API</a></li>
+            <li><a href="#default">Default and Static Methods</a></li>
+            <li><a href="#base64">Base64 Encoding</a></li>
+            <li><a href="#foreach">forEach Method</a></li>
+            <li><a href="#trywith">try-with-resources</a></li>
+            <li><a href="#modern">Modern Features</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Functional Interfaces -->
+        <section id="functional" class="content-section">
+            <h2>Functional Interfaces</h2>
+
+            <h3>Definition</h3>
+            <p>A functional interface is an interface that contains exactly one abstract method. It can have any number of default or static methods. Functional interfaces are the foundation for lambda expressions in Java.</p>
+
+            <h3>Key Points</h3>
+            <ul>
+                <li>Contains exactly one abstract method</li>
+                <li>Can have multiple default and static methods</li>
+                <li>Annotated with <code>@FunctionalInterface</code> (optional but recommended)</li>
+                <li>Can be used as the target for lambda expressions</li>
+                <li>Introduced in Java 8</li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>FunctionalInterfaceDemo.java</span>
+                </div>
+                <pre><code><span class="comment">// Custom functional interface</span>
+<span class="annotation">@FunctionalInterface</span>
+<span class="keyword">interface</span> Calculator {
+    <span class="keyword">int</span> calculate(<span class="keyword">int</span> a, <span class="keyword">int</span> b);  <span class="comment">// Single abstract method</span>
+    
+    <span class="comment">// Default method (allowed)</span>
+    <span class="keyword">default void</span> printResult(<span class="keyword">int</span> result) {
+        System.out.println(<span class="string">"Result: "</span> + result);
+    }
+    
+    <span class="comment">// Static method (allowed)</span>
+    <span class="keyword">static void</span> info() {
+        System.out.println(<span class="string">"Calculator Interface"</span>);
+    }
+}
+
+<span class="keyword">public class</span> FunctionalInterfaceDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Using lambda expression</span>
+        Calculator add = (a, b) -> a + b;
+        Calculator subtract = (a, b) -> a - b;
+        Calculator multiply = (a, b) -> a * b;
+        
+        System.out.println(<span class="string">"5 + 3 = "</span> + add.calculate(<span class="number">5</span>, <span class="number">3</span>));
+        System.out.println(<span class="string">"5 - 3 = "</span> + subtract.calculate(<span class="number">5</span>, <span class="number">3</span>));
+        System.out.println(<span class="string">"5 * 3 = "</span> + multiply.calculate(<span class="number">5</span>, <span class="number">3</span>));
+        
+        <span class="comment">// Using default and static methods</span>
+        add.printResult(add.calculate(<span class="number">10</span>, <span class="number">20</span>));
+        Calculator.info();
+    }
+}</code></pre>
+            </div>
+
+            <h3>Built-in Functional Interfaces (java.util.function)</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Interface</th>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Predicate&lt;T&gt;</td>
+                    <td>boolean test(T t)</td>
+                    <td>Tests a condition, returns boolean</td>
+                </tr>
+                <tr>
+                    <td>Function&lt;T, R&gt;</td>
+                    <td>R apply(T t)</td>
+                    <td>Transforms T to R</td>
+                </tr>
+                <tr>
+                    <td>Consumer&lt;T&gt;</td>
+                    <td>void accept(T t)</td>
+                    <td>Consumes T, returns nothing</td>
+                </tr>
+                <tr>
+                    <td>Supplier&lt;T&gt;</td>
+                    <td>T get()</td>
+                    <td>Supplies T, takes no input</td>
+                </tr>
+                <tr>
+                    <td>BiFunction&lt;T, U, R&gt;</td>
+                    <td>R apply(T t, U u)</td>
+                    <td>Takes two inputs, returns R</td>
+                </tr>
+                <tr>
+                    <td>UnaryOperator&lt;T&gt;</td>
+                    <td>T apply(T t)</td>
+                    <td>Same input and output type</td>
+                </tr>
+                <tr>
+                    <td>BinaryOperator&lt;T&gt;</td>
+                    <td>T apply(T t1, T t2)</td>
+                    <td>Two inputs of same type, same output</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>BuiltInFunctionalInterfaces.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.function.*;
+
+<span class="keyword">public class</span> BuiltInFunctionalInterfaces {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Predicate - tests a condition</span>
+        Predicate&lt;Integer&gt; isEven = n -> n % <span class="number">2</span> == <span class="number">0</span>;
+        System.out.println(<span class="string">"Is 4 even? "</span> + isEven.test(<span class="number">4</span>));  <span class="comment">// true</span>
+        
+        <span class="comment">// Function - transforms input to output</span>
+        Function&lt;String, Integer&gt; length = s -> s.length();
+        System.out.println(<span class="string">"Length: "</span> + length.apply(<span class="string">"Hello"</span>));  <span class="comment">// 5</span>
+        
+        <span class="comment">// Consumer - consumes input, no output</span>
+        Consumer&lt;String&gt; printer = s -> System.out.println(s);
+        printer.accept(<span class="string">"Hello, Consumer!"</span>);
+        
+        <span class="comment">// Supplier - supplies output, no input</span>
+        Supplier&lt;Double&gt; random = () -> Math.random();
+        System.out.println(<span class="string">"Random: "</span> + random.get());
+        
+        <span class="comment">// BiFunction - two inputs, one output</span>
+        BiFunction&lt;Integer, Integer, Integer&gt; add = (a, b) -> a + b;
+        System.out.println(<span class="string">"Sum: "</span> + add.apply(<span class="number">5</span>, <span class="number">3</span>));  <span class="comment">// 8</span>
+        
+        <span class="comment">// UnaryOperator - same type input/output</span>
+        UnaryOperator&lt;Integer&gt; square = n -> n * n;
+        System.out.println(<span class="string">"Square: "</span> + square.apply(<span class="number">5</span>));  <span class="comment">// 25</span>
+    }
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>The <code>@FunctionalInterface</code> annotation is optional but recommended. It causes a compile error if the interface has more than one abstract method.</p>
+            </div>
+        </section>
+
+        <!-- Lambda Expressions -->
+        <section id="lambda" class="content-section">
+            <h2>Lambda Expressions</h2>
+
+            <h3>Definition</h3>
+            <p>A lambda expression is a concise way to represent an anonymous function that can be passed as an argument or stored in a variable. It provides a clear and compact syntax for implementing functional interfaces.</p>
+
+            <h3>Syntax</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Lambda Syntax</span>
+                </div>
+                <pre><code><span class="comment">// Basic syntax</span>
+(parameters) -> expression
+
+<span class="comment">// With block body</span>
+(parameters) -> {
+    statements;
+    <span class="keyword">return</span> value;
+}
+
+<span class="comment">// Examples</span>
+() -> <span class="number">42</span>                          <span class="comment">// No parameters</span>
+x -> x * x                        <span class="comment">// Single parameter (no parentheses needed)</span>
+(x, y) -> x + y                   <span class="comment">// Multiple parameters</span>
+(String s) -> s.length()          <span class="comment">// Explicit parameter type</span>
+(x, y) -> { <span class="keyword">return</span> x + y; }       <span class="comment">// Block body with return</span></code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>LambdaDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> LambdaDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Without lambda (anonymous class)</span>
+        Runnable r1 = <span class="keyword">new</span> Runnable() {
+            <span class="annotation">@Override</span>
+            <span class="keyword">public void</span> run() {
+                System.out.println(<span class="string">"Hello from anonymous class"</span>);
+            }
+        };
+        
+        <span class="comment">// With lambda</span>
+        Runnable r2 = () -> System.out.println(<span class="string">"Hello from lambda"</span>);
+        
+        r1.run();
+        r2.run();
+        
+        <span class="comment">// Sorting with lambda</span>
+        List&lt;String&gt; names = Arrays.asList(<span class="string">"John"</span>, <span class="string">"Alice"</span>, <span class="string">"Bob"</span>);
+        
+        <span class="comment">// Without lambda</span>
+        Collections.sort(names, <span class="keyword">new</span> Comparator&lt;String&gt;() {
+            <span class="annotation">@Override</span>
+            <span class="keyword">public int</span> compare(String s1, String s2) {
+                <span class="keyword">return</span> s1.compareTo(s2);
+            }
+        });
+        
+        <span class="comment">// With lambda</span>
+        Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
+        
+        <span class="comment">// Even simpler with method reference</span>
+        Collections.sort(names, String::compareTo);
+        
+        System.out.println(names);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Variable Capture</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>VariableCapture.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> VariableCapture {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Variables used in lambda must be effectively final</span>
+        <span class="keyword">int</span> multiplier = <span class="number">5</span>;  <span class="comment">// effectively final</span>
+        
+        Function&lt;Integer, Integer&gt; multiply = n -> n * multiplier;
+        System.out.println(multiply.apply(<span class="number">10</span>));  <span class="comment">// 50</span>
+        
+        <span class="comment">// This would cause error:</span>
+        <span class="comment">// multiplier = 10;  // Cannot modify - not effectively final</span>
+    }
+}</code></pre>
+            </div>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>Lambda expressions can access variables from the enclosing scope, but those variables must be effectively final (not modified after initialization).</p>
+            </div>
+        </section>
+
+        <!-- Method References -->
+        <section id="methodref" class="content-section">
+            <h2>Method References</h2>
+
+            <h3>Definition</h3>
+            <p>A method reference is a shorthand notation for a lambda expression that calls an existing method. It uses the <code>::</code> operator to separate the class or object name from the method name.</p>
+
+            <h3>Types of Method References</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Type</th>
+                    <th>Syntax</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Static method</td>
+                    <td>ClassName::staticMethod</td>
+                    <td>Math::max</td>
+                </tr>
+                <tr>
+                    <td>Instance method of object</td>
+                    <td>object::instanceMethod</td>
+                    <td>str::toUpperCase</td>
+                </tr>
+                <tr>
+                    <td>Instance method of class</td>
+                    <td>ClassName::instanceMethod</td>
+                    <td>String::length</td>
+                </tr>
+                <tr>
+                    <td>Constructor</td>
+                    <td>ClassName::new</td>
+                    <td>ArrayList::new</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>MethodReferenceDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+<span class="keyword">import</span> java.util.function.*;
+
+<span class="keyword">public class</span> MethodReferenceDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// 1. Static method reference</span>
+        <span class="comment">// Lambda: (a, b) -> Math.max(a, b)</span>
+        BiFunction&lt;Integer, Integer, Integer&gt; max = Math::max;
+        System.out.println(<span class="string">"Max: "</span> + max.apply(<span class="number">5</span>, <span class="number">10</span>));  <span class="comment">// 10</span>
+        
+        <span class="comment">// 2. Instance method of particular object</span>
+        String str = <span class="string">"Hello"</span>;
+        <span class="comment">// Lambda: () -> str.toUpperCase()</span>
+        Supplier&lt;String&gt; upper = str::toUpperCase;
+        System.out.println(upper.get());  <span class="comment">// HELLO</span>
+        
+        <span class="comment">// 3. Instance method of class type</span>
+        <span class="comment">// Lambda: s -> s.length()</span>
+        Function&lt;String, Integer&gt; length = String::length;
+        System.out.println(<span class="string">"Length: "</span> + length.apply(<span class="string">"Java"</span>));  <span class="comment">// 4</span>
+        
+        <span class="comment">// 4. Constructor reference</span>
+        <span class="comment">// Lambda: () -> new ArrayList()</span>
+        Supplier&lt;List&lt;String&gt;&gt; listSupplier = ArrayList::new;
+        List&lt;String&gt; list = listSupplier.get();
+        
+        <span class="comment">// Practical example with forEach</span>
+        List&lt;String&gt; names = Arrays.asList(<span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>);
+        
+        <span class="comment">// Lambda</span>
+        names.forEach(name -> System.out.println(name));
+        
+        <span class="comment">// Method reference</span>
+        names.forEach(System.out::println);
+    }
+    
+    <span class="comment">// Custom static method</span>
+    <span class="keyword">public static boolean</span> isEven(<span class="keyword">int</span> n) {
+        <span class="keyword">return</span> n % <span class="number">2</span> == <span class="number">0</span>;
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Stream API -->
+        <section id="streams" class="content-section">
+            <h2>Stream API</h2>
+
+            <h3>Definition</h3>
+            <p>The Stream API, introduced in Java 8, is used to process collections of objects in a functional style. A stream is a sequence of elements that supports sequential and parallel aggregate operations.</p>
+
+            <h3>Key Points</h3>
+            <ul>
+                <li>Streams do not store elements; they carry values from a source</li>
+                <li>Operations on streams are lazy; computation happens when terminal operation is invoked</li>
+                <li>Streams can be processed only once</li>
+                <li>Streams support functional-style operations</li>
+            </ul>
+
+            <h3>Stream Operations</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Intermediate Operations</th>
+                    <th>Terminal Operations</th>
+                </tr>
+                <tr>
+                    <td>filter(), map(), sorted()</td>
+                    <td>forEach(), collect(), reduce()</td>
+                </tr>
+                <tr>
+                    <td>distinct(), limit(), skip()</td>
+                    <td>count(), min(), max()</td>
+                </tr>
+                <tr>
+                    <td>flatMap(), peek()</td>
+                    <td>findFirst(), findAny(), anyMatch()</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>StreamDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+<span class="keyword">import</span> java.util.stream.*;
+
+<span class="keyword">public class</span> StreamDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;Integer&gt; numbers = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>);
+        
+        <span class="comment">// filter - keep elements matching condition</span>
+        List&lt;Integer&gt; evenNumbers = numbers.stream()
+            .filter(n -> n % <span class="number">2</span> == <span class="number">0</span>)
+            .collect(Collectors.toList());
+        System.out.println(<span class="string">"Even: "</span> + evenNumbers);  <span class="comment">// [2, 4, 6, 8, 10]</span>
+        
+        <span class="comment">// map - transform elements</span>
+        List&lt;Integer&gt; squares = numbers.stream()
+            .map(n -> n * n)
+            .collect(Collectors.toList());
+        System.out.println(<span class="string">"Squares: "</span> + squares);
+        
+        <span class="comment">// reduce - combine elements</span>
+        <span class="keyword">int</span> sum = numbers.stream()
+            .reduce(<span class="number">0</span>, (a, b) -> a + b);
+        System.out.println(<span class="string">"Sum: "</span> + sum);  <span class="comment">// 55</span>
+        
+        <span class="comment">// Chaining operations</span>
+        <span class="keyword">int</span> sumOfEvenSquares = numbers.stream()
+            .filter(n -> n % <span class="number">2</span> == <span class="number">0</span>)    <span class="comment">// Keep even numbers</span>
+            .map(n -> n * n)              <span class="comment">// Square them</span>
+            .reduce(<span class="number">0</span>, Integer::sum);     <span class="comment">// Sum them</span>
+        System.out.println(<span class="string">"Sum of even squares: "</span> + sumOfEvenSquares);  <span class="comment">// 220</span>
+        
+        <span class="comment">// sorted, distinct, limit</span>
+        List&lt;Integer&gt; nums = Arrays.asList(<span class="number">5</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">5</span>);
+        List&lt;Integer&gt; result = nums.stream()
+            .distinct()             <span class="comment">// Remove duplicates</span>
+            .sorted()               <span class="comment">// Sort</span>
+            .limit(<span class="number">4</span>)               <span class="comment">// Take first 4</span>
+            .collect(Collectors.toList());
+        System.out.println(<span class="string">"Result: "</span> + result);  <span class="comment">// [1, 3, 5, 8]</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Collectors</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>CollectorsDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+<span class="keyword">import</span> java.util.stream.*;
+
+<span class="keyword">public class</span> CollectorsDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;String&gt; names = Arrays.asList(<span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>, <span class="string">"David"</span>);
+        
+        <span class="comment">// Collect to List</span>
+        List&lt;String&gt; upperList = names.stream()
+            .map(String::toUpperCase)
+            .collect(Collectors.toList());
+        
+        <span class="comment">// Collect to Set</span>
+        Set&lt;String&gt; upperSet = names.stream()
+            .map(String::toUpperCase)
+            .collect(Collectors.toSet());
+        
+        <span class="comment">// Join strings</span>
+        String joined = names.stream()
+            .collect(Collectors.joining(<span class="string">", "</span>));
+        System.out.println(<span class="string">"Joined: "</span> + joined);  <span class="comment">// Alice, Bob, Charlie, David</span>
+        
+        <span class="comment">// Counting</span>
+        <span class="keyword">long</span> count = names.stream()
+            .filter(n -> n.length() > <span class="number">3</span>)
+            .count();
+        System.out.println(<span class="string">"Count: "</span> + count);
+        
+        <span class="comment">// Grouping</span>
+        Map&lt;Integer, List&lt;String&gt;&gt; byLength = names.stream()
+            .collect(Collectors.groupingBy(String::length));
+        System.out.println(<span class="string">"Grouped by length: "</span> + byLength);
+        
+        <span class="comment">// Partitioning (split into two groups)</span>
+        Map&lt;Boolean, List&lt;String&gt;&gt; partitioned = names.stream()
+            .collect(Collectors.partitioningBy(n -> n.length() > <span class="number">4</span>));
+        System.out.println(<span class="string">"Partitioned: "</span> + partitioned);
+    }
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Remember: Intermediate operations (filter, map, sorted) return a stream and are lazy. Terminal operations (collect, forEach, reduce) produce a result and trigger processing.</p>
+            </div>
+        </section>
+
+        <!-- Default and Static Methods -->
+        <section id="default" class="content-section">
+            <h2>Default and Static Methods in Interfaces</h2>
+
+            <h3>Definition</h3>
+            <p>Java 8 introduced default and static methods in interfaces. Default methods provide a default implementation that implementing classes can override. Static methods belong to the interface and cannot be overridden.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>DefaultStaticDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">interface</span> Vehicle {
+    <span class="comment">// Abstract method (must be implemented)</span>
+    <span class="keyword">void</span> start();
+    
+    <span class="comment">// Default method (has implementation)</span>
+    <span class="keyword">default void</span> honk() {
+        System.out.println(<span class="string">"Honking..."</span>);
+    }
+    
+    <span class="comment">// Static method (belongs to interface)</span>
+    <span class="keyword">static void</span> description() {
+        System.out.println(<span class="string">"This is a vehicle interface"</span>);
+    }
+}
+
+<span class="keyword">class</span> Car <span class="keyword">implements</span> Vehicle {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> start() {
+        System.out.println(<span class="string">"Car starting..."</span>);
+    }
+    
+    <span class="comment">// Optional: Override default method</span>
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> honk() {
+        System.out.println(<span class="string">"Car honking: Beep Beep!"</span>);
+    }
+}
+
+<span class="keyword">class</span> Bike <span class="keyword">implements</span> Vehicle {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> start() {
+        System.out.println(<span class="string">"Bike starting..."</span>);
+    }
+    <span class="comment">// Uses default honk() implementation</span>
+}
+
+<span class="keyword">public class</span> DefaultStaticDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Car car = <span class="keyword">new</span> Car();
+        car.start();
+        car.honk();  <span class="comment">// Overridden</span>
+        
+        Bike bike = <span class="keyword">new</span> Bike();
+        bike.start();
+        bike.honk();  <span class="comment">// Default implementation</span>
+        
+        <span class="comment">// Static method called on interface</span>
+        Vehicle.description();
+    }
+}</code></pre>
+            </div>
+
+            <h3>Diamond Problem Resolution</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>DiamondProblem.java</span>
+                </div>
+                <pre><code><span class="keyword">interface</span> A {
+    <span class="keyword">default void</span> display() {
+        System.out.println(<span class="string">"A"</span>);
+    }
+}
+
+<span class="keyword">interface</span> B {
+    <span class="keyword">default void</span> display() {
+        System.out.println(<span class="string">"B"</span>);
+    }
+}
+
+<span class="comment">// Class must override to resolve conflict</span>
+<span class="keyword">class</span> C <span class="keyword">implements</span> A, B {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> display() {
+        <span class="comment">// Can call specific interface's method</span>
+        A.<span class="keyword">super</span>.display();  <span class="comment">// Calls A's display</span>
+        B.<span class="keyword">super</span>.display();  <span class="comment">// Calls B's display</span>
+        System.out.println(<span class="string">"C"</span>);
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Base64 Encoding -->
+        <section id="base64" class="content-section">
+            <h2>Base64 Encoding and Decoding</h2>
+
+            <h3>Definition</h3>
+            <p>Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. Java 8 introduced the <code>java.util.Base64</code> class for encoding and decoding.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Base64Demo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.Base64;
+
+<span class="keyword">public class</span> Base64Demo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        String original = <span class="string">"Hello, Java Base64!"</span>;
+        
+        <span class="comment">// Basic encoding</span>
+        String encoded = Base64.getEncoder()
+            .encodeToString(original.getBytes());
+        System.out.println(<span class="string">"Encoded: "</span> + encoded);
+        
+        <span class="comment">// Basic decoding</span>
+        <span class="keyword">byte</span>[] decodedBytes = Base64.getDecoder().decode(encoded);
+        String decoded = <span class="keyword">new</span> String(decodedBytes);
+        System.out.println(<span class="string">"Decoded: "</span> + decoded);
+        
+        <span class="comment">// URL-safe encoding (uses - and _ instead of + and /)</span>
+        String urlEncoded = Base64.getUrlEncoder()
+            .encodeToString(original.getBytes());
+        System.out.println(<span class="string">"URL Encoded: "</span> + urlEncoded);
+        
+        <span class="comment">// MIME encoding (for email, with line breaks)</span>
+        String mimeEncoded = Base64.getMimeEncoder()
+            .encodeToString(original.getBytes());
+        System.out.println(<span class="string">"MIME Encoded: "</span> + mimeEncoded);
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- forEach Method -->
+        <section id="foreach" class="content-section">
+            <h2>forEach Method</h2>
+
+            <h3>Definition</h3>
+            <p>The <code>forEach</code> method is a default method in the <code>Iterable</code> interface that performs an action for each element. It accepts a <code>Consumer</code> functional interface.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ForEachDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> ForEachDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;String&gt; names = Arrays.asList(<span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>);
+        
+        <span class="comment">// Traditional for loop</span>
+        <span class="keyword">for</span> (String name : names) {
+            System.out.println(name);
+        }
+        
+        <span class="comment">// forEach with lambda</span>
+        names.forEach(name -> System.out.println(name));
+        
+        <span class="comment">// forEach with method reference</span>
+        names.forEach(System.out::println);
+        
+        <span class="comment">// forEach with Map</span>
+        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();
+        map.put(<span class="string">"A"</span>, <span class="number">1</span>);
+        map.put(<span class="string">"B"</span>, <span class="number">2</span>);
+        map.put(<span class="string">"C"</span>, <span class="number">3</span>);
+        
+        map.forEach((key, value) -> 
+            System.out.println(key + <span class="string">" = "</span> + value));
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- try-with-resources -->
+        <section id="trywith" class="content-section">
+            <h2>try-with-resources Statement</h2>
+
+            <h3>Definition</h3>
+            <p>The try-with-resources statement (introduced in Java 7) automatically closes resources that implement the <code>AutoCloseable</code> interface when the try block exits.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TryWithResourcesDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> TryWithResourcesDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Without try-with-resources (old way)</span>
+        BufferedReader br = <span class="keyword">null</span>;
+        <span class="keyword">try</span> {
+            br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>));
+            String line = br.readLine();
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        } <span class="keyword">finally</span> {
+            <span class="keyword">if</span> (br != <span class="keyword">null</span>) {
+                <span class="keyword">try</span> {
+                    br.close();
+                } <span class="keyword">catch</span> (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        <span class="comment">// With try-with-resources (recommended)</span>
+        <span class="keyword">try</span> (BufferedReader reader = <span class="keyword">new</span> BufferedReader(
+                                       <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>))) {
+            String line = reader.readLine();
+            System.out.println(line);
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+        <span class="comment">// reader is automatically closed</span>
+        
+        <span class="comment">// Multiple resources</span>
+        <span class="keyword">try</span> (FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"input.txt"</span>);
+             FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"output.txt"</span>)) {
+            <span class="keyword">int</span> data;
+            <span class="keyword">while</span> ((data = fis.read()) != -<span class="number">1</span>) {
+                fos.write(data);
+            }
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+            </div>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>Resources declared in try-with-resources must implement <code>AutoCloseable</code> or <code>Closeable</code> interface. They are closed in reverse order of their creation.</p>
+            </div>
+        </section>
+
+        <!-- Modern Java Features -->
+        <section id="modern" class="content-section">
+            <h2>Modern Java Features</h2>
+
+            <h3>Annotations (Introduction)</h3>
+            <p><strong>Definition:</strong> Annotations provide metadata about the program. They do not directly affect program semantics but can be used by the compiler and runtime.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Common Annotations</span>
+                </div>
+                <pre><code><span class="annotation">@Override</span>      <span class="comment">// Indicates method overrides superclass method</span>
+<span class="annotation">@Deprecated</span>   <span class="comment">// Marks element as deprecated</span>
+<span class="annotation">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)  <span class="comment">// Suppresses compiler warnings</span>
+<span class="annotation">@FunctionalInterface</span>  <span class="comment">// Marks interface as functional</span></code></pre>
+            </div>
+
+            <h3>Local Variable Type Inference (var) - Java 10</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>VarDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> VarDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Type is inferred from the right-hand side</span>
+        <span class="keyword">var</span> message = <span class="string">"Hello"</span>;        <span class="comment">// String</span>
+        <span class="keyword">var</span> number = <span class="number">42</span>;              <span class="comment">// int</span>
+        <span class="keyword">var</span> decimal = <span class="number">3.14</span>;           <span class="comment">// double</span>
+        <span class="keyword">var</span> list = <span class="keyword">new</span> ArrayList&lt;String&gt;();  <span class="comment">// ArrayList&lt;String&gt;</span>
+        
+        <span class="comment">// Works in for loops</span>
+        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+            System.out.println(i);
+        }
+        
+        <span class="comment">// Enhanced for loop</span>
+        <span class="keyword">var</span> names = List.of(<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>);
+        <span class="keyword">for</span> (<span class="keyword">var</span> name : names) {
+            System.out.println(name);
+        }
+        
+        <span class="comment">// Cannot use var for:</span>
+        <span class="comment">// - Fields</span>
+        <span class="comment">// - Method parameters</span>
+        <span class="comment">// - Method return types</span>
+        <span class="comment">// - Without initialization</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Switch Expressions (Java 14)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SwitchExpressions.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> SwitchExpressions {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span> day = <span class="number">3</span>;
+        
+        <span class="comment">// Traditional switch</span>
+        String dayName;
+        <span class="keyword">switch</span> (day) {
+            <span class="keyword">case</span> <span class="number">1</span>: dayName = <span class="string">"Monday"</span>; <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="number">2</span>: dayName = <span class="string">"Tuesday"</span>; <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="number">3</span>: dayName = <span class="string">"Wednesday"</span>; <span class="keyword">break</span>;
+            <span class="keyword">default</span>: dayName = <span class="string">"Unknown"</span>;
+        }
+        
+        <span class="comment">// Switch expression with arrow syntax</span>
+        String dayType = <span class="keyword">switch</span> (day) {
+            <span class="keyword">case</span> <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> -> <span class="string">"Weekday"</span>;
+            <span class="keyword">case</span> <span class="number">6</span>, <span class="number">7</span> -> <span class="string">"Weekend"</span>;
+            <span class="keyword">default</span> -> <span class="string">"Invalid"</span>;
+        };
+        
+        <span class="comment">// Switch expression with yield</span>
+        String result = <span class="keyword">switch</span> (day) {
+            <span class="keyword">case</span> <span class="number">1</span> -> {
+                System.out.println(<span class="string">"Monday logic"</span>);
+                <span class="keyword">yield</span> <span class="string">"Start of week"</span>;
+            }
+            <span class="keyword">case</span> <span class="number">5</span> -> {
+                System.out.println(<span class="string">"Friday logic"</span>);
+                <span class="keyword">yield</span> <span class="string">"End of work week"</span>;
+            }
+            <span class="keyword">default</span> -> <span class="string">"Regular day"</span>;
+        };
+    }
+}</code></pre>
+            </div>
+
+            <h3>Text Blocks (Java 15)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TextBlocks.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> TextBlocks {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Traditional multi-line string</span>
+        String html1 = <span class="string">"&lt;html&gt;\n"</span> +
+                       <span class="string">"  &lt;body&gt;\n"</span> +
+                       <span class="string">"    &lt;p&gt;Hello&lt;/p&gt;\n"</span> +
+                       <span class="string">"  &lt;/body&gt;\n"</span> +
+                       <span class="string">"&lt;/html&gt;"</span>;
+        
+        <span class="comment">// Text block (Java 15+)</span>
+        String html2 = <span class="string">"""
+                       &lt;html&gt;
+                         &lt;body&gt;
+                           &lt;p&gt;Hello&lt;/p&gt;
+                         &lt;/body&gt;
+                       &lt;/html&gt;
+                       """</span>;
+        
+        <span class="comment">// JSON example</span>
+        String json = <span class="string">"""
+                      {
+                          "name": "John",
+                          "age": 30,
+                          "city": "New York"
+                      }
+                      """</span>;
+        
+        System.out.println(json);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Records (Java 16)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>RecordsDemo.java</span>
+                </div>
+                <pre><code><span class="comment">// Record - immutable data class</span>
+<span class="keyword">record</span> Person(String name, <span class="keyword">int</span> age) {
+    <span class="comment">// Compact constructor for validation</span>
+    <span class="keyword">public</span> Person {
+        <span class="keyword">if</span> (age < <span class="number">0</span>) {
+            <span class="keyword">throw new</span> IllegalArgumentException(<span class="string">"Age cannot be negative"</span>);
+        }
+    }
+    
+    <span class="comment">// Additional method</span>
+    <span class="keyword">public</span> String greeting() {
+        <span class="keyword">return</span> <span class="string">"Hello, I am "</span> + name;
+    }
+}
+
+<span class="keyword">public class</span> RecordsDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Person p = <span class="keyword">new</span> Person(<span class="string">"John"</span>, <span class="number">25</span>);
+        
+        <span class="comment">// Automatic getter methods (no 'get' prefix)</span>
+        System.out.println(p.name());  <span class="comment">// John</span>
+        System.out.println(p.age());   <span class="comment">// 25</span>
+        
+        <span class="comment">// Automatic toString, equals, hashCode</span>
+        System.out.println(p);  <span class="comment">// Person[name=John, age=25]</span>
+        
+        Person p2 = <span class="keyword">new</span> Person(<span class="string">"John"</span>, <span class="number">25</span>);
+        System.out.println(p.equals(p2));  <span class="comment">// true</span>
+        
+        <span class="comment">// Custom method</span>
+        System.out.println(p.greeting());
+    }
+}</code></pre>
+            </div>
+
+            <h3>Sealed Classes (Java 17)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SealedClassesDemo.java</span>
+                </div>
+                <pre><code><span class="comment">// Sealed class - restricts which classes can extend it</span>
+<span class="keyword">sealed class</span> Shape <span class="keyword">permits</span> Circle, Rectangle, Triangle {
+    <span class="keyword">abstract double</span> area();
+}
+
+<span class="keyword">final class</span> Circle <span class="keyword">extends</span> Shape {
+    <span class="keyword">private final double</span> radius;
+    
+    Circle(<span class="keyword">double</span> radius) {
+        <span class="keyword">this</span>.radius = radius;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">double</span> area() {
+        <span class="keyword">return</span> Math.PI * radius * radius;
+    }
+}
+
+<span class="keyword">final class</span> Rectangle <span class="keyword">extends</span> Shape {
+    <span class="keyword">private final double</span> width, height;
+    
+    Rectangle(<span class="keyword">double</span> width, <span class="keyword">double</span> height) {
+        <span class="keyword">this</span>.width = width;
+        <span class="keyword">this</span>.height = height;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">double</span> area() {
+        <span class="keyword">return</span> width * height;
+    }
+}
+
+<span class="keyword">non-sealed class</span> Triangle <span class="keyword">extends</span> Shape {
+    <span class="keyword">private final double</span> base, height;
+    
+    Triangle(<span class="keyword">double</span> base, <span class="keyword">double</span> height) {
+        <span class="keyword">this</span>.base = base;
+        <span class="keyword">this</span>.height = height;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">double</span> area() {
+        <span class="keyword">return</span> <span class="number">0.5</span> * base * height;
+    }
+}
+
+<span class="comment">// Usage</span>
+<span class="keyword">public class</span> SealedClassesDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Shape circle = <span class="keyword">new</span> Circle(<span class="number">5</span>);
+        System.out.println(<span class="string">"Circle area: "</span> + circle.area());
+    }
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Records are immutable data carriers with automatic constructors, getters, equals(), hashCode(), and toString(). Sealed classes control inheritance hierarchy using permits keyword.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="nav-buttons">
+        <a href="unit2.html" class="nav-btn">Unit II: Exceptions and I/O</a>
+        <a href="unit4.html" class="nav-btn">Unit IV: Collections Framework</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="unit1.html">Unit I - Fundamentals</a></li>
+                    <li><a href="unit2.html">Unit II - Exceptions and I/O</a></li>
+                    <li><a href="unit3.html">Unit III - Modern Features</a></li>
+                    <li><a href="unit4.html">Unit IV - Collections</a></li>
+                    <li><a href="unit5.html">Unit V - Spring Concepts</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

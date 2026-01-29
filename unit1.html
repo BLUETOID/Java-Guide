@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit I: Java Fundamentals - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Java Hub</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html" class="active">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Unit I: Java Fundamentals</h1>
+        <p>Learn the core concepts of Java programming language</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#jvm">JVM, JRE, JDK</a></li>
+            <li><a href="#structure">Source File Structure</a></li>
+            <li><a href="#datatypes">Data Types</a></li>
+            <li><a href="#operators">Operators</a></li>
+            <li><a href="#control">Control Statements</a></li>
+            <li><a href="#arrays">Arrays</a></li>
+            <li><a href="#strings">Strings</a></li>
+            <li><a href="#oop">OOP Concepts</a></li>
+            <li><a href="#packages">Packages</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Introduction to Java -->
+        <section id="intro" class="content-section">
+            <h2>Why Java and History of Java</h2>
+            
+            <h3>Definition</h3>
+            <p>Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. It follows the principle of "Write Once, Run Anywhere" (WORA).</p>
+            
+            <h3>History</h3>
+            <ul>
+                <li>Developed by <strong>James Gosling</strong> at Sun Microsystems</li>
+                <li>First released in <strong>1995</strong></li>
+                <li>Originally named "Oak", later renamed to "Java"</li>
+                <li>Sun Microsystems was acquired by Oracle Corporation in 2010</li>
+                <li>Current version: Java SE 21 (LTS) as of 2024</li>
+            </ul>
+
+            <h3>Key Features of Java</h3>
+            <ul>
+                <li><strong>Platform Independent:</strong> Java bytecode runs on any platform with JVM</li>
+                <li><strong>Object-Oriented:</strong> Everything in Java is an object (except primitives)</li>
+                <li><strong>Simple:</strong> Removed complex features like pointers and operator overloading from C++</li>
+                <li><strong>Secure:</strong> No explicit pointers, bytecode verification, security manager</li>
+                <li><strong>Robust:</strong> Strong type checking, exception handling, garbage collection</li>
+                <li><strong>Multithreaded:</strong> Built-in support for concurrent programming</li>
+                <li><strong>Architecture Neutral:</strong> No implementation-dependent features</li>
+                <li><strong>Distributed:</strong> Designed for distributed computing with RMI and EJB</li>
+            </ul>
+
+            <h3>Your First Java Program</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HelloWorld.java</span>
+                </div>
+                <pre><code><span class="comment">// This is your first Java program</span>
+<span class="keyword">public class</span> HelloWorld {
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(<span class="string">"Hello, World!"</span>);
+        
+        <span class="comment">// Print numbers</span>
+        System.out.println(<span class="number">42</span>);
+        
+        <span class="comment">// Perform calculations</span>
+        System.out.println(<span class="number">10</span> + <span class="number">20</span>);
+    }
+}</code></pre>
+            </div>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>The filename must match the public class name exactly (case-sensitive) and have the <code>.java</code> extension. For example, <code>HelloWorld.java</code> for <code>public class HelloWorld</code>.</p>
+            </div>
+        </section>
+
+        <!-- JVM, JRE, JDK -->
+        <section id="jvm" class="content-section">
+            <h2>JVM, JRE, and JDK</h2>
+
+            <h3>JDK (Java Development Kit)</h3>
+            <p><strong>Definition:</strong> JDK is a software development environment used for developing Java applications. It includes the JRE plus development tools.</p>
+            <ul>
+                <li>Contains compiler (javac), debugger, and other development tools</li>
+                <li>Required for developing Java applications</li>
+                <li>Includes JRE and development tools</li>
+            </ul>
+
+            <h3>JRE (Java Runtime Environment)</h3>
+            <p><strong>Definition:</strong> JRE provides the runtime environment to execute Java applications. It contains the JVM and standard class libraries.</p>
+            <ul>
+                <li>Required to run Java applications</li>
+                <li>Contains JVM and core libraries</li>
+                <li>Does not include development tools</li>
+            </ul>
+
+            <h3>JVM (Java Virtual Machine)</h3>
+            <p><strong>Definition:</strong> JVM is an abstract machine that provides the runtime environment in which Java bytecode can be executed. It is platform-dependent.</p>
+            <ul>
+                <li>Executes Java bytecode</li>
+                <li>Provides memory management (Garbage Collection)</li>
+                <li>Platform-specific implementation</li>
+                <li>Responsible for: Loading, Linking, and Initialization</li>
+            </ul>
+
+            <h3>Relationship</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Component</th>
+                    <th>Contains</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>JDK</td>
+                    <td>JRE + Development Tools (javac, jar, javadoc)</td>
+                    <td>Develop and Run Java programs</td>
+                </tr>
+                <tr>
+                    <td>JRE</td>
+                    <td>JVM + Library Classes</td>
+                    <td>Run Java programs</td>
+                </tr>
+                <tr>
+                    <td>JVM</td>
+                    <td>Class Loader, Bytecode Verifier, Interpreter</td>
+                    <td>Execute bytecode</td>
+                </tr>
+            </table>
+
+            <h3>Java Compilation Process</h3>
+            <ol>
+                <li><strong>Source Code (.java):</strong> Write Java source code</li>
+                <li><strong>Compilation:</strong> javac compiles source to bytecode (.class)</li>
+                <li><strong>Bytecode (.class):</strong> Platform-independent intermediate code</li>
+                <li><strong>JVM Execution:</strong> JVM interprets/JIT compiles bytecode to machine code</li>
+                <li><strong>Output:</strong> Program executes on the host machine</li>
+            </ol>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Terminal Commands</span>
+                </div>
+                <pre><code><span class="comment"># Compile Java source file</span>
+javac HelloWorld.java
+
+<span class="comment"># Run the compiled program</span>
+java HelloWorld
+
+<span class="comment"># Output: Hello, World!</span></code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Remember: JDK = JRE + Development Tools, JRE = JVM + Libraries. The JVM is platform-dependent, but bytecode is platform-independent.</p>
+            </div>
+        </section>
+
+        <!-- Java Source File Structure -->
+        <section id="structure" class="content-section">
+            <h2>Java Source File Structure</h2>
+
+            <h3>Definition</h3>
+            <p>A Java source file has a specific structure that must be followed. The file can contain package declaration, import statements, and class definitions in a specific order.</p>
+
+            <h3>Structure Order (Must Follow)</h3>
+            <ol>
+                <li><strong>Package Statement</strong> (optional, must be first if present)</li>
+                <li><strong>Import Statements</strong> (optional)</li>
+                <li><strong>Class/Interface Declarations</strong></li>
+            </ol>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SourceFileStructure.java</span>
+                </div>
+                <pre><code><span class="comment">// 1. Package declaration (optional, must be first)</span>
+<span class="keyword">package</span> com.example.myapp;
+
+<span class="comment">// 2. Import statements (optional)</span>
+<span class="keyword">import</span> java.util.Scanner;
+<span class="keyword">import</span> java.util.ArrayList;
+
+<span class="comment">// 3. Class declaration</span>
+<span class="keyword">public class</span> SourceFileStructure {
+    <span class="comment">// Fields (instance variables)</span>
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private int</span> age;
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> SourceFileStructure(String name, <span class="keyword">int</span> age) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.age = age;
+    }
+    
+    <span class="comment">// Methods</span>
+    <span class="keyword">public void</span> display() {
+        System.out.println(<span class="string">"Name: "</span> + name);
+        System.out.println(<span class="string">"Age: "</span> + age);
+    }
+    
+    <span class="comment">// Main method - entry point</span>
+    <span class="keyword">public static void</span> main(String[] args) {
+        SourceFileStructure obj = <span class="keyword">new</span> SourceFileStructure(<span class="string">"John"</span>, <span class="number">25</span>);
+        obj.display();
+    }
+}</code></pre>
+            </div>
+
+            <h3>Rules for Java Source Files</h3>
+            <ul>
+                <li>Only one public class per source file</li>
+                <li>Filename must match the public class name (case-sensitive)</li>
+                <li>A source file can have multiple non-public classes</li>
+                <li>Package statement must be the first statement (if present)</li>
+                <li>Import statements come after package and before class declarations</li>
+            </ul>
+
+            <h3>Access Specifiers</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Modifier</th>
+                    <th>Class</th>
+                    <th>Package</th>
+                    <th>Subclass</th>
+                    <th>World</th>
+                </tr>
+                <tr>
+                    <td>public</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>protected</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>default (no modifier)</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>private</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>No</td>
+                </tr>
+            </table>
+
+            <div class="common-mistake">
+                <h4>Common Mistake</h4>
+                <p>Placing import statements before the package declaration will cause a compilation error. Always follow the order: package, imports, class.</p>
+            </div>
+        </section>
+
+        <!-- Data Types -->
+        <section id="datatypes" class="content-section">
+            <h2>Data Types in Java</h2>
+
+            <h3>Definition</h3>
+            <p>Data types specify the type of data that can be stored in a variable. Java is a statically-typed language, meaning all variables must be declared with a data type before use.</p>
+
+            <h3>Categories of Data Types</h3>
+            <p>Java has two categories of data types:</p>
+            <ul>
+                <li><strong>Primitive Data Types:</strong> Built-in types provided by Java (8 types)</li>
+                <li><strong>Reference Data Types:</strong> Objects, Arrays, Interfaces, Classes</li>
+            </ul>
+
+            <h3>Primitive Data Types</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Range</th>
+                    <th>Default</th>
+                </tr>
+                <tr>
+                    <td>byte</td>
+                    <td>1 byte</td>
+                    <td>-128 to 127</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>short</td>
+                    <td>2 bytes</td>
+                    <td>-32,768 to 32,767</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>int</td>
+                    <td>4 bytes</td>
+                    <td>-2^31 to 2^31-1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>long</td>
+                    <td>8 bytes</td>
+                    <td>-2^63 to 2^63-1</td>
+                    <td>0L</td>
+                </tr>
+                <tr>
+                    <td>float</td>
+                    <td>4 bytes</td>
+                    <td>~7 decimal digits</td>
+                    <td>0.0f</td>
+                </tr>
+                <tr>
+                    <td>double</td>
+                    <td>8 bytes</td>
+                    <td>~15 decimal digits</td>
+                    <td>0.0d</td>
+                </tr>
+                <tr>
+                    <td>char</td>
+                    <td>2 bytes</td>
+                    <td>0 to 65,535 (Unicode)</td>
+                    <td>'\u0000'</td>
+                </tr>
+                <tr>
+                    <td>boolean</td>
+                    <td>1 bit</td>
+                    <td>true or false</td>
+                    <td>false</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>DataTypesDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> DataTypesDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Integer types</span>
+        <span class="keyword">byte</span> b = <span class="number">100</span>;
+        <span class="keyword">short</span> s = <span class="number">10000</span>;
+        <span class="keyword">int</span> i = <span class="number">100000</span>;
+        <span class="keyword">long</span> l = <span class="number">10000000000L</span>;  <span class="comment">// Note: L suffix for long</span>
+        
+        <span class="comment">// Floating-point types</span>
+        <span class="keyword">float</span> f = <span class="number">3.14f</span>;      <span class="comment">// Note: f suffix for float</span>
+        <span class="keyword">double</span> d = <span class="number">3.14159265359</span>;
+        
+        <span class="comment">// Character type</span>
+        <span class="keyword">char</span> c = <span class="string">'A'</span>;
+        <span class="keyword">char</span> unicode = <span class="string">'\u0041'</span>;  <span class="comment">// Also 'A'</span>
+        
+        <span class="comment">// Boolean type</span>
+        <span class="keyword">boolean</span> isJavaFun = <span class="keyword">true</span>;
+        
+        <span class="comment">// Reference type (String is a class)</span>
+        String name = <span class="string">"Java"</span>;
+        
+        System.out.println(<span class="string">"byte: "</span> + b);
+        System.out.println(<span class="string">"int: "</span> + i);
+        System.out.println(<span class="string">"double: "</span> + d);
+        System.out.println(<span class="string">"char: "</span> + c);
+        System.out.println(<span class="string">"boolean: "</span> + isJavaFun);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Type Casting</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TypeCasting.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> TypeCasting {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Widening (Implicit) - automatic</span>
+        <span class="keyword">int</span> intVal = <span class="number">100</span>;
+        <span class="keyword">double</span> doubleVal = intVal;  <span class="comment">// int to double</span>
+        System.out.println(<span class="string">"Widening: "</span> + doubleVal);  <span class="comment">// 100.0</span>
+        
+        <span class="comment">// Narrowing (Explicit) - requires cast</span>
+        <span class="keyword">double</span> d = <span class="number">9.78</span>;
+        <span class="keyword">int</span> i = (<span class="keyword">int</span>) d;  <span class="comment">// double to int (truncates)</span>
+        System.out.println(<span class="string">"Narrowing: "</span> + i);  <span class="comment">// 9</span>
+        
+        <span class="comment">// String to int</span>
+        String str = <span class="string">"123"</span>;
+        <span class="keyword">int</span> num = Integer.parseInt(str);
+        
+        <span class="comment">// int to String</span>
+        <span class="keyword">int</span> value = <span class="number">456</span>;
+        String s = String.valueOf(value);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Variables</h3>
+            <ul>
+                <li><strong>Local Variables:</strong> Declared inside methods, must be initialized before use</li>
+                <li><strong>Instance Variables:</strong> Declared in class but outside methods, have default values</li>
+                <li><strong>Static Variables:</strong> Declared with static keyword, shared across all instances</li>
+            </ul>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Remember the size hierarchy: byte (1) &lt; short (2) &lt; int (4) &lt; long (8) and float (4) &lt; double (8). char is 2 bytes because Java uses Unicode.</p>
+            </div>
+        </section>
+
+        <!-- Operators -->
+        <section id="operators" class="content-section">
+            <h2>Operators in Java</h2>
+
+            <h3>Definition</h3>
+            <p>Operators are special symbols that perform operations on operands (variables and values). Java provides a rich set of operators classified into several categories.</p>
+
+            <h3>1. Arithmetic Operators</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Operator</th>
+                    <th>Name</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr><td>+</td><td>Addition</td><td>5 + 3</td><td>8</td></tr>
+                <tr><td>-</td><td>Subtraction</td><td>5 - 3</td><td>2</td></tr>
+                <tr><td>*</td><td>Multiplication</td><td>5 * 3</td><td>15</td></tr>
+                <tr><td>/</td><td>Division</td><td>5 / 3</td><td>1 (integer division)</td></tr>
+                <tr><td>%</td><td>Modulus</td><td>5 % 3</td><td>2</td></tr>
+            </table>
+
+            <h3>2. Relational Operators</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Operator</th>
+                    <th>Name</th>
+                    <th>Example</th>
+                </tr>
+                <tr><td>==</td><td>Equal to</td><td>a == b</td></tr>
+                <tr><td>!=</td><td>Not equal to</td><td>a != b</td></tr>
+                <tr><td>&gt;</td><td>Greater than</td><td>a &gt; b</td></tr>
+                <tr><td>&lt;</td><td>Less than</td><td>a &lt; b</td></tr>
+                <tr><td>&gt;=</td><td>Greater than or equal</td><td>a &gt;= b</td></tr>
+                <tr><td>&lt;=</td><td>Less than or equal</td><td>a &lt;= b</td></tr>
+            </table>
+
+            <h3>3. Logical Operators</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>LogicalOperators.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> LogicalOperators {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">boolean</span> a = <span class="keyword">true</span>;
+        <span class="keyword">boolean</span> b = <span class="keyword">false</span>;
+        
+        <span class="comment">// AND - both must be true</span>
+        System.out.println(<span class="string">"a && b: "</span> + (a && b));  <span class="comment">// false</span>
+        
+        <span class="comment">// OR - at least one must be true</span>
+        System.out.println(<span class="string">"a || b: "</span> + (a || b));  <span class="comment">// true</span>
+        
+        <span class="comment">// NOT - reverses the value</span>
+        System.out.println(<span class="string">"!a: "</span> + !a);  <span class="comment">// false</span>
+        
+        <span class="comment">// Practical example</span>
+        <span class="keyword">int</span> age = <span class="number">25</span>;
+        <span class="keyword">boolean</span> hasLicense = <span class="keyword">true</span>;
+        <span class="keyword">boolean</span> canDrive = (age >= <span class="number">18</span>) && hasLicense;
+        System.out.println(<span class="string">"Can drive: "</span> + canDrive);  <span class="comment">// true</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>4. Assignment Operators</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>AssignmentOperators.java</span>
+                </div>
+                <pre><code><span class="keyword">int</span> x = <span class="number">10</span>;
+x += <span class="number">5</span>;   <span class="comment">// x = x + 5;  x = 15</span>
+x -= <span class="number">3</span>;   <span class="comment">// x = x - 3;  x = 12</span>
+x *= <span class="number">2</span>;   <span class="comment">// x = x * 2;  x = 24</span>
+x /= <span class="number">4</span>;   <span class="comment">// x = x / 4;  x = 6</span>
+x %= <span class="number">4</span>;   <span class="comment">// x = x % 4;  x = 2</span></code></pre>
+            </div>
+
+            <h3>5. Unary Operators</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>UnaryOperators.java</span>
+                </div>
+                <pre><code><span class="keyword">int</span> a = <span class="number">5</span>;
+
+<span class="comment">// Pre-increment: increment first, then use</span>
+System.out.println(++a);  <span class="comment">// Output: 6</span>
+
+<span class="comment">// Post-increment: use first, then increment</span>
+a = <span class="number">5</span>;
+System.out.println(a++);  <span class="comment">// Output: 5</span>
+System.out.println(a);    <span class="comment">// Output: 6</span>
+
+<span class="comment">// Pre-decrement and Post-decrement work similarly</span>
+<span class="keyword">int</span> b = <span class="number">10</span>;
+System.out.println(--b);  <span class="comment">// Output: 9</span>
+System.out.println(b--);  <span class="comment">// Output: 9</span>
+System.out.println(b);    <span class="comment">// Output: 8</span></code></pre>
+            </div>
+
+            <h3>6. Ternary Operator</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TernaryOperator.java</span>
+                </div>
+                <pre><code><span class="comment">// Syntax: condition ? value_if_true : value_if_false</span>
+
+<span class="keyword">int</span> age = <span class="number">20</span>;
+String status = (age >= <span class="number">18</span>) ? <span class="string">"Adult"</span> : <span class="string">"Minor"</span>;
+System.out.println(status);  <span class="comment">// Output: Adult</span>
+
+<span class="comment">// Finding maximum</span>
+<span class="keyword">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;
+<span class="keyword">int</span> max = (a > b) ? a : b;
+System.out.println(<span class="string">"Max: "</span> + max);  <span class="comment">// Output: Max: 20</span></code></pre>
+            </div>
+
+            <h3>7. Bitwise Operators</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Operator</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                <tr><td>&amp;</td><td>AND</td><td>Sets bit to 1 if both bits are 1</td></tr>
+                <tr><td>|</td><td>OR</td><td>Sets bit to 1 if at least one bit is 1</td></tr>
+                <tr><td>^</td><td>XOR</td><td>Sets bit to 1 if only one bit is 1</td></tr>
+                <tr><td>~</td><td>NOT</td><td>Inverts all the bits</td></tr>
+                <tr><td>&lt;&lt;</td><td>Left Shift</td><td>Shifts bits left, fills with 0</td></tr>
+                <tr><td>&gt;&gt;</td><td>Right Shift</td><td>Shifts bits right, preserves sign</td></tr>
+            </table>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Understand the difference between <code>++i</code> (pre-increment) and <code>i++</code> (post-increment). In expressions, pre-increment increments first and then uses the value, while post-increment uses the value first and then increments.</p>
+            </div>
+        </section>
+
+        <!-- Control Statements -->
+        <section id="control" class="content-section">
+            <h2>Control Statements</h2>
+
+            <h3>Definition</h3>
+            <p>Control statements determine the flow of execution of a program. They allow decision making, looping, and branching in code.</p>
+
+            <h3>1. if-else Statement</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>IfElseDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> IfElseDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span> age = <span class="number">20</span>;
+        
+        <span class="comment">// Simple if</span>
+        <span class="keyword">if</span> (age >= <span class="number">18</span>) {
+            System.out.println(<span class="string">"You are an adult"</span>);
+        }
+        
+        <span class="comment">// if-else</span>
+        <span class="keyword">if</span> (age >= <span class="number">18</span>) {
+            System.out.println(<span class="string">"Can vote"</span>);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Cannot vote"</span>);
+        }
+        
+        <span class="comment">// if-else-if ladder</span>
+        <span class="keyword">int</span> score = <span class="number">85</span>;
+        <span class="keyword">if</span> (score >= <span class="number">90</span>) {
+            System.out.println(<span class="string">"Grade: A"</span>);
+        } <span class="keyword">else if</span> (score >= <span class="number">80</span>) {
+            System.out.println(<span class="string">"Grade: B"</span>);
+        } <span class="keyword">else if</span> (score >= <span class="number">70</span>) {
+            System.out.println(<span class="string">"Grade: C"</span>);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Grade: F"</span>);
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>2. switch Statement</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SwitchDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> SwitchDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span> day = <span class="number">3</span>;
+        
+        <span class="keyword">switch</span> (day) {
+            <span class="keyword">case</span> <span class="number">1</span>:
+                System.out.println(<span class="string">"Monday"</span>);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="number">2</span>:
+                System.out.println(<span class="string">"Tuesday"</span>);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="number">3</span>:
+                System.out.println(<span class="string">"Wednesday"</span>);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="number">4</span>:
+                System.out.println(<span class="string">"Thursday"</span>);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="number">5</span>:
+                System.out.println(<span class="string">"Friday"</span>);
+                <span class="keyword">break</span>;
+            <span class="keyword">default</span>:
+                System.out.println(<span class="string">"Weekend"</span>);
+        }
+        
+        <span class="comment">// Switch with String (Java 7+)</span>
+        String fruit = <span class="string">"Apple"</span>;
+        <span class="keyword">switch</span> (fruit) {
+            <span class="keyword">case</span> <span class="string">"Apple"</span>:
+                System.out.println(<span class="string">"Red fruit"</span>);
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"Banana"</span>:
+                System.out.println(<span class="string">"Yellow fruit"</span>);
+                <span class="keyword">break</span>;
+            <span class="keyword">default</span>:
+                System.out.println(<span class="string">"Unknown fruit"</span>);
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>3. for Loop</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ForLoopDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> ForLoopDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Basic for loop</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
+            System.out.println(<span class="string">"Count: "</span> + i);
+        }
+        
+        <span class="comment">// Enhanced for loop (for-each)</span>
+        <span class="keyword">int</span>[] numbers = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>};
+        <span class="keyword">for</span> (<span class="keyword">int</span> num : numbers) {
+            System.out.println(<span class="string">"Number: "</span> + num);
+        }
+        
+        <span class="comment">// Nested for loop</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">3</span>; i++) {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j <= <span class="number">3</span>; j++) {
+                System.out.print(i * j + <span class="string">" "</span>);
+            }
+            System.out.println();
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>4. while Loop</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>WhileLoopDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> WhileLoopDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// while loop</span>
+        <span class="keyword">int</span> count = <span class="number">1</span>;
+        <span class="keyword">while</span> (count <= <span class="number">5</span>) {
+            System.out.println(<span class="string">"Count: "</span> + count);
+            count++;
+        }
+        
+        <span class="comment">// do-while loop (executes at least once)</span>
+        <span class="keyword">int</span> num = <span class="number">1</span>;
+        <span class="keyword">do</span> {
+            System.out.println(<span class="string">"Number: "</span> + num);
+            num++;
+        } <span class="keyword">while</span> (num <= <span class="number">5</span>);
+    }
+}</code></pre>
+            </div>
+
+            <h3>5. break and continue</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>BreakContinueDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> BreakContinueDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// break - exits the loop</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++) {
+            <span class="keyword">if</span> (i == <span class="number">5</span>) {
+                <span class="keyword">break</span>;  <span class="comment">// Exits loop when i is 5</span>
+            }
+            System.out.println(i);  <span class="comment">// Prints 1, 2, 3, 4</span>
+        }
+        
+        <span class="comment">// continue - skips current iteration</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
+            <span class="keyword">if</span> (i == <span class="number">3</span>) {
+                <span class="keyword">continue</span>;  <span class="comment">// Skips when i is 3</span>
+            }
+            System.out.println(i);  <span class="comment">// Prints 1, 2, 4, 5</span>
+        }
+    }
+}</code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>Warning</h4>
+                <p>Unlike Python, Java does not have an <code>else</code> clause for loops. The <code>do-while</code> loop is guaranteed to execute at least once, unlike the <code>while</code> loop which may not execute at all if the condition is initially false.</p>
+            </div>
+        </section>
+
+        <!-- Arrays -->
+        <section id="arrays" class="content-section">
+            <h2>Arrays in Java</h2>
+
+            <h3>Definition</h3>
+            <p>An array is a container object that holds a fixed number of values of a single type. The length of an array is established when the array is created and cannot be changed after creation.</p>
+
+            <h3>Key Points</h3>
+            <ul>
+                <li>Arrays are objects in Java</li>
+                <li>Array size is fixed once created</li>
+                <li>Arrays are zero-indexed (first element at index 0)</li>
+                <li>Arrays can store primitives or objects</li>
+                <li>The <code>length</code> property gives the array size</li>
+            </ul>
+
+            <h3>Array Declaration and Initialization</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ArrayDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> ArrayDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Declaration and initialization</span>
+        <span class="keyword">int</span>[] numbers = <span class="keyword">new int</span>[<span class="number">5</span>];  <span class="comment">// Array of 5 integers</span>
+        
+        <span class="comment">// Assigning values</span>
+        numbers[<span class="number">0</span>] = <span class="number">10</span>;
+        numbers[<span class="number">1</span>] = <span class="number">20</span>;
+        numbers[<span class="number">2</span>] = <span class="number">30</span>;
+        numbers[<span class="number">3</span>] = <span class="number">40</span>;
+        numbers[<span class="number">4</span>] = <span class="number">50</span>;
+        
+        <span class="comment">// Declaration with values (array literal)</span>
+        <span class="keyword">int</span>[] scores = {<span class="number">85</span>, <span class="number">90</span>, <span class="number">78</span>, <span class="number">92</span>, <span class="number">88</span>};
+        
+        <span class="comment">// String array</span>
+        String[] fruits = {<span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Cherry"</span>};
+        
+        <span class="comment">// Accessing elements</span>
+        System.out.println(<span class="string">"First fruit: "</span> + fruits[<span class="number">0</span>]);
+        System.out.println(<span class="string">"Array length: "</span> + fruits.length);
+        
+        <span class="comment">// Iterating with for loop</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < scores.length; i++) {
+            System.out.println(<span class="string">"Score "</span> + i + <span class="string">": "</span> + scores[i]);
+        }
+        
+        <span class="comment">// Iterating with enhanced for loop</span>
+        <span class="keyword">for</span> (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Multidimensional Arrays</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>MultiDimensionalArray.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> MultiDimensionalArray {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// 2D array declaration</span>
+        <span class="keyword">int</span>[][] matrix = <span class="keyword">new int</span>[<span class="number">3</span>][<span class="number">3</span>];
+        
+        <span class="comment">// 2D array with values</span>
+        <span class="keyword">int</span>[][] grid = {
+            {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>},
+            {<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>},
+            {<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>}
+        };
+        
+        <span class="comment">// Accessing elements</span>
+        System.out.println(<span class="string">"Element at [1][2]: "</span> + grid[<span class="number">1</span>][<span class="number">2</span>]);  <span class="comment">// 6</span>
+        
+        <span class="comment">// Iterating 2D array</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < grid.length; i++) {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j < grid[i].length; j++) {
+                System.out.print(grid[i][j] + <span class="string">" "</span>);
+            }
+            System.out.println();
+        }
+        
+        <span class="comment">// Jagged array (rows with different lengths)</span>
+        <span class="keyword">int</span>[][] jagged = <span class="keyword">new int</span>[<span class="number">3</span>][];
+        jagged[<span class="number">0</span>] = <span class="keyword">new int</span>[<span class="number">2</span>];
+        jagged[<span class="number">1</span>] = <span class="keyword">new int</span>[<span class="number">4</span>];
+        jagged[<span class="number">2</span>] = <span class="keyword">new int</span>[<span class="number">3</span>];
+    }
+}</code></pre>
+            </div>
+
+            <div class="common-mistake">
+                <h4>Common Mistake</h4>
+                <p>Accessing an array index that is out of bounds (negative or >= length) throws <code>ArrayIndexOutOfBoundsException</code>. Always check the array length before accessing elements.</p>
+            </div>
+        </section>
+
+        <!-- Strings -->
+        <section id="strings" class="content-section">
+            <h2>Strings in Java</h2>
+
+            <h3>Definition</h3>
+            <p>A String in Java is an object that represents a sequence of characters. Strings are immutable, meaning once created, their values cannot be changed.</p>
+
+            <h3>Key Points</h3>
+            <ul>
+                <li>Strings are objects of the <code>java.lang.String</code> class</li>
+                <li>Strings are immutable (cannot be modified after creation)</li>
+                <li>String literals are stored in the String Pool</li>
+                <li>Use <code>equals()</code> for content comparison, not <code>==</code></li>
+            </ul>
+
+            <h3>String Creation</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>StringDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> StringDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// String literal (stored in String Pool)</span>
+        String s1 = <span class="string">"Hello"</span>;
+        
+        <span class="comment">// Using new keyword (creates new object in heap)</span>
+        String s2 = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);
+        
+        <span class="comment">// Concatenation</span>
+        String fullName = <span class="string">"John"</span> + <span class="string">" "</span> + <span class="string">"Doe"</span>;
+        
+        <span class="comment">// String length</span>
+        System.out.println(<span class="string">"Length: "</span> + s1.length());  <span class="comment">// 5</span>
+        
+        <span class="comment">// Comparison</span>
+        System.out.println(s1 == s2);           <span class="comment">// false (different objects)</span>
+        System.out.println(s1.equals(s2));      <span class="comment">// true (same content)</span>
+        System.out.println(s1.equalsIgnoreCase(<span class="string">"HELLO"</span>));  <span class="comment">// true</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Common String Methods</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>StringMethods.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> StringMethods {
+    <span class="keyword">public static void</span> main(String[] args) {
+        String str = <span class="string">"Hello World"</span>;
+        
+        <span class="comment">// Character access</span>
+        <span class="keyword">char</span> ch = str.charAt(<span class="number">0</span>);  <span class="comment">// 'H'</span>
+        
+        <span class="comment">// Substring</span>
+        String sub = str.substring(<span class="number">0</span>, <span class="number">5</span>);  <span class="comment">// "Hello"</span>
+        
+        <span class="comment">// Case conversion</span>
+        String upper = str.toUpperCase();  <span class="comment">// "HELLO WORLD"</span>
+        String lower = str.toLowerCase();  <span class="comment">// "hello world"</span>
+        
+        <span class="comment">// Trim whitespace</span>
+        String padded = <span class="string">"  Java  "</span>;
+        String trimmed = padded.trim();  <span class="comment">// "Java"</span>
+        
+        <span class="comment">// Replace</span>
+        String replaced = str.replace(<span class="string">'l'</span>, <span class="string">'x'</span>);  <span class="comment">// "Hexxo Worxd"</span>
+        
+        <span class="comment">// Split</span>
+        String csv = <span class="string">"apple,banana,cherry"</span>;
+        String[] parts = csv.split(<span class="string">","</span>);  <span class="comment">// ["apple", "banana", "cherry"]</span>
+        
+        <span class="comment">// Contains and indexOf</span>
+        <span class="keyword">boolean</span> contains = str.contains(<span class="string">"World"</span>);  <span class="comment">// true</span>
+        <span class="keyword">int</span> index = str.indexOf(<span class="string">"World"</span>);  <span class="comment">// 6</span>
+        
+        <span class="comment">// StartsWith and EndsWith</span>
+        <span class="keyword">boolean</span> starts = str.startsWith(<span class="string">"Hello"</span>);  <span class="comment">// true</span>
+        <span class="keyword">boolean</span> ends = str.endsWith(<span class="string">"World"</span>);  <span class="comment">// true</span>
+        
+        <span class="comment">// isEmpty and isBlank (Java 11+)</span>
+        <span class="keyword">boolean</span> empty = <span class="string">""</span>.isEmpty();  <span class="comment">// true</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>StringBuilder and StringBuffer</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>StringBuilderDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> StringBuilderDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// StringBuilder - mutable, not thread-safe, faster</span>
+        StringBuilder sb = <span class="keyword">new</span> StringBuilder();
+        sb.append(<span class="string">"Hello"</span>);
+        sb.append(<span class="string">" "</span>);
+        sb.append(<span class="string">"World"</span>);
+        System.out.println(sb.toString());  <span class="comment">// "Hello World"</span>
+        
+        sb.insert(<span class="number">5</span>, <span class="string">","</span>);  <span class="comment">// "Hello, World"</span>
+        sb.reverse();  <span class="comment">// "dlroW ,olleH"</span>
+        sb.delete(<span class="number">0</span>, <span class="number">5</span>);  <span class="comment">// ", olleH"</span>
+        
+        <span class="comment">// StringBuffer - mutable, thread-safe, slower</span>
+        StringBuffer buffer = <span class="keyword">new</span> StringBuffer(<span class="string">"Thread Safe"</span>);
+    }
+}</code></pre>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>String</th>
+                    <th>StringBuilder</th>
+                    <th>StringBuffer</th>
+                </tr>
+                <tr>
+                    <td>Mutability</td>
+                    <td>Immutable</td>
+                    <td>Mutable</td>
+                    <td>Mutable</td>
+                </tr>
+                <tr>
+                    <td>Thread Safety</td>
+                    <td>Yes (immutable)</td>
+                    <td>No</td>
+                    <td>Yes (synchronized)</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Slow for modifications</td>
+                    <td>Fast</td>
+                    <td>Slower than StringBuilder</td>
+                </tr>
+            </table>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Use <code>StringBuilder</code> for single-threaded string manipulation and <code>StringBuffer</code> for multi-threaded environments. Never use <code>==</code> to compare String content; always use <code>equals()</code>.</p>
+            </div>
+        </section>
+
+        <!-- OOP Concepts -->
+        <section id="oop" class="content-section">
+            <h2>Object-Oriented Programming Concepts</h2>
+
+            <h3>Definition</h3>
+            <p>Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects" which contain data (fields) and code (methods). Java is fundamentally an object-oriented language.</p>
+
+            <h3>Four Pillars of OOP</h3>
+            <ol>
+                <li><strong>Encapsulation:</strong> Bundling data and methods that operate on the data within a single unit (class)</li>
+                <li><strong>Inheritance:</strong> Mechanism where one class acquires properties and behaviors of another class</li>
+                <li><strong>Polymorphism:</strong> Ability of an object to take many forms</li>
+                <li><strong>Abstraction:</strong> Hiding implementation details and showing only functionality</li>
+            </ol>
+
+            <h3>Classes and Objects</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Student.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> Student {
+    <span class="comment">// Instance variables (fields)</span>
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private int</span> age;
+    <span class="keyword">private</span> String rollNo;
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> Student(String name, <span class="keyword">int</span> age, String rollNo) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.age = age;
+        <span class="keyword">this</span>.rollNo = rollNo;
+    }
+    
+    <span class="comment">// Default constructor</span>
+    <span class="keyword">public</span> Student() {
+        <span class="keyword">this</span>.name = <span class="string">"Unknown"</span>;
+        <span class="keyword">this</span>.age = <span class="number">0</span>;
+    }
+    
+    <span class="comment">// Getter methods</span>
+    <span class="keyword">public</span> String getName() {
+        <span class="keyword">return</span> name;
+    }
+    
+    <span class="keyword">public int</span> getAge() {
+        <span class="keyword">return</span> age;
+    }
+    
+    <span class="comment">// Setter methods</span>
+    <span class="keyword">public void</span> setName(String name) {
+        <span class="keyword">this</span>.name = name;
+    }
+    
+    <span class="keyword">public void</span> setAge(<span class="keyword">int</span> age) {
+        <span class="keyword">if</span> (age > <span class="number">0</span>) {
+            <span class="keyword">this</span>.age = age;
+        }
+    }
+    
+    <span class="comment">// Method</span>
+    <span class="keyword">public void</span> display() {
+        System.out.println(<span class="string">"Name: "</span> + name + <span class="string">", Age: "</span> + age);
+    }
+    
+    <span class="comment">// Main method for testing</span>
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Creating objects</span>
+        Student s1 = <span class="keyword">new</span> Student(<span class="string">"John"</span>, <span class="number">20</span>, <span class="string">"CS101"</span>);
+        Student s2 = <span class="keyword">new</span> Student();
+        
+        s1.display();
+        s2.setName(<span class="string">"Jane"</span>);
+        s2.display();
+    }
+}</code></pre>
+            </div>
+
+            <h3>Inheritance</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>InheritanceDemo.java</span>
+                </div>
+                <pre><code><span class="comment">// Parent class (Superclass)</span>
+<span class="keyword">class</span> Animal {
+    <span class="keyword">protected</span> String name;
+    
+    <span class="keyword">public void</span> eat() {
+        System.out.println(name + <span class="string">" is eating"</span>);
+    }
+    
+    <span class="keyword">public void</span> sleep() {
+        System.out.println(name + <span class="string">" is sleeping"</span>);
+    }
+}
+
+<span class="comment">// Child class (Subclass)</span>
+<span class="keyword">class</span> Dog <span class="keyword">extends</span> Animal {
+    <span class="keyword">public</span> Dog(String name) {
+        <span class="keyword">this</span>.name = name;
+    }
+    
+    <span class="comment">// Additional method</span>
+    <span class="keyword">public void</span> bark() {
+        System.out.println(name + <span class="string">" is barking"</span>);
+    }
+    
+    <span class="comment">// Method overriding</span>
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> eat() {
+        System.out.println(name + <span class="string">" is eating dog food"</span>);
+    }
+}
+
+<span class="keyword">public class</span> InheritanceDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Dog dog = <span class="keyword">new</span> Dog(<span class="string">"Buddy"</span>);
+        dog.eat();    <span class="comment">// Overridden method</span>
+        dog.sleep();  <span class="comment">// Inherited method</span>
+        dog.bark();   <span class="comment">// Own method</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Polymorphism</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>PolymorphismDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> Shape {
+    <span class="keyword">public void</span> draw() {
+        System.out.println(<span class="string">"Drawing a shape"</span>);
+    }
+}
+
+<span class="keyword">class</span> Circle <span class="keyword">extends</span> Shape {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> draw() {
+        System.out.println(<span class="string">"Drawing a circle"</span>);
+    }
+}
+
+<span class="keyword">class</span> Rectangle <span class="keyword">extends</span> Shape {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> draw() {
+        System.out.println(<span class="string">"Drawing a rectangle"</span>);
+    }
+}
+
+<span class="keyword">public class</span> PolymorphismDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Runtime polymorphism</span>
+        Shape shape1 = <span class="keyword">new</span> Circle();
+        Shape shape2 = <span class="keyword">new</span> Rectangle();
+        
+        shape1.draw();  <span class="comment">// Drawing a circle</span>
+        shape2.draw();  <span class="comment">// Drawing a rectangle</span>
+        
+        <span class="comment">// Method overloading (compile-time polymorphism)</span>
+        Calculator calc = <span class="keyword">new</span> Calculator();
+        System.out.println(calc.add(<span class="number">5</span>, <span class="number">3</span>));
+        System.out.println(calc.add(<span class="number">5.0</span>, <span class="number">3.0</span>));
+    }
+}
+
+<span class="keyword">class</span> Calculator {
+    <span class="comment">// Method overloading</span>
+    <span class="keyword">public int</span> add(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="keyword">public double</span> add(<span class="keyword">double</span> a, <span class="keyword">double</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+}</code></pre>
+            </div>
+
+            <h3>Abstract Classes and Interfaces</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>AbstractDemo.java</span>
+                </div>
+                <pre><code><span class="comment">// Abstract class</span>
+<span class="keyword">abstract class</span> Vehicle {
+    <span class="keyword">protected</span> String brand;
+    
+    <span class="keyword">public</span> Vehicle(String brand) {
+        <span class="keyword">this</span>.brand = brand;
+    }
+    
+    <span class="comment">// Abstract method (no implementation)</span>
+    <span class="keyword">public abstract void</span> start();
+    
+    <span class="comment">// Concrete method</span>
+    <span class="keyword">public void</span> stop() {
+        System.out.println(brand + <span class="string">" stopped"</span>);
+    }
+}
+
+<span class="comment">// Interface</span>
+<span class="keyword">interface</span> Electric {
+    <span class="keyword">void</span> charge();  <span class="comment">// implicitly public abstract</span>
+    <span class="keyword">int</span> VOLTAGE = <span class="number">220</span>;  <span class="comment">// implicitly public static final</span>
+}
+
+<span class="comment">// Concrete class implementing abstract class and interface</span>
+<span class="keyword">class</span> Tesla <span class="keyword">extends</span> Vehicle <span class="keyword">implements</span> Electric {
+    <span class="keyword">public</span> Tesla() {
+        <span class="keyword">super</span>(<span class="string">"Tesla"</span>);
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> start() {
+        System.out.println(<span class="string">"Tesla starting silently"</span>);
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> charge() {
+        System.out.println(<span class="string">"Charging at "</span> + VOLTAGE + <span class="string">"V"</span>);
+    }
+}</code></pre>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Abstract Class</th>
+                    <th>Interface</th>
+                </tr>
+                <tr>
+                    <td>Methods</td>
+                    <td>Can have abstract and concrete methods</td>
+                    <td>Only abstract methods (before Java 8)</td>
+                </tr>
+                <tr>
+                    <td>Variables</td>
+                    <td>Can have any type of variables</td>
+                    <td>Only public static final (constants)</td>
+                </tr>
+                <tr>
+                    <td>Inheritance</td>
+                    <td>Single inheritance only</td>
+                    <td>Multiple interfaces can be implemented</td>
+                </tr>
+                <tr>
+                    <td>Constructor</td>
+                    <td>Can have constructors</td>
+                    <td>Cannot have constructors</td>
+                </tr>
+                <tr>
+                    <td>Keyword</td>
+                    <td>extends</td>
+                    <td>implements</td>
+                </tr>
+            </table>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Remember: Java supports single inheritance for classes but multiple inheritance through interfaces. From Java 8, interfaces can have default and static methods with implementations.</p>
+            </div>
+        </section>
+
+        <!-- Packages -->
+        <section id="packages" class="content-section">
+            <h2>Packages, CLASSPATH, and JAR Files</h2>
+
+            <h3>Definition</h3>
+            <p>A package in Java is a namespace that organizes classes and interfaces. Packages prevent naming conflicts and provide access control.</p>
+
+            <h3>Types of Packages</h3>
+            <ul>
+                <li><strong>Built-in Packages:</strong> java.lang, java.util, java.io, etc.</li>
+                <li><strong>User-defined Packages:</strong> Created by programmers</li>
+            </ul>
+
+            <h3>Creating and Using Packages</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>com/example/util/MathHelper.java</span>
+                </div>
+                <pre><code><span class="comment">// Package declaration (must match directory structure)</span>
+<span class="keyword">package</span> com.example.util;
+
+<span class="keyword">public class</span> MathHelper {
+    <span class="keyword">public static int</span> add(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="keyword">public static int</span> multiply(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a * b;
+    }
+}</code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Main.java</span>
+                </div>
+                <pre><code><span class="comment">// Import single class</span>
+<span class="keyword">import</span> com.example.util.MathHelper;
+
+<span class="comment">// Import all classes from package</span>
+<span class="keyword">import</span> java.util.*;
+
+<span class="comment">// Static import - import static members</span>
+<span class="keyword">import static</span> java.lang.Math.PI;
+<span class="keyword">import static</span> java.lang.Math.sqrt;
+
+<span class="keyword">public class</span> Main {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Using imported class</span>
+        <span class="keyword">int</span> sum = MathHelper.add(<span class="number">5</span>, <span class="number">3</span>);
+        
+        <span class="comment">// Using static imports (no class name needed)</span>
+        <span class="keyword">double</span> area = PI * <span class="number">5</span> * <span class="number">5</span>;
+        <span class="keyword">double</span> root = sqrt(<span class="number">16</span>);
+        
+        <span class="comment">// Using fully qualified name (no import needed)</span>
+        java.util.Date date = <span class="keyword">new</span> java.util.Date();
+    }
+}</code></pre>
+            </div>
+
+            <h3>CLASSPATH</h3>
+            <p><strong>Definition:</strong> CLASSPATH is an environment variable that tells the JVM where to look for user-defined classes and packages.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Setting CLASSPATH</span>
+                </div>
+                <pre><code><span class="comment"># Windows</span>
+set CLASSPATH=.;C:\myproject\classes;C:\libs\mylib.jar
+
+<span class="comment"># Linux/Mac</span>
+export CLASSPATH=.:/home/user/classes:/home/user/libs/mylib.jar
+
+<span class="comment"># Using -cp or -classpath option</span>
+java -cp .;lib/mylib.jar Main</code></pre>
+            </div>
+
+            <h3>JAR Files</h3>
+            <p><strong>Definition:</strong> JAR (Java Archive) is a package file format used to aggregate many Java class files and associated resources into one file for distribution.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>JAR Commands</span>
+                </div>
+                <pre><code><span class="comment"># Create a JAR file</span>
+jar cf myapp.jar *.class
+
+<span class="comment"># Create JAR with manifest</span>
+jar cfm myapp.jar manifest.txt *.class
+
+<span class="comment"># View contents of JAR</span>
+jar tf myapp.jar
+
+<span class="comment"># Extract JAR</span>
+jar xf myapp.jar
+
+<span class="comment"># Run executable JAR</span>
+java -jar myapp.jar</code></pre>
+            </div>
+
+            <h3>Common Built-in Packages</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Package</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>java.lang</td>
+                    <td>Core classes (String, Math, System) - auto-imported</td>
+                </tr>
+                <tr>
+                    <td>java.util</td>
+                    <td>Collections, Date, Scanner, Random</td>
+                </tr>
+                <tr>
+                    <td>java.io</td>
+                    <td>Input/Output classes</td>
+                </tr>
+                <tr>
+                    <td>java.nio</td>
+                    <td>New I/O classes</td>
+                </tr>
+                <tr>
+                    <td>java.net</td>
+                    <td>Networking classes</td>
+                </tr>
+                <tr>
+                    <td>java.sql</td>
+                    <td>Database connectivity (JDBC)</td>
+                </tr>
+            </table>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>The <code>java.lang</code> package is automatically imported in every Java program. You do not need to explicitly import classes like <code>String</code>, <code>System</code>, or <code>Math</code>.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="nav-buttons">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="unit2.html" class="nav-btn">Unit II: Exceptions and I/O</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="unit1.html">Unit I - Fundamentals</a></li>
+                    <li><a href="unit2.html">Unit II - Exceptions and I/O</a></li>
+                    <li><a href="unit3.html">Unit III - Modern Features</a></li>
+                    <li><a href="unit4.html">Unit IV - Collections</a></li>
+                    <li><a href="unit5.html">Unit V - Spring Concepts</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

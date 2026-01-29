@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Java Hub</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Java Learning Hub</h1>
+            <p>Master Java Programming from Fundamentals to Advanced Concepts</p>
+            <a href="unit1.html" class="btn-primary">START LEARNING</a>
+        </div>
+        <div class="hero-code">
+            <pre><code>// Welcome to Java!
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        
+        String[] topics = {
+            "OOP Concepts",
+            "Collections",
+            "Multithreading",
+            "Spring Framework"
+        };
+        
+        for (String topic : topics) {
+            System.out.println("Learning: " + topic);
+        }
+    }
+}</code></pre>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="course-units">
+            <h2>Course Units</h2>
+            <div class="units-grid">
+                <div class="unit-card">
+                    <h3>Unit I</h3>
+                    <h4>Java Fundamentals</h4>
+                    <ul>
+                        <li>JVM, JRE, JDK Architecture</li>
+                        <li>Data Types and Operators</li>
+                        <li>Control Statements</li>
+                        <li>OOP Concepts</li>
+                    </ul>
+                    <a href="unit1.html" class="btn-secondary">Learn More</a>
+                </div>
+
+                <div class="unit-card">
+                    <h3>Unit II</h3>
+                    <h4>Exception Handling and I/O</h4>
+                    <ul>
+                        <li>try, catch, finally</li>
+                        <li>Byte and Character Streams</li>
+                        <li>Multithreading Basics</li>
+                        <li>Synchronization</li>
+                    </ul>
+                    <a href="unit2.html" class="btn-secondary">Learn More</a>
+                </div>
+
+                <div class="unit-card">
+                    <h3>Unit III</h3>
+                    <h4>Modern Java Features</h4>
+                    <ul>
+                        <li>Lambda Expressions</li>
+                        <li>Stream API</li>
+                        <li>Records and Sealed Classes</li>
+                        <li>Switch Expressions</li>
+                    </ul>
+                    <a href="unit3.html" class="btn-secondary">Learn More</a>
+                </div>
+
+                <div class="unit-card">
+                    <h3>Unit IV</h3>
+                    <h4>Collections Framework</h4>
+                    <ul>
+                        <li>List, Set, Queue Interfaces</li>
+                        <li>ArrayList, LinkedList, HashMap</li>
+                        <li>Comparable vs Comparator</li>
+                        <li>Sorting in Collections</li>
+                    </ul>
+                    <a href="unit4.html" class="btn-secondary">Learn More</a>
+                </div>
+
+                <div class="unit-card">
+                    <h3>Unit V</h3>
+                    <h4>Spring Framework Concepts</h4>
+                    <ul>
+                        <li>Dependency Injection</li>
+                        <li>Inversion of Control</li>
+                        <li>Spring Boot Overview</li>
+                        <li>REST Fundamentals</li>
+                    </ul>
+                    <a href="unit5.html" class="btn-secondary">Learn More</a>
+                </div>
+
+                <div class="unit-card">
+                    <h3>Resources</h3>
+                    <h4>Additional Learning</h4>
+                    <ul>
+                        <li><a href="mcq.html">MCQ Question Bank</a></li>
+                        <li><a href="practice.html">Coding Practice</a></li>
+                        <li><a href="theory.html">Theory Questions</a></li>
+                        <li><a href="errors.html">Common Errors</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-java">
+            <h2>Why Learn Java?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Platform Independent</h3>
+                    <p>Java follows the "Write Once, Run Anywhere" principle. Code compiled to bytecode runs on any platform with a JVM.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Object-Oriented</h3>
+                    <p>Java is built around OOP principles - encapsulation, inheritance, polymorphism, and abstraction - promoting modular, reusable code.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Robust and Secure</h3>
+                    <p>Strong type checking, exception handling, and memory management make Java programs reliable and secure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Enterprise Standard</h3>
+                    <p>Java powers enterprise applications, Android development, and backend systems across major organizations worldwide.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="unit1.html">Unit I - Fundamentals</a></li>
+                    <li><a href="unit2.html">Unit II - Exceptions and I/O</a></li>
+                    <li><a href="unit3.html">Unit III - Modern Features</a></li>
+                    <li><a href="unit4.html">Unit IV - Collections</a></li>
+                    <li><a href="unit5.html">Unit V - Spring Concepts</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://docs.oracle.com/javase/">Oracle Java Docs</a></li>
+                    <li><a href="https://www.java.com/">Java.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

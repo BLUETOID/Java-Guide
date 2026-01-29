@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Errors - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><a href="index.html">Java Hub</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html" class="active">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Common Java Errors</h1>
+        <p>Understand, identify, and fix common Java errors</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#compile">Compile-Time</a></li>
+            <li><a href="#runtime">Runtime</a></li>
+            <li><a href="#logical">Logical</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Compile-Time Errors -->
+        <section id="compile" class="content-section">
+            <h2>Compile-Time Errors</h2>
+
+            <div class="error-card">
+                <h3>1. "Cannot find symbol"</h3>
+                <p><strong>Cause:</strong> Variable, method, or class not declared or misspelled.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+System.out.println(myVariable);  <span class="comment">// myVariable not declared</span>
+
+<span class="comment">// Fix</span>
+<span class="keyword">int</span> myVariable = <span class="number">10</span>;
+System.out.println(myVariable);</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>2. "Class, interface, or enum expected"</h3>
+                <p><strong>Cause:</strong> Code written outside of any class definition.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+System.out.println(<span class="string">"Hello"</span>);  <span class="comment">// Outside class</span>
+
+<span class="comment">// Fix</span>
+<span class="keyword">public class</span> Main {
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(<span class="string">"Hello"</span>);
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>3. "Incompatible types"</h3>
+                <p><strong>Cause:</strong> Assigning value of wrong type without proper casting.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">int</span> num = <span class="string">"123"</span>;  <span class="comment">// String to int</span>
+
+<span class="comment">// Fix</span>
+<span class="keyword">int</span> num = Integer.parseInt(<span class="string">"123"</span>);
+<span class="comment">// or</span>
+String str = <span class="string">"123"</span>;</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>4. "Missing return statement"</h3>
+                <p><strong>Cause:</strong> Method with non-void return type doesn't return a value in all paths.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">public int</span> getValue(<span class="keyword">boolean</span> flag) {
+    <span class="keyword">if</span> (flag) {
+        <span class="keyword">return</span> <span class="number">10</span>;
+    }
+    <span class="comment">// Missing return for else case</span>
+}
+
+<span class="comment">// Fix</span>
+<span class="keyword">public int</span> getValue(<span class="keyword">boolean</span> flag) {
+    <span class="keyword">if</span> (flag) {
+        <span class="keyword">return</span> <span class="number">10</span>;
+    }
+    <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// Default return</span>
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>5. "Unreported exception; must be caught or declared"</h3>
+                <p><strong>Cause:</strong> Checked exception not handled.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>);  <span class="comment">// IOException not handled</span>
+
+<span class="comment">// Fix 1: try-catch</span>
+<span class="keyword">try</span> {
+    FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>);
+} <span class="keyword">catch</span> (IOException e) {
+    e.printStackTrace();
+}
+
+<span class="comment">// Fix 2: throws declaration</span>
+<span class="keyword">public void</span> readFile() <span class="keyword">throws</span> IOException {
+    FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>6. "Variable might not have been initialized"</h3>
+                <p><strong>Cause:</strong> Local variable used before initialization.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">int</span> x;
+System.out.println(x);  <span class="comment">// x not initialized</span>
+
+<span class="comment">// Fix</span>
+<span class="keyword">int</span> x = <span class="number">0</span>;
+System.out.println(x);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Runtime Errors -->
+        <section id="runtime" class="content-section">
+            <h2>Runtime Errors (Exceptions)</h2>
+
+            <div class="error-card">
+                <h3>1. NullPointerException</h3>
+                <p><strong>Cause:</strong> Calling method or accessing field on null reference.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+String str = <span class="keyword">null</span>;
+<span class="keyword">int</span> len = str.length();  <span class="comment">// NullPointerException</span>
+
+<span class="comment">// Fix: Null check</span>
+<span class="keyword">if</span> (str != <span class="keyword">null</span>) {
+    <span class="keyword">int</span> len = str.length();
+}
+
+<span class="comment">// Fix: Optional (Java 8+)</span>
+Optional.ofNullable(str)
+    .ifPresent(s -> System.out.println(s.length()));</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>2. ArrayIndexOutOfBoundsException</h3>
+                <p><strong>Cause:</strong> Accessing array with invalid index.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};
+System.out.println(arr[<span class="number">3</span>]);  <span class="comment">// Index 3 doesn't exist (0-2)</span>
+
+<span class="comment">// Fix: Check bounds</span>
+<span class="keyword">int</span> index = <span class="number">3</span>;
+<span class="keyword">if</span> (index >= <span class="number">0</span> && index < arr.length) {
+    System.out.println(arr[index]);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>3. ClassCastException</h3>
+                <p><strong>Cause:</strong> Invalid type casting.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+Object obj = <span class="string">"Hello"</span>;
+Integer num = (Integer) obj;  <span class="comment">// String cannot be cast to Integer</span>
+
+<span class="comment">// Fix: Check type first</span>
+<span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Integer) {
+    Integer num = (Integer) obj;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>4. NumberFormatException</h3>
+                <p><strong>Cause:</strong> Parsing non-numeric string to number.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">int</span> num = Integer.parseInt(<span class="string">"abc"</span>);  <span class="comment">// "abc" is not a number</span>
+
+<span class="comment">// Fix: Validate or catch</span>
+<span class="keyword">try</span> {
+    <span class="keyword">int</span> num = Integer.parseInt(input);
+} <span class="keyword">catch</span> (NumberFormatException e) {
+    System.out.println(<span class="string">"Invalid number format"</span>);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>5. ArithmeticException</h3>
+                <p><strong>Cause:</strong> Division by zero (integer).</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">int</span> result = <span class="number">10</span> / <span class="number">0</span>;  <span class="comment">// ArithmeticException</span>
+
+<span class="comment">// Fix: Check divisor</span>
+<span class="keyword">int</span> divisor = <span class="number">0</span>;
+<span class="keyword">if</span> (divisor != <span class="number">0</span>) {
+    <span class="keyword">int</span> result = <span class="number">10</span> / divisor;
+} <span class="keyword">else</span> {
+    System.out.println(<span class="string">"Cannot divide by zero"</span>);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>6. ConcurrentModificationException</h3>
+                <p><strong>Cause:</strong> Modifying collection while iterating with for-each.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>));
+<span class="keyword">for</span> (String s : list) {
+    list.remove(s);  <span class="comment">// ConcurrentModificationException</span>
+}
+
+<span class="comment">// Fix: Use Iterator</span>
+Iterator&lt;String&gt; it = list.iterator();
+<span class="keyword">while</span> (it.hasNext()) {
+    String s = it.next();
+    it.remove();  <span class="comment">// Safe removal</span>
+}
+
+<span class="comment">// Fix: removeIf (Java 8+)</span>
+list.removeIf(s -> s.equals(<span class="string">"B"</span>));</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>7. StackOverflowError</h3>
+                <p><strong>Cause:</strong> Infinite recursion or too deep recursion.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">public void</span> infiniteRecursion() {
+    infiniteRecursion();  <span class="comment">// No base case</span>
+}
+
+<span class="comment">// Fix: Add base case</span>
+<span class="keyword">public int</span> factorial(<span class="keyword">int</span> n) {
+    <span class="keyword">if</span> (n <= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;  <span class="comment">// Base case</span>
+    <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>8. OutOfMemoryError</h3>
+                <p><strong>Cause:</strong> JVM runs out of heap space.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error - creating too many objects</span>
+List&lt;<span class="keyword">byte</span>[]&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();
+<span class="keyword">while</span> (<span class="keyword">true</span>) {
+    list.add(<span class="keyword">new byte</span>[<span class="number">1000000</span>]);  <span class="comment">// OutOfMemoryError</span>
+}
+
+<span class="comment">// Fix: Limit data, increase heap (-Xmx), use streaming</span></code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logical Errors -->
+        <section id="logical" class="content-section">
+            <h2>Logical Errors</h2>
+
+            <div class="error-card">
+                <h3>1. Off-by-one Error</h3>
+                <p><strong>Cause:</strong> Loop iterates one too many or too few times.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i <= arr.length; i++) {  <span class="comment">// Should be < not <=</span>
+    System.out.println(arr[i]);
+}
+
+<span class="comment">// Fix</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < arr.length; i++) {
+    System.out.println(arr[i]);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>2. == vs .equals() for Strings</h3>
+                <p><strong>Cause:</strong> Using == to compare string content.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+String s1 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);
+String s2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);
+<span class="keyword">if</span> (s1 == s2) { ... }  <span class="comment">// false - compares references</span>
+
+<span class="comment">// Fix</span>
+<span class="keyword">if</span> (s1.equals(s2)) { ... }  <span class="comment">// true - compares content</span></code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>3. Floating Point Comparison</h3>
+                <p><strong>Cause:</strong> Direct equality comparison of floating point numbers.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">double</span> a = <span class="number">0.1</span> + <span class="number">0.2</span>;
+<span class="keyword">if</span> (a == <span class="number">0.3</span>) { ... }  <span class="comment">// May be false due to precision</span>
+
+<span class="comment">// Fix: Use epsilon comparison</span>
+<span class="keyword">double</span> epsilon = <span class="number">0.0001</span>;
+<span class="keyword">if</span> (Math.abs(a - <span class="number">0.3</span>) < epsilon) { ... }</code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>4. Integer Overflow</h3>
+                <p><strong>Cause:</strong> Arithmetic exceeds int range.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">int</span> big = Integer.MAX_VALUE;
+<span class="keyword">int</span> result = big + <span class="number">1</span>;  <span class="comment">// Overflows to negative</span>
+
+<span class="comment">// Fix: Use long</span>
+<span class="keyword">long</span> big = Integer.MAX_VALUE;
+<span class="keyword">long</span> result = big + <span class="number">1</span>;  <span class="comment">// Works correctly</span></code></pre>
+                </div>
+            </div>
+
+            <div class="error-card">
+                <h3>5. Forgetting break in switch</h3>
+                <p><strong>Cause:</strong> Fall-through to next case.</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Error</span>
+<span class="keyword">switch</span> (day) {
+    <span class="keyword">case</span> <span class="number">1</span>: System.out.println(<span class="string">"Monday"</span>);
+    <span class="keyword">case</span> <span class="number">2</span>: System.out.println(<span class="string">"Tuesday"</span>);  <span class="comment">// Also prints for day=1</span>
+}
+
+<span class="comment">// Fix</span>
+<span class="keyword">switch</span> (day) {
+    <span class="keyword">case</span> <span class="number">1</span>: System.out.println(<span class="string">"Monday"</span>); <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">2</span>: System.out.println(<span class="string">"Tuesday"</span>); <span class="keyword">break</span>;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

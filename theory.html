@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory Questions - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><a href="index.html">Java Hub</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html" class="active">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Theory Questions</h1>
+        <p>Short-answer questions for exam and viva preparation</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#unit1">Unit I</a></li>
+            <li><a href="#unit2">Unit II</a></li>
+            <li><a href="#unit3">Unit III</a></li>
+            <li><a href="#unit4">Unit IV</a></li>
+            <li><a href="#unit5">Unit V</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Unit I -->
+        <section id="unit1" class="content-section">
+            <h2>Unit I: Java Fundamentals</h2>
+
+            <details class="theory-item">
+                <summary>1. What is the difference between JDK, JRE, and JVM?</summary>
+                <div class="answer">
+                    <p><strong>JVM (Java Virtual Machine):</strong> Abstract machine that executes bytecode. Provides runtime environment.</p>
+                    <p><strong>JRE (Java Runtime Environment):</strong> JVM + libraries + other components needed to run Java programs.</p>
+                    <p><strong>JDK (Java Development Kit):</strong> JRE + development tools (compiler, debugger) needed to develop Java programs.</p>
+                    <p><strong>Relationship:</strong> JDK &superset; JRE &superset; JVM</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>2. Why is Java called platform-independent?</summary>
+                <div class="answer">
+                    <p>Java code is compiled to bytecode (.class files), not machine code. This bytecode runs on any platform with a JVM. "Write Once, Run Anywhere" (WORA).</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>3. Explain the four pillars of OOP.</summary>
+                <div class="answer">
+                    <p><strong>Encapsulation:</strong> Bundling data and methods together, hiding internal state using access modifiers.</p>
+                    <p><strong>Inheritance:</strong> Creating new classes from existing ones using <code>extends</code>. Promotes code reuse.</p>
+                    <p><strong>Polymorphism:</strong> One interface, multiple implementations. Method overloading (compile-time) and overriding (runtime).</p>
+                    <p><strong>Abstraction:</strong> Hiding complex implementation details, showing only essential features via abstract classes/interfaces.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>4. Differentiate between method overloading and overriding.</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>Overloading</th><th>Overriding</th></tr>
+                        <tr><td>Same method name, different parameters</td><td>Same signature in parent and child</td></tr>
+                        <tr><td>Compile-time polymorphism</td><td>Runtime polymorphism</td></tr>
+                        <tr><td>Within same class</td><td>Between parent-child classes</td></tr>
+                        <tr><td>Return type can differ</td><td>Return type must be same or covariant</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>5. What is the difference between abstract class and interface?</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>Abstract Class</th><th>Interface</th></tr>
+                        <tr><td>Can have constructors</td><td>Cannot have constructors</td></tr>
+                        <tr><td>Can have instance variables</td><td>Only constants (public static final)</td></tr>
+                        <tr><td>Can have any access modifier</td><td>Methods public by default</td></tr>
+                        <tr><td>Single inheritance only</td><td>Multiple inheritance supported</td></tr>
+                        <tr><td>Use when classes share code</td><td>Use to define a contract</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>6. What are access modifiers in Java?</summary>
+                <div class="answer">
+                    <p><strong>private:</strong> Accessible only within the same class.</p>
+                    <p><strong>default (no modifier):</strong> Accessible within the same package.</p>
+                    <p><strong>protected:</strong> Accessible within same package + subclasses in other packages.</p>
+                    <p><strong>public:</strong> Accessible from anywhere.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>7. Explain the difference between == and equals() in Java.</summary>
+                <div class="answer">
+                    <p><strong>== operator:</strong> Compares references (memory addresses) for objects, values for primitives.</p>
+                    <p><strong>equals() method:</strong> Compares content/values. Can be overridden to define equality logic.</p>
+                    <p><strong>Example:</strong> Two String objects with same content: == returns false, equals() returns true.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>8. What is the String pool?</summary>
+                <div class="answer">
+                    <p>A special memory area in heap where Java stores String literals. When you create a String literal, JVM checks the pool first. If exists, returns reference to existing String; otherwise creates new one. This optimizes memory by avoiding duplicate String objects.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>9. What is the difference between String, StringBuilder, and StringBuffer?</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>Feature</th><th>String</th><th>StringBuilder</th><th>StringBuffer</th></tr>
+                        <tr><td>Mutability</td><td>Immutable</td><td>Mutable</td><td>Mutable</td></tr>
+                        <tr><td>Thread-safe</td><td>Yes (immutable)</td><td>No</td><td>Yes (synchronized)</td></tr>
+                        <tr><td>Performance</td><td>Slow for modifications</td><td>Fast</td><td>Slower (sync overhead)</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>10. What is a constructor? Types of constructors?</summary>
+                <div class="answer">
+                    <p>Constructor is a special method called when object is created. Same name as class, no return type.</p>
+                    <p><strong>Default constructor:</strong> No parameters. Provided by compiler if none defined.</p>
+                    <p><strong>Parameterized constructor:</strong> Takes parameters to initialize object with specific values.</p>
+                    <p><strong>Copy constructor:</strong> Creates object by copying another object (not built-in, user-defined).</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>11. What is the difference between this and super keyword?</summary>
+                <div class="answer">
+                    <p><strong>this:</strong> Refers to current object. Used to access current class members, call current class constructor.</p>
+                    <p><strong>super:</strong> Refers to parent class. Used to access parent class members, call parent class constructor.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>12. What is static keyword in Java?</summary>
+                <div class="answer">
+                    <p>Static members belong to class, not instances. Shared across all objects.</p>
+                    <p><strong>Static variable:</strong> One copy shared by all instances.</p>
+                    <p><strong>Static method:</strong> Can be called without object. Cannot access non-static members directly.</p>
+                    <p><strong>Static block:</strong> Executes once when class is loaded.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>13. What is final keyword in Java?</summary>
+                <div class="answer">
+                    <p><strong>final variable:</strong> Cannot be changed once initialized (constant).</p>
+                    <p><strong>final method:</strong> Cannot be overridden by subclasses.</p>
+                    <p><strong>final class:</strong> Cannot be extended (no inheritance).</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>14. What are wrapper classes?</summary>
+                <div class="answer">
+                    <p>Classes that wrap primitive types as objects. Required for collections and generics.</p>
+                    <p>int → Integer, char → Character, double → Double, boolean → Boolean, etc.</p>
+                    <p><strong>Autoboxing:</strong> Automatic conversion from primitive to wrapper.</p>
+                    <p><strong>Unboxing:</strong> Automatic conversion from wrapper to primitive.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>15. What is garbage collection?</summary>
+                <div class="answer">
+                    <p>Automatic memory management. JVM automatically reclaims memory from objects that are no longer referenced. Runs in background, cannot be forced (only requested via System.gc()). Helps prevent memory leaks.</p>
+                </div>
+            </details>
+        </section>
+
+        <!-- Unit II -->
+        <section id="unit2" class="content-section">
+            <h2>Unit II: Exception Handling, I/O, Multithreading</h2>
+
+            <details class="theory-item">
+                <summary>1. What is the difference between checked and unchecked exceptions?</summary>
+                <div class="answer">
+                    <p><strong>Checked Exceptions:</strong> Must be handled (try-catch) or declared (throws). Checked at compile time. Examples: IOException, SQLException.</p>
+                    <p><strong>Unchecked Exceptions:</strong> Not required to handle. Runtime exceptions. Examples: NullPointerException, ArrayIndexOutOfBoundsException.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>2. Explain the difference between throw and throws.</summary>
+                <div class="answer">
+                    <p><strong>throw:</strong> Used inside method to explicitly throw an exception. Example: <code>throw new IOException("Error");</code></p>
+                    <p><strong>throws:</strong> Used in method signature to declare exceptions. Example: <code>void read() throws IOException</code></p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>3. What is the purpose of finally block?</summary>
+                <div class="answer">
+                    <p>Finally block always executes regardless of whether exception occurs. Used for cleanup operations like closing files/connections. Executes even if try block has return statement. Only skipped if System.exit() is called or JVM crashes.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>4. Differentiate between byte stream and character stream.</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>Byte Stream</th><th>Character Stream</th></tr>
+                        <tr><td>Handles raw bytes (8-bit)</td><td>Handles characters (16-bit Unicode)</td></tr>
+                        <tr><td>InputStream/OutputStream</td><td>Reader/Writer</td></tr>
+                        <tr><td>For binary data (images, etc.)</td><td>For text data</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>5. What is the difference between process and thread?</summary>
+                <div class="answer">
+                    <p><strong>Process:</strong> Independent program with its own memory space. Processes don't share memory. Heavy-weight.</p>
+                    <p><strong>Thread:</strong> Lightweight subprocess within a process. Threads share memory space. Thread creation is faster.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>6. Explain the thread lifecycle.</summary>
+                <div class="answer">
+                    <p><strong>New:</strong> Thread created but not started.</p>
+                    <p><strong>Runnable:</strong> Thread ready to run, waiting for CPU.</p>
+                    <p><strong>Running:</strong> Thread executing.</p>
+                    <p><strong>Blocked/Waiting:</strong> Thread waiting for resource/condition.</p>
+                    <p><strong>Terminated:</strong> Thread execution completed.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>7. What is synchronization? Why is it needed?</summary>
+                <div class="answer">
+                    <p>Synchronization controls access to shared resources in multithreaded environment. Prevents race conditions where multiple threads modify shared data simultaneously, leading to data inconsistency. Achieved using <code>synchronized</code> keyword on methods or blocks.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>8. What is deadlock?</summary>
+                <div class="answer">
+                    <p>Deadlock occurs when two or more threads are blocked forever, each waiting for the other's lock. Example: Thread A holds Lock1, waits for Lock2; Thread B holds Lock2, waits for Lock1. Prevented by acquiring locks in same order.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>9. How to create a thread in Java?</summary>
+                <div class="answer">
+                    <p><strong>Method 1:</strong> Extend Thread class and override run() method.</p>
+                    <p><strong>Method 2:</strong> Implement Runnable interface and pass to Thread constructor.</p>
+                    <p><strong>Method 3:</strong> Use ExecutorService (preferred for thread pools).</p>
+                    <p>Implementing Runnable is preferred as it allows extending other classes.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>10. What is the difference between wait() and sleep()?</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>wait()</th><th>sleep()</th></tr>
+                        <tr><td>Releases the lock</td><td>Does not release the lock</td></tr>
+                        <tr><td>Must be called from synchronized context</td><td>Can be called from anywhere</td></tr>
+                        <tr><td>Object class method</td><td>Thread class static method</td></tr>
+                        <tr><td>Used for inter-thread communication</td><td>Used to pause execution</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>11. What is try-with-resources?</summary>
+                <div class="answer">
+                    <p>Statement that automatically closes resources after use (Java 7+). Resources must implement AutoCloseable. No need for explicit finally block to close resources. Example: <code>try (FileReader fr = new FileReader("file.txt")) { ... }</code></p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>12. What is the difference between FileInputStream and FileReader?</summary>
+                <div class="answer">
+                    <p><strong>FileInputStream:</strong> Reads raw bytes. Used for binary files (images, audio).</p>
+                    <p><strong>FileReader:</strong> Reads characters using platform default encoding. Used for text files.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>13. What is BufferedReader? Why use it?</summary>
+                <div class="answer">
+                    <p>BufferedReader reads text from character stream with buffering for efficiency. Reduces I/O operations by reading chunks into buffer. Provides readLine() method for line-by-line reading. Faster than reading character by character.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>14. What is serialization?</summary>
+                <div class="answer">
+                    <p>Converting object state to byte stream for storage or transmission. Class must implement Serializable interface. Use ObjectOutputStream to write, ObjectInputStream to read. transient keyword excludes fields from serialization.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>15. What is volatile keyword?</summary>
+                <div class="answer">
+                    <p>Ensures variable is read from main memory, not thread's local cache. Guarantees visibility of changes across threads. Does not provide atomicity - use synchronized or AtomicInteger for atomic operations.</p>
+                </div>
+            </details>
+        </section>
+
+        <!-- Unit III -->
+        <section id="unit3" class="content-section">
+            <h2>Unit III: Modern Java Features</h2>
+
+            <details class="theory-item">
+                <summary>1. What is a functional interface?</summary>
+                <div class="answer">
+                    <p>An interface with exactly one abstract method. Can have default/static methods. Marked with @FunctionalInterface annotation (optional but recommended). Used as target for lambda expressions. Examples: Runnable, Comparator, Predicate.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>2. What is a lambda expression?</summary>
+                <div class="answer">
+                    <p>Concise syntax for implementing functional interfaces. Syntax: <code>(parameters) -> expression</code> or <code>(parameters) -> { statements }</code>. Enables functional programming style. Example: <code>(a, b) -> a + b</code></p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>3. What is a method reference?</summary>
+                <div class="answer">
+                    <p>Shorthand for lambdas that call existing methods. Uses :: operator. Four types:</p>
+                    <p><strong>Static:</strong> <code>Class::staticMethod</code></p>
+                    <p><strong>Instance of object:</strong> <code>object::instanceMethod</code></p>
+                    <p><strong>Instance of class:</strong> <code>Class::instanceMethod</code></p>
+                    <p><strong>Constructor:</strong> <code>Class::new</code></p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>4. What is the Stream API?</summary>
+                <div class="answer">
+                    <p>API for processing collections in functional style. Key features:</p>
+                    <ul>
+                        <li>Sequence of elements supporting aggregate operations</li>
+                        <li>Intermediate operations (filter, map) return stream</li>
+                        <li>Terminal operations (collect, forEach) produce result</li>
+                        <li>Lazy evaluation - only computes when needed</li>
+                        <li>Supports parallel processing</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>5. Explain default methods in interfaces.</summary>
+                <div class="answer">
+                    <p>Methods with implementation in interfaces (Java 8+). Use <code>default</code> keyword. Allow adding new methods to interfaces without breaking existing implementations. Can be overridden by implementing classes.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>6. What is the var keyword?</summary>
+                <div class="answer">
+                    <p>Local variable type inference (Java 10+). Compiler infers type from initialization. Example: <code>var list = new ArrayList&lt;String&gt;();</code>. Only for local variables with initializers. Not a keyword, but reserved type name.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>7. What are Records in Java?</summary>
+                <div class="answer">
+                    <p>Immutable data carriers (Java 16+). Automatically generate constructor, getters, equals(), hashCode(), toString(). Example: <code>record Person(String name, int age) {}</code>. Cannot extend other classes but can implement interfaces.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>8. What is try-with-resources?</summary>
+                <div class="answer">
+                    <p>Automatic resource management (Java 7+). Resources declared in try parentheses are automatically closed. Resource must implement AutoCloseable. Example: <code>try (FileReader fr = new FileReader("file.txt")) { ... }</code></p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>9. What is Optional class?</summary>
+                <div class="answer">
+                    <p>Container object that may or may not contain a non-null value (Java 8+). Helps avoid NullPointerException. Methods: of(), ofNullable(), isPresent(), ifPresent(), orElse(), orElseGet(), orElseThrow().</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>10. What are the built-in functional interfaces in Java?</summary>
+                <div class="answer">
+                    <p><strong>Predicate&lt;T&gt;:</strong> Takes T, returns boolean. test() method.</p>
+                    <p><strong>Function&lt;T,R&gt;:</strong> Takes T, returns R. apply() method.</p>
+                    <p><strong>Consumer&lt;T&gt;:</strong> Takes T, returns nothing. accept() method.</p>
+                    <p><strong>Supplier&lt;T&gt;:</strong> Takes nothing, returns T. get() method.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>11. What is the difference between intermediate and terminal operations in Streams?</summary>
+                <div class="answer">
+                    <p><strong>Intermediate:</strong> Return a stream, are lazy (not executed until terminal called). Examples: filter(), map(), sorted(), distinct().</p>
+                    <p><strong>Terminal:</strong> Produce result or side-effect, trigger pipeline execution. Examples: collect(), forEach(), count(), reduce().</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>12. What is switch expression (Java 14+)?</summary>
+                <div class="answer">
+                    <p>Enhanced switch that can return a value. Uses arrow syntax (->). No fall-through. yield keyword for returning value from block. Example: <code>String result = switch(day) { case 1 -> "Monday"; default -> "Other"; };</code></p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>13. What are Sealed classes?</summary>
+                <div class="answer">
+                    <p>Classes that restrict which classes can extend them (Java 17+). Use sealed keyword and permits clause. Subclasses must be final, sealed, or non-sealed. Enables exhaustive pattern matching in switch.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>14. What are Text Blocks?</summary>
+                <div class="answer">
+                    <p>Multi-line string literals (Java 15+). Use triple quotes ("""). Preserve formatting and line breaks. No need to escape quotes. Example: <code>String html = """&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;""";</code></p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>15. What is pattern matching for instanceof?</summary>
+                <div class="answer">
+                    <p>Combines instanceof check with variable declaration (Java 16+). Example: <code>if (obj instanceof String s) { s.length(); }</code>. Variable s is automatically cast and scoped.</p>
+                </div>
+            </details>
+        </section>
+
+        <!-- Unit IV -->
+        <section id="unit4" class="content-section">
+            <h2>Unit IV: Collections Framework</h2>
+
+            <details class="theory-item">
+                <summary>1. What is the Collections Framework?</summary>
+                <div class="answer">
+                    <p>Unified architecture for storing and manipulating groups of objects. Provides interfaces (Collection, List, Set, Map), implementations (ArrayList, HashSet, HashMap), and algorithms (sorting, searching). Located in java.util package.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>2. Differentiate between ArrayList and LinkedList.</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>ArrayList</th><th>LinkedList</th></tr>
+                        <tr><td>Dynamic array</td><td>Doubly linked list</td></tr>
+                        <tr><td>O(1) random access</td><td>O(n) random access</td></tr>
+                        <tr><td>O(n) insert/delete in middle</td><td>O(1) insert/delete (with reference)</td></tr>
+                        <tr><td>Better for read-heavy operations</td><td>Better for frequent insertions/deletions</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>3. Differentiate between HashSet and TreeSet.</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>HashSet</th><th>TreeSet</th></tr>
+                        <tr><td>Uses hash table</td><td>Uses Red-Black tree</td></tr>
+                        <tr><td>No ordering</td><td>Sorted order (natural or Comparator)</td></tr>
+                        <tr><td>O(1) operations</td><td>O(log n) operations</td></tr>
+                        <tr><td>Allows one null</td><td>No null (comparison fails)</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>4. Differentiate between HashMap and Hashtable.</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>HashMap</th><th>Hashtable</th></tr>
+                        <tr><td>Not synchronized</td><td>Synchronized (thread-safe)</td></tr>
+                        <tr><td>Allows null key/values</td><td>No null keys or values</td></tr>
+                        <tr><td>Faster (no sync overhead)</td><td>Slower</td></tr>
+                        <tr><td>Preferred in modern code</td><td>Legacy class</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>5. What is the difference between Comparable and Comparator?</summary>
+                <div class="answer">
+                    <p><strong>Comparable:</strong> Natural ordering. Class implements Comparable, defines compareTo(). Single sort sequence. Example: String, Integer.</p>
+                    <p><strong>Comparator:</strong> External comparison. Separate class implements Comparator, defines compare(). Multiple sort sequences. More flexible.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>6. What is an Iterator?</summary>
+                <div class="answer">
+                    <p>Object to traverse collections one element at a time. Methods: hasNext(), next(), remove(). Obtained via collection.iterator(). Supports safe element removal during iteration. Fail-fast - throws ConcurrentModificationException if collection modified.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>7. What is the difference between fail-fast and fail-safe iterators?</summary>
+                <div class="answer">
+                    <p><strong>Fail-fast:</strong> Throws ConcurrentModificationException if collection modified during iteration. ArrayList, HashMap iterators.</p>
+                    <p><strong>Fail-safe:</strong> Works on clone of collection. Doesn't throw exception. ConcurrentHashMap, CopyOnWriteArrayList iterators.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>8. What is the internal working of HashMap?</summary>
+                <div class="answer">
+                    <p>HashMap uses array of buckets. Each bucket is a linked list (Java 8+: converts to tree if > 8 nodes). Process: key.hashCode() -> bucket index -> linear search in bucket using equals(). Load factor (0.75) determines when to resize. Resizing doubles capacity and rehashes all entries.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>9. What is the difference between List, Set, and Map?</summary>
+                <div class="answer">
+                    <p><strong>List:</strong> Ordered collection, allows duplicates, index-based access. Examples: ArrayList, LinkedList.</p>
+                    <p><strong>Set:</strong> Unordered collection (except TreeSet), no duplicates. Examples: HashSet, TreeSet.</p>
+                    <p><strong>Map:</strong> Key-value pairs, unique keys. Not part of Collection interface. Examples: HashMap, TreeMap.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>10. What is ConcurrentHashMap?</summary>
+                <div class="answer">
+                    <p>Thread-safe HashMap alternative. Uses segment-based locking (Java 7) or node-based locking (Java 8+). Better performance than Hashtable. Allows concurrent reads and limited concurrent writes. No null keys or values.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>11. What is the difference between Queue and Deque?</summary>
+                <div class="answer">
+                    <p><strong>Queue:</strong> FIFO (First-In-First-Out). Elements added at end, removed from front. Methods: offer(), poll(), peek().</p>
+                    <p><strong>Deque:</strong> Double-ended queue. Elements can be added/removed from both ends. Can be used as stack or queue.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>12. What is PriorityQueue?</summary>
+                <div class="answer">
+                    <p>Queue implementation where elements are ordered by priority (natural order or Comparator). Not FIFO. poll() returns highest priority element. Based on heap data structure. Does not allow null.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>13. How to make ArrayList thread-safe?</summary>
+                <div class="answer">
+                    <p><strong>Method 1:</strong> Collections.synchronizedList(new ArrayList&lt;&gt;())</p>
+                    <p><strong>Method 2:</strong> Use CopyOnWriteArrayList (from java.util.concurrent)</p>
+                    <p><strong>Method 3:</strong> Use Vector (legacy, not recommended)</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>14. What is the difference between Vector and ArrayList?</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>Vector</th><th>ArrayList</th></tr>
+                        <tr><td>Synchronized (thread-safe)</td><td>Not synchronized</td></tr>
+                        <tr><td>Legacy class</td><td>Part of Collections Framework</td></tr>
+                        <tr><td>Grows by 100%</td><td>Grows by 50%</td></tr>
+                        <tr><td>Slower</td><td>Faster (no sync overhead)</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>15. What is the hashCode() and equals() contract?</summary>
+                <div class="answer">
+                    <p>If two objects are equal (equals() returns true), they must have same hashCode.</p>
+                    <p>If two objects have same hashCode, they may or may not be equal.</p>
+                    <p>Must override both together when using objects in hash-based collections.</p>
+                </div>
+            </details>
+        </section>
+
+        <!-- Unit V -->
+        <section id="unit5" class="content-section">
+            <h2>Unit V: Spring Framework</h2>
+
+            <details class="theory-item">
+                <summary>1. What is Dependency Injection (DI)?</summary>
+                <div class="answer">
+                    <p>Design pattern where objects receive dependencies from external source rather than creating them. Benefits: loose coupling, easier testing, better maintainability. Types: Constructor injection (preferred), Setter injection, Field injection.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>2. What is Inversion of Control (IoC)?</summary>
+                <div class="answer">
+                    <p>Principle where control of object creation/lifecycle is transferred from program to container/framework. Spring IoC container manages object creation, wiring, and lifecycle. Implements DI to achieve IoC.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>3. What are the types of Dependency Injection?</summary>
+                <div class="answer">
+                    <p><strong>Constructor Injection:</strong> Dependencies provided via constructor. Preferred - ensures object fully initialized.</p>
+                    <p><strong>Setter Injection:</strong> Dependencies set via setter methods. For optional dependencies.</p>
+                    <p><strong>Field Injection:</strong> Dependencies injected directly into fields using @Autowired. Not recommended.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>4. What is AOP (Aspect-Oriented Programming)?</summary>
+                <div class="answer">
+                    <p>Programming paradigm for separating cross-cutting concerns (logging, security, transactions) from business logic. Key concepts: Aspect (module), Join Point (method execution), Pointcut (expression matching join points), Advice (action taken).</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>5. What are the types of Advice in AOP?</summary>
+                <div class="answer">
+                    <p><strong>Before:</strong> Runs before method execution.</p>
+                    <p><strong>After:</strong> Runs after method (regardless of outcome).</p>
+                    <p><strong>After Returning:</strong> Runs after successful completion.</p>
+                    <p><strong>After Throwing:</strong> Runs if method throws exception.</p>
+                    <p><strong>Around:</strong> Wraps method; controls if/when method executes.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>6. What are Spring Bean scopes?</summary>
+                <div class="answer">
+                    <p><strong>Singleton:</strong> Single instance per container (default).</p>
+                    <p><strong>Prototype:</strong> New instance for each request.</p>
+                    <p><strong>Request:</strong> New instance per HTTP request (web).</p>
+                    <p><strong>Session:</strong> New instance per HTTP session (web).</p>
+                    <p><strong>Application:</strong> Single instance per ServletContext.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>7. What is @Autowired annotation?</summary>
+                <div class="answer">
+                    <p>Spring annotation for automatic dependency injection. Can be used on constructors, setters, or fields. Spring finds matching bean and injects it. Use @Qualifier with @Autowired when multiple beans of same type exist.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>8. What is Spring Boot? How is it different from Spring?</summary>
+                <div class="answer">
+                    <p>Spring Boot is a framework on top of Spring for rapid application development. Differences:</p>
+                    <ul>
+                        <li>Auto-configuration reduces boilerplate</li>
+                        <li>Embedded servers (Tomcat) - no external deployment</li>
+                        <li>Starter dependencies simplify Maven/Gradle config</li>
+                        <li>No XML configuration required</li>
+                        <li>Production-ready features (health checks, metrics)</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>9. What is @Component, @Service, @Repository, @Controller?</summary>
+                <div class="answer">
+                    <p><strong>@Component:</strong> Generic stereotype for Spring-managed component.</p>
+                    <p><strong>@Service:</strong> Business logic layer. Semantic clarity.</p>
+                    <p><strong>@Repository:</strong> Data access layer. Enables exception translation.</p>
+                    <p><strong>@Controller:</strong> Web layer. Handles HTTP requests.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>10. What is @RequestMapping?</summary>
+                <div class="answer">
+                    <p>Maps HTTP requests to handler methods. Attributes: value (URL), method (GET/POST), produces, consumes. Shortcuts: @GetMapping, @PostMapping, @PutMapping, @DeleteMapping.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>11. What is the Spring Bean lifecycle?</summary>
+                <div class="answer">
+                    <p><strong>1. Instantiation:</strong> Bean object created.</p>
+                    <p><strong>2. Populate properties:</strong> Dependencies injected.</p>
+                    <p><strong>3. BeanNameAware, BeanFactoryAware:</strong> Set bean name, factory.</p>
+                    <p><strong>4. Pre-initialization:</strong> @PostConstruct or init-method.</p>
+                    <p><strong>5. Ready to use:</strong> Bean is fully initialized.</p>
+                    <p><strong>6. Destruction:</strong> @PreDestroy or destroy-method on shutdown.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>12. What is @Transactional?</summary>
+                <div class="answer">
+                    <p>Annotation for declarative transaction management. Marks method/class for transaction support. Attributes: propagation, isolation, timeout, readOnly, rollbackFor. Applied to service layer methods.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>13. What is ApplicationContext vs BeanFactory?</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>BeanFactory</th><th>ApplicationContext</th></tr>
+                        <tr><td>Basic container</td><td>Advanced container</td></tr>
+                        <tr><td>Lazy loading</td><td>Eager loading</td></tr>
+                        <tr><td>No AOP support</td><td>Full AOP support</td></tr>
+                        <tr><td>No internationalization</td><td>i18n support</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>14. What is @RestController?</summary>
+                <div class="answer">
+                    <p>Combination of @Controller and @ResponseBody. Every method returns data directly (JSON/XML), not view name. Used for REST APIs. No need for @ResponseBody on each method.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>15. What is @PathVariable and @RequestParam?</summary>
+                <div class="answer">
+                    <p><strong>@PathVariable:</strong> Extracts value from URI path. Example: /users/{id} with @PathVariable Long id</p>
+                    <p><strong>@RequestParam:</strong> Extracts query parameters. Example: /users?name=John with @RequestParam String name</p>
+                </div>
+            </details>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

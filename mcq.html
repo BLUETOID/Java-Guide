@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Practice - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><a href="index.html">Java Hub</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html" class="active">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Multiple Choice Questions</h1>
+        <p>Test your Java knowledge with unit-wise MCQs</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#unit1">Unit I</a></li>
+            <li><a href="#unit2">Unit II</a></li>
+            <li><a href="#unit3">Unit III</a></li>
+            <li><a href="#unit4">Unit IV</a></li>
+            <li><a href="#unit5">Unit V</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Unit I MCQs -->
+        <section id="unit1" class="content-section">
+            <h2>Unit I: Java Fundamentals</h2>
+
+            <div class="mcq-item">
+                <p class="mcq-question">1. Which component is responsible for converting bytecode to machine code?</p>
+                <ul class="mcq-options">
+                    <li>a) JDK</li>
+                    <li>b) JRE</li>
+                    <li>c) JVM</li>
+                    <li>d) Compiler</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) JVM - The Java Virtual Machine interprets/compiles bytecode to machine code at runtime.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">2. What is the size of int data type in Java?</p>
+                <ul class="mcq-options">
+                    <li>a) 2 bytes</li>
+                    <li>b) 4 bytes</li>
+                    <li>c) 8 bytes</li>
+                    <li>d) Depends on platform</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) 4 bytes - int is always 32 bits (4 bytes) in Java regardless of platform.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">3. Which keyword is used to prevent method overriding?</p>
+                <ul class="mcq-options">
+                    <li>a) static</li>
+                    <li>b) final</li>
+                    <li>c) abstract</li>
+                    <li>d) const</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) final - A final method cannot be overridden in subclasses.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">4. What is the default value of a boolean instance variable?</p>
+                <ul class="mcq-options">
+                    <li>a) true</li>
+                    <li>b) false</li>
+                    <li>c) null</li>
+                    <li>d) 0</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) false - Boolean instance variables default to false.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">5. Which operator is used to check if an object is an instance of a class?</p>
+                <ul class="mcq-options">
+                    <li>a) typeof</li>
+                    <li>b) instanceof</li>
+                    <li>c) isInstance</li>
+                    <li>d) classof</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) instanceof - The instanceof operator checks object type at runtime.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">6. Which access modifier makes a member visible only within the same package?</p>
+                <ul class="mcq-options">
+                    <li>a) private</li>
+                    <li>b) protected</li>
+                    <li>c) default (no modifier)</li>
+                    <li>d) public</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) default - Package-private access when no modifier is specified.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">7. What is the output of: System.out.println(10 + 20 + "Hello");</p>
+                <ul class="mcq-options">
+                    <li>a) 1020Hello</li>
+                    <li>b) 30Hello</li>
+                    <li>c) Hello1020</li>
+                    <li>d) Hello30</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) 30Hello - Left to right: 10+20=30, then 30+"Hello"="30Hello".</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">8. Which method is used to compare string contents?</p>
+                <ul class="mcq-options">
+                    <li>a) ==</li>
+                    <li>b) compare()</li>
+                    <li>c) equals()</li>
+                    <li>d) match()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) equals() - The equals() method compares string content; == compares references.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">9. Which class is mutable and thread-safe for string operations?</p>
+                <ul class="mcq-options">
+                    <li>a) String</li>
+                    <li>b) StringBuilder</li>
+                    <li>c) StringBuffer</li>
+                    <li>d) StringWriter</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) StringBuffer - StringBuffer is mutable and synchronized (thread-safe).</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">10. What is method overloading?</p>
+                <ul class="mcq-options">
+                    <li>a) Same method name, same parameters in subclass</li>
+                    <li>b) Same method name, different parameters in same class</li>
+                    <li>c) Different method name, same parameters</li>
+                    <li>d) Override parent method</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Same method name, different parameters in same class - Compile-time polymorphism.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">11. Which loop is guaranteed to execute at least once?</p>
+                <ul class="mcq-options">
+                    <li>a) for</li>
+                    <li>b) while</li>
+                    <li>c) do-while</li>
+                    <li>d) for-each</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) do-while - Condition is checked after the loop body executes.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">12. How many objects can a Java class extend?</p>
+                <ul class="mcq-options">
+                    <li>a) 0</li>
+                    <li>b) 1</li>
+                    <li>c) 2</li>
+                    <li>d) Unlimited</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) 1 - Java supports single inheritance for classes.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">13. What does JDK stand for?</p>
+                <ul class="mcq-options">
+                    <li>a) Java Development Kit</li>
+                    <li>b) Java Deployment Kit</li>
+                    <li>c) Java Debug Kit</li>
+                    <li>d) Java Design Kit</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>a) Java Development Kit - Contains JRE + development tools (compiler, debugger).</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">14. Which keyword is used to create a constant in Java?</p>
+                <ul class="mcq-options">
+                    <li>a) const</li>
+                    <li>b) final</li>
+                    <li>c) static</li>
+                    <li>d) constant</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) final - final variables cannot be reassigned. const is reserved but not used.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">15. What is the index of the first element in an array?</p>
+                <ul class="mcq-options">
+                    <li>a) -1</li>
+                    <li>b) 0</li>
+                    <li>c) 1</li>
+                    <li>d) Depends on declaration</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) 0 - Java arrays are zero-indexed.</p></details>
+            </div>
+        </section>
+
+        <!-- Unit II MCQs -->
+        <section id="unit2" class="content-section">
+            <h2>Unit II: Exception Handling, I/O, Multithreading</h2>
+
+            <div class="mcq-item">
+                <p class="mcq-question">1. Which is the parent class of all exceptions?</p>
+                <ul class="mcq-options">
+                    <li>a) Exception</li>
+                    <li>b) Error</li>
+                    <li>c) Throwable</li>
+                    <li>d) RuntimeException</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) Throwable - Both Exception and Error extend Throwable.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">2. Which block always executes regardless of exception?</p>
+                <ul class="mcq-options">
+                    <li>a) try</li>
+                    <li>b) catch</li>
+                    <li>c) finally</li>
+                    <li>d) throw</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) finally - Executes even if exception occurs (except System.exit()).</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">3. Which keyword is used to declare that a method may throw an exception?</p>
+                <ul class="mcq-options">
+                    <li>a) throw</li>
+                    <li>b) throws</li>
+                    <li>c) try</li>
+                    <li>d) catch</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) throws - Used in method signature; throw is used to actually throw an exception.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">4. Which exception is checked at compile time?</p>
+                <ul class="mcq-options">
+                    <li>a) NullPointerException</li>
+                    <li>b) ArrayIndexOutOfBoundsException</li>
+                    <li>c) IOException</li>
+                    <li>d) ArithmeticException</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) IOException - Checked exceptions must be handled or declared.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">5. Which stream is used to read bytes from a file?</p>
+                <ul class="mcq-options">
+                    <li>a) FileReader</li>
+                    <li>b) FileInputStream</li>
+                    <li>c) BufferedReader</li>
+                    <li>d) Scanner</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) FileInputStream - Byte stream for reading files; FileReader is for characters.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">6. Which method is used to start a thread?</p>
+                <ul class="mcq-options">
+                    <li>a) run()</li>
+                    <li>b) start()</li>
+                    <li>c) execute()</li>
+                    <li>d) begin()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) start() - Calling run() directly doesn't create a new thread.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">7. Which interface must be implemented to create a thread?</p>
+                <ul class="mcq-options">
+                    <li>a) Executable</li>
+                    <li>b) Runnable</li>
+                    <li>c) Threadable</li>
+                    <li>d) Running</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Runnable - Contains single run() method; alternative to extending Thread.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">8. What is the default priority of a thread?</p>
+                <ul class="mcq-options">
+                    <li>a) 1</li>
+                    <li>b) 5</li>
+                    <li>c) 10</li>
+                    <li>d) 0</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) 5 - Thread.NORM_PRIORITY = 5 (range is 1-10).</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">9. Which keyword is used to prevent race conditions?</p>
+                <ul class="mcq-options">
+                    <li>a) volatile</li>
+                    <li>b) synchronized</li>
+                    <li>c) atomic</li>
+                    <li>d) locked</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) synchronized - Ensures only one thread accesses critical section at a time.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">10. Which method releases the lock and waits?</p>
+                <ul class="mcq-options">
+                    <li>a) sleep()</li>
+                    <li>b) wait()</li>
+                    <li>c) yield()</li>
+                    <li>d) join()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) wait() - Releases lock and waits; sleep() doesn't release lock.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">11. Which class is used for buffered character reading?</p>
+                <ul class="mcq-options">
+                    <li>a) BufferedInputStream</li>
+                    <li>b) BufferedReader</li>
+                    <li>c) DataInputStream</li>
+                    <li>d) FileReader</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) BufferedReader - Character stream with buffering; provides readLine().</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">12. What happens if you call run() instead of start()?</p>
+                <ul class="mcq-options">
+                    <li>a) New thread is created</li>
+                    <li>b) Method runs in current thread</li>
+                    <li>c) Compilation error</li>
+                    <li>d) Runtime error</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Method runs in current thread - No new thread is spawned.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">13. Which method wakes up all waiting threads?</p>
+                <ul class="mcq-options">
+                    <li>a) notify()</li>
+                    <li>b) notifyAll()</li>
+                    <li>c) wakeAll()</li>
+                    <li>d) resume()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) notifyAll() - Wakes all threads; notify() wakes only one.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">14. try-with-resources requires resources to implement which interface?</p>
+                <ul class="mcq-options">
+                    <li>a) Closeable</li>
+                    <li>b) AutoCloseable</li>
+                    <li>c) Disposable</li>
+                    <li>d) Both a and b</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>d) Both a and b - Closeable extends AutoCloseable; both work.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">15. Which thread state means the thread is waiting for a lock?</p>
+                <ul class="mcq-options">
+                    <li>a) RUNNABLE</li>
+                    <li>b) BLOCKED</li>
+                    <li>c) WAITING</li>
+                    <li>d) TIMED_WAITING</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) BLOCKED - Waiting to acquire a monitor lock.</p></details>
+            </div>
+        </section>
+
+        <!-- Unit III MCQs -->
+        <section id="unit3" class="content-section">
+            <h2>Unit III: Modern Java Features</h2>
+
+            <div class="mcq-item">
+                <p class="mcq-question">1. How many abstract methods can a functional interface have?</p>
+                <ul class="mcq-options">
+                    <li>a) 0</li>
+                    <li>b) 1</li>
+                    <li>c) 2</li>
+                    <li>d) Unlimited</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) 1 - Exactly one abstract method; can have default/static methods.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">2. What is the correct lambda syntax for no parameters?</p>
+                <ul class="mcq-options">
+                    <li>a) -> expression</li>
+                    <li>b) () -> expression</li>
+                    <li>c) {} -> expression</li>
+                    <li>d) _ -> expression</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) () -> expression - Empty parentheses required for no parameters.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">3. Which built-in functional interface returns boolean?</p>
+                <ul class="mcq-options">
+                    <li>a) Function</li>
+                    <li>b) Consumer</li>
+                    <li>c) Predicate</li>
+                    <li>d) Supplier</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) Predicate - test() method returns boolean.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">4. What is the method reference syntax for static methods?</p>
+                <ul class="mcq-options">
+                    <li>a) ClassName.methodName</li>
+                    <li>b) ClassName::methodName</li>
+                    <li>c) ClassName->methodName</li>
+                    <li>d) ClassName#methodName</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) ClassName::methodName - Double colon operator for method references.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">5. Which stream operation is terminal?</p>
+                <ul class="mcq-options">
+                    <li>a) filter()</li>
+                    <li>b) map()</li>
+                    <li>c) sorted()</li>
+                    <li>d) collect()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>d) collect() - Terminal operations produce results and end the stream.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">6. Which stream operation removes duplicates?</p>
+                <ul class="mcq-options">
+                    <li>a) unique()</li>
+                    <li>b) distinct()</li>
+                    <li>c) removeDuplicates()</li>
+                    <li>d) filter()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) distinct() - Returns stream with unique elements.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">7. What does var keyword do in Java?</p>
+                <ul class="mcq-options">
+                    <li>a) Creates dynamic type</li>
+                    <li>b) Local variable type inference</li>
+                    <li>c) Creates variant type</li>
+                    <li>d) Disables type checking</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Local variable type inference - Compiler infers type from initializer.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">8. Which Java version introduced Records?</p>
+                <ul class="mcq-options">
+                    <li>a) Java 8</li>
+                    <li>b) Java 11</li>
+                    <li>c) Java 14</li>
+                    <li>d) Java 16</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>d) Java 16 - Records became standard in Java 16 (preview in 14/15).</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">9. What keyword is used in switch expressions to return a value from a block?</p>
+                <ul class="mcq-options">
+                    <li>a) return</li>
+                    <li>b) yield</li>
+                    <li>c) break</li>
+                    <li>d) give</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) yield - Used in switch expression blocks to return value.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">10. Text blocks use which delimiter?</p>
+                <ul class="mcq-options">
+                    <li>a) """</li>
+                    <li>b) '''</li>
+                    <li>c) ```</li>
+                    <li>d) |||</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>a) """ - Triple double quotes for multi-line text blocks.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">11. Which annotation marks a functional interface?</p>
+                <ul class="mcq-options">
+                    <li>a) @Lambda</li>
+                    <li>b) @FunctionalInterface</li>
+                    <li>c) @SingleMethod</li>
+                    <li>d) @Function</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) @FunctionalInterface - Optional but recommended annotation.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">12. What does sealed class restrict?</p>
+                <ul class="mcq-options">
+                    <li>a) Method access</li>
+                    <li>b) Field access</li>
+                    <li>c) Which classes can extend it</li>
+                    <li>d) Object creation</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) Which classes can extend it - Uses permits keyword to list allowed subclasses.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">13. Which stream method transforms elements?</p>
+                <ul class="mcq-options">
+                    <li>a) filter()</li>
+                    <li>b) map()</li>
+                    <li>c) reduce()</li>
+                    <li>d) peek()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) map() - Transforms each element using a function.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">14. Records are implicitly:</p>
+                <ul class="mcq-options">
+                    <li>a) abstract</li>
+                    <li>b) final</li>
+                    <li>c) static</li>
+                    <li>d) volatile</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) final - Records cannot be extended.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">15. Base64.getEncoder() is used for:</p>
+                <ul class="mcq-options">
+                    <li>a) Decoding Base64</li>
+                    <li>b) Encoding to Base64</li>
+                    <li>c) Encrypting data</li>
+                    <li>d) Compressing data</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Encoding to Base64 - Converts bytes to Base64 string.</p></details>
+            </div>
+        </section>
+
+        <!-- Unit IV MCQs -->
+        <section id="unit4" class="content-section">
+            <h2>Unit IV: Collections Framework</h2>
+
+            <div class="mcq-item">
+                <p class="mcq-question">1. Which collection does not allow duplicates?</p>
+                <ul class="mcq-options">
+                    <li>a) ArrayList</li>
+                    <li>b) LinkedList</li>
+                    <li>c) HashSet</li>
+                    <li>d) Vector</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) HashSet - Set interface implementations don't allow duplicates.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">2. Which collection maintains insertion order and allows duplicates?</p>
+                <ul class="mcq-options">
+                    <li>a) HashSet</li>
+                    <li>b) TreeSet</li>
+                    <li>c) ArrayList</li>
+                    <li>d) HashMap</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) ArrayList - List maintains order and allows duplicates.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">3. Which Map implementation maintains sorted order?</p>
+                <ul class="mcq-options">
+                    <li>a) HashMap</li>
+                    <li>b) LinkedHashMap</li>
+                    <li>c) TreeMap</li>
+                    <li>d) Hashtable</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) TreeMap - Sorted by keys using natural ordering or Comparator.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">4. Which collection is synchronized by default?</p>
+                <ul class="mcq-options">
+                    <li>a) ArrayList</li>
+                    <li>b) HashMap</li>
+                    <li>c) Vector</li>
+                    <li>d) LinkedList</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) Vector - Legacy class; thread-safe but slower.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">5. What is the time complexity of ArrayList.get(index)?</p>
+                <ul class="mcq-options">
+                    <li>a) O(1)</li>
+                    <li>b) O(n)</li>
+                    <li>c) O(log n)</li>
+                    <li>d) O(n^2)</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>a) O(1) - Direct index access in array.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">6. Iterator's remove() method removes:</p>
+                <ul class="mcq-options">
+                    <li>a) First element</li>
+                    <li>b) Last element</li>
+                    <li>c) Current element</li>
+                    <li>d) Next element</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) Current element - The last element returned by next().</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">7. Which interface is used for natural ordering?</p>
+                <ul class="mcq-options">
+                    <li>a) Comparator</li>
+                    <li>b) Comparable</li>
+                    <li>c) Ordering</li>
+                    <li>d) Sorted</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Comparable - Defines compareTo() for natural ordering.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">8. HashMap allows how many null keys?</p>
+                <ul class="mcq-options">
+                    <li>a) 0</li>
+                    <li>b) 1</li>
+                    <li>c) 2</li>
+                    <li>d) Unlimited</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) 1 - One null key, multiple null values allowed.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">9. Which collection is best for frequent insertions/deletions?</p>
+                <ul class="mcq-options">
+                    <li>a) ArrayList</li>
+                    <li>b) LinkedList</li>
+                    <li>c) Vector</li>
+                    <li>d) Stack</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) LinkedList - O(1) insertion/deletion at known position.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">10. PriorityQueue orders elements by:</p>
+                <ul class="mcq-options">
+                    <li>a) Insertion order</li>
+                    <li>b) Natural ordering or Comparator</li>
+                    <li>c) Random order</li>
+                    <li>d) Reverse order</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Natural ordering or Comparator - Heap-based priority queue.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">11. Which method of Comparable interface must be implemented?</p>
+                <ul class="mcq-options">
+                    <li>a) compare()</li>
+                    <li>b) compareTo()</li>
+                    <li>c) equals()</li>
+                    <li>d) compareWith()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) compareTo() - Returns negative, zero, or positive integer.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">12. LinkedHashSet maintains:</p>
+                <ul class="mcq-options">
+                    <li>a) Sorted order</li>
+                    <li>b) Insertion order</li>
+                    <li>c) Random order</li>
+                    <li>d) Reverse order</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Insertion order - HashSet with linked list for ordering.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">13. Hashtable vs HashMap - which allows null?</p>
+                <ul class="mcq-options">
+                    <li>a) Both</li>
+                    <li>b) Neither</li>
+                    <li>c) Only HashMap</li>
+                    <li>d) Only Hashtable</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) Only HashMap - Hashtable throws NullPointerException for null key/value.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">14. Which Queue method removes and returns head, returning null if empty?</p>
+                <ul class="mcq-options">
+                    <li>a) remove()</li>
+                    <li>b) poll()</li>
+                    <li>c) element()</li>
+                    <li>d) peek()</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) poll() - remove() throws exception if empty.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">15. Properties class extends:</p>
+                <ul class="mcq-options">
+                    <li>a) HashMap</li>
+                    <li>b) Hashtable</li>
+                    <li>c) TreeMap</li>
+                    <li>d) LinkedHashMap</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Hashtable - Legacy class for configuration properties.</p></details>
+            </div>
+        </section>
+
+        <!-- Unit V MCQs -->
+        <section id="unit5" class="content-section">
+            <h2>Unit V: Spring Framework Concepts</h2>
+
+            <div class="mcq-item">
+                <p class="mcq-question">1. What does IoC stand for?</p>
+                <ul class="mcq-options">
+                    <li>a) Input Output Control</li>
+                    <li>b) Inversion of Control</li>
+                    <li>c) Interface of Classes</li>
+                    <li>d) Instance of Container</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Inversion of Control - Container manages object creation and dependencies.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">2. Which is the recommended type of dependency injection?</p>
+                <ul class="mcq-options">
+                    <li>a) Field injection</li>
+                    <li>b) Setter injection</li>
+                    <li>c) Constructor injection</li>
+                    <li>d) Method injection</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) Constructor injection - Promotes immutability and clear dependencies.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">3. What is the default bean scope in Spring?</p>
+                <ul class="mcq-options">
+                    <li>a) prototype</li>
+                    <li>b) singleton</li>
+                    <li>c) request</li>
+                    <li>d) session</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) singleton - One instance per Spring container.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">4. Which annotation marks a class as a Spring-managed service?</p>
+                <ul class="mcq-options">
+                    <li>a) @Component</li>
+                    <li>b) @Service</li>
+                    <li>c) @Bean</li>
+                    <li>d) Both a and b</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>d) Both a and b - @Service is a specialization of @Component.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">5. AOP is used for handling:</p>
+                <ul class="mcq-options">
+                    <li>a) Business logic</li>
+                    <li>b) Cross-cutting concerns</li>
+                    <li>c) Database operations</li>
+                    <li>d) User interface</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Cross-cutting concerns - Logging, security, transactions, etc.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">6. Which advice type wraps the join point?</p>
+                <ul class="mcq-options">
+                    <li>a) @Before</li>
+                    <li>b) @After</li>
+                    <li>c) @Around</li>
+                    <li>d) @AfterReturning</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) @Around - Can control if/when the method executes.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">7. @Autowired performs injection by:</p>
+                <ul class="mcq-options">
+                    <li>a) Name</li>
+                    <li>b) Type</li>
+                    <li>c) Constructor</li>
+                    <li>d) Index</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Type - Matches by type; use @Qualifier for name.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">8. Which annotation is used for initialization callback?</p>
+                <ul class="mcq-options">
+                    <li>a) @Init</li>
+                    <li>b) @PostConstruct</li>
+                    <li>c) @AfterCreate</li>
+                    <li>d) @Initialize</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) @PostConstruct - Called after dependency injection.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">9. @RestController is equivalent to:</p>
+                <ul class="mcq-options">
+                    <li>a) @Controller</li>
+                    <li>b) @Controller + @ResponseBody</li>
+                    <li>c) @Service + @ResponseBody</li>
+                    <li>d) @Component + @REST</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) @Controller + @ResponseBody - Automatically serializes return values.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">10. Which HTTP method is used to create a new resource?</p>
+                <ul class="mcq-options">
+                    <li>a) GET</li>
+                    <li>b) POST</li>
+                    <li>c) PUT</li>
+                    <li>d) DELETE</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) POST - Creates new resource; PUT updates existing.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">11. @SpringBootApplication combines which annotations?</p>
+                <ul class="mcq-options">
+                    <li>a) @Configuration, @EnableAutoConfiguration, @ComponentScan</li>
+                    <li>b) @Controller, @Service, @Repository</li>
+                    <li>c) @Bean, @Autowired, @Qualifier</li>
+                    <li>d) @Primary, @Scope, @Lazy</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>a) @Configuration, @EnableAutoConfiguration, @ComponentScan</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">12. Which scope creates a new bean for each HTTP request?</p>
+                <ul class="mcq-options">
+                    <li>a) singleton</li>
+                    <li>b) prototype</li>
+                    <li>c) request</li>
+                    <li>d) session</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) request - Web-scoped bean; one per HTTP request.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">13. @PathVariable extracts value from:</p>
+                <ul class="mcq-options">
+                    <li>a) Query string</li>
+                    <li>b) Request body</li>
+                    <li>c) URI path</li>
+                    <li>d) Header</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>c) URI path - e.g., /users/{id} extracts id.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">14. Which runner interface receives raw command line arguments?</p>
+                <ul class="mcq-options">
+                    <li>a) ApplicationRunner</li>
+                    <li>b) CommandLineRunner</li>
+                    <li>c) StartupRunner</li>
+                    <li>d) InitRunner</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) CommandLineRunner - Receives String... args.</p></details>
+            </div>
+
+            <div class="mcq-item">
+                <p class="mcq-question">15. @Qualifier is used when:</p>
+                <ul class="mcq-options">
+                    <li>a) No beans exist</li>
+                    <li>b) Multiple beans of same type exist</li>
+                    <li>c) Bean is prototype scoped</li>
+                    <li>d) Bean needs lazy initialization</li>
+                </ul>
+                <details class="mcq-answer"><summary>Show Answer</summary><p>b) Multiple beans of same type exist - Specifies which bean to inject.</p></details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

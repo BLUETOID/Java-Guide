@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit II: Exception Handling, I/O, and Multithreading - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">Java Hub</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html" class="active">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Unit II: Exception Handling, I/O, and Multithreading</h1>
+        <p>Master exception handling, file operations, and concurrent programming in Java</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#exceptions">Exception Handling</a></li>
+            <li><a href="#try-catch">try-catch-finally</a></li>
+            <li><a href="#throw">throw and throws</a></li>
+            <li><a href="#checked">Checked vs Unchecked</a></li>
+            <li><a href="#io">Java I/O</a></li>
+            <li><a href="#streams">Byte and Character Streams</a></li>
+            <li><a href="#file">File Operations</a></li>
+            <li><a href="#threads">Multithreading</a></li>
+            <li><a href="#sync">Synchronization</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Exception Handling Introduction -->
+        <section id="exceptions" class="content-section">
+            <h2>Exception Handling in Java</h2>
+
+            <h3>Definition</h3>
+            <p>An exception is an unwanted or unexpected event that occurs during the execution of a program and disrupts the normal flow of instructions. Exception handling is a mechanism to handle runtime errors gracefully without terminating the program abruptly.</p>
+
+            <h3>Key Points</h3>
+            <ul>
+                <li>Exceptions are objects that describe an error condition</li>
+                <li>All exceptions are subclasses of <code>java.lang.Throwable</code></li>
+                <li>Two main subclasses: <code>Exception</code> and <code>Error</code></li>
+                <li>Errors represent serious problems that applications should not try to catch</li>
+                <li>Exceptions can be caught and handled by the program</li>
+            </ul>
+
+            <h3>Exception Hierarchy</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Exception Hierarchy</span>
+                </div>
+                <pre><code>java.lang.Object
+    └── java.lang.Throwable
+            ├── java.lang.Error
+            │       ├── OutOfMemoryError
+            │       ├── StackOverflowError
+            │       └── VirtualMachineError
+            │
+            └── java.lang.Exception
+                    ├── IOException (Checked)
+                    ├── SQLException (Checked)
+                    ├── ClassNotFoundException (Checked)
+                    │
+                    └── RuntimeException (Unchecked)
+                            ├── NullPointerException
+                            ├── ArrayIndexOutOfBoundsException
+                            ├── ArithmeticException
+                            └── IllegalArgumentException</code></pre>
+            </div>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>Errors are typically caused by problems outside the application's control (e.g., out of memory). Exceptions are conditions that can be anticipated and recovered from within the application.</p>
+            </div>
+        </section>
+
+        <!-- try-catch-finally -->
+        <section id="try-catch" class="content-section">
+            <h2>try, catch, and finally Blocks</h2>
+
+            <h3>Syntax</h3>
+            <ul>
+                <li><strong>try:</strong> Contains code that might throw an exception</li>
+                <li><strong>catch:</strong> Handles the exception if it occurs</li>
+                <li><strong>finally:</strong> Always executes, used for cleanup code</li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TryCatchDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> TryCatchDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">try</span> {
+            <span class="comment">// Code that may throw an exception</span>
+            <span class="keyword">int</span> result = <span class="number">10</span> / <span class="number">0</span>;
+            System.out.println(result);
+        } <span class="keyword">catch</span> (ArithmeticException e) {
+            <span class="comment">// Handle the exception</span>
+            System.out.println(<span class="string">"Error: Division by zero!"</span>);
+            System.out.println(<span class="string">"Message: "</span> + e.getMessage());
+        } <span class="keyword">finally</span> {
+            <span class="comment">// Always executed</span>
+            System.out.println(<span class="string">"Finally block executed"</span>);
+        }
+        
+        System.out.println(<span class="string">"Program continues..."</span>);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Multiple catch Blocks</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>MultipleCatch.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> MultipleCatch {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">try</span> {
+            <span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};
+            System.out.println(arr[<span class="number">5</span>]);  <span class="comment">// ArrayIndexOutOfBoundsException</span>
+            
+            <span class="keyword">int</span> result = <span class="number">10</span> / <span class="number">0</span>;  <span class="comment">// ArithmeticException</span>
+            
+        } <span class="keyword">catch</span> (ArrayIndexOutOfBoundsException e) {
+            System.out.println(<span class="string">"Array index error: "</span> + e.getMessage());
+            
+        } <span class="keyword">catch</span> (ArithmeticException e) {
+            System.out.println(<span class="string">"Arithmetic error: "</span> + e.getMessage());
+            
+        } <span class="keyword">catch</span> (Exception e) {
+            <span class="comment">// Catches any other exception</span>
+            System.out.println(<span class="string">"General error: "</span> + e.getMessage());
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Multi-catch (Java 7+)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>MultiCatch.java</span>
+                </div>
+                <pre><code><span class="keyword">try</span> {
+    <span class="comment">// Code that may throw multiple exceptions</span>
+    riskyOperation();
+} <span class="keyword">catch</span> (IOException | SQLException e) {
+    <span class="comment">// Handle multiple exception types with single catch block</span>
+    System.out.println(<span class="string">"IO or SQL error: "</span> + e.getMessage());
+}</code></pre>
+            </div>
+
+            <h3>Nested try Blocks</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>NestedTry.java</span>
+                </div>
+                <pre><code><span class="keyword">try</span> {
+    <span class="comment">// Outer try block</span>
+    System.out.println(<span class="string">"Outer try"</span>);
+    
+    <span class="keyword">try</span> {
+        <span class="comment">// Inner try block</span>
+        <span class="keyword">int</span> result = <span class="number">10</span> / <span class="number">0</span>;
+    } <span class="keyword">catch</span> (ArithmeticException e) {
+        System.out.println(<span class="string">"Inner catch: "</span> + e.getMessage());
+    }
+    
+} <span class="keyword">catch</span> (Exception e) {
+    System.out.println(<span class="string">"Outer catch: "</span> + e.getMessage());
+} <span class="keyword">finally</span> {
+    System.out.println(<span class="string">"Outer finally"</span>);
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>The <code>finally</code> block always executes except when <code>System.exit()</code> is called or the JVM crashes. Even if there is a return statement in try or catch, finally still executes before the method returns.</p>
+            </div>
+        </section>
+
+        <!-- throw and throws -->
+        <section id="throw" class="content-section">
+            <h2>throw and throws Keywords</h2>
+
+            <h3>throw Keyword</h3>
+            <p><strong>Definition:</strong> The <code>throw</code> keyword is used to explicitly throw an exception from a method or any block of code.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ThrowDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> ThrowDemo {
+    <span class="keyword">public static void</span> validateAge(<span class="keyword">int</span> age) {
+        <span class="keyword">if</span> (age < <span class="number">0</span>) {
+            <span class="keyword">throw new</span> IllegalArgumentException(<span class="string">"Age cannot be negative"</span>);
+        }
+        <span class="keyword">if</span> (age < <span class="number">18</span>) {
+            <span class="keyword">throw new</span> ArithmeticException(<span class="string">"Not eligible to vote"</span>);
+        }
+        System.out.println(<span class="string">"Valid age: "</span> + age);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">try</span> {
+            validateAge(<span class="number">15</span>);
+        } <span class="keyword">catch</span> (ArithmeticException e) {
+            System.out.println(<span class="string">"Exception: "</span> + e.getMessage());
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>throws Keyword</h3>
+            <p><strong>Definition:</strong> The <code>throws</code> keyword is used in method declaration to specify that the method might throw certain exceptions. It delegates the responsibility of exception handling to the caller.</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ThrowsDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> ThrowsDemo {
+    <span class="comment">// Method declares that it may throw IOException</span>
+    <span class="keyword">public static void</span> readFile(String filename) <span class="keyword">throws</span> IOException {
+        FileReader file = <span class="keyword">new</span> FileReader(filename);
+        BufferedReader reader = <span class="keyword">new</span> BufferedReader(file);
+        String line = reader.readLine();
+        System.out.println(line);
+        reader.close();
+    }
+    
+    <span class="comment">// Method can throw multiple exceptions</span>
+    <span class="keyword">public static void</span> process() <span class="keyword">throws</span> IOException, SQLException {
+        <span class="comment">// Method implementation</span>
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">try</span> {
+            readFile(<span class="string">"test.txt"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"File error: "</span> + e.getMessage());
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Custom Exceptions</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>CustomExceptionDemo.java</span>
+                </div>
+                <pre><code><span class="comment">// Custom checked exception</span>
+<span class="keyword">class</span> InsufficientFundsException <span class="keyword">extends</span> Exception {
+    <span class="keyword">private double</span> amount;
+    
+    <span class="keyword">public</span> InsufficientFundsException(<span class="keyword">double</span> amount) {
+        <span class="keyword">super</span>(<span class="string">"Insufficient funds. Required: "</span> + amount);
+        <span class="keyword">this</span>.amount = amount;
+    }
+    
+    <span class="keyword">public double</span> getAmount() {
+        <span class="keyword">return</span> amount;
+    }
+}
+
+<span class="comment">// Custom unchecked exception</span>
+<span class="keyword">class</span> InvalidUserException <span class="keyword">extends</span> RuntimeException {
+    <span class="keyword">public</span> InvalidUserException(String message) {
+        <span class="keyword">super</span>(message);
+    }
+}
+
+<span class="keyword">class</span> BankAccount {
+    <span class="keyword">private double</span> balance;
+    
+    <span class="keyword">public void</span> withdraw(<span class="keyword">double</span> amount) <span class="keyword">throws</span> InsufficientFundsException {
+        <span class="keyword">if</span> (amount > balance) {
+            <span class="keyword">throw new</span> InsufficientFundsException(amount - balance);
+        }
+        balance -= amount;
+    }
+}</code></pre>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>throw</th>
+                    <th>throws</th>
+                </tr>
+                <tr>
+                    <td>Used to throw an exception explicitly</td>
+                    <td>Used to declare an exception</td>
+                </tr>
+                <tr>
+                    <td>Used inside a method</td>
+                    <td>Used in method signature</td>
+                </tr>
+                <tr>
+                    <td>Followed by an exception object</td>
+                    <td>Followed by exception class names</td>
+                </tr>
+                <tr>
+                    <td>Can throw only one exception at a time</td>
+                    <td>Can declare multiple exceptions</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Checked vs Unchecked Exceptions -->
+        <section id="checked" class="content-section">
+            <h2>Checked vs Unchecked Exceptions</h2>
+
+            <h3>Checked Exceptions</h3>
+            <p><strong>Definition:</strong> Checked exceptions are exceptions that are checked at compile-time. The compiler verifies that these exceptions are either caught or declared in the method signature.</p>
+            <ul>
+                <li>Subclasses of <code>Exception</code> (except RuntimeException)</li>
+                <li>Must be declared using <code>throws</code> or handled using <code>try-catch</code></li>
+                <li>Examples: IOException, SQLException, ClassNotFoundException</li>
+            </ul>
+
+            <h3>Unchecked Exceptions</h3>
+            <p><strong>Definition:</strong> Unchecked exceptions are exceptions that are not checked at compile-time. They occur at runtime and are also called runtime exceptions.</p>
+            <ul>
+                <li>Subclasses of <code>RuntimeException</code></li>
+                <li>Not required to be declared or caught</li>
+                <li>Examples: NullPointerException, ArrayIndexOutOfBoundsException, ArithmeticException</li>
+            </ul>
+
+            <table class="data-table">
+                <tr>
+                    <th>Checked Exceptions</th>
+                    <th>Unchecked Exceptions</th>
+                </tr>
+                <tr>
+                    <td>Checked at compile-time</td>
+                    <td>Checked at runtime</td>
+                </tr>
+                <tr>
+                    <td>Must be declared or handled</td>
+                    <td>Not required to declare or handle</td>
+                </tr>
+                <tr>
+                    <td>Extends Exception class</td>
+                    <td>Extends RuntimeException class</td>
+                </tr>
+                <tr>
+                    <td>IOException, SQLException</td>
+                    <td>NullPointerException, ArithmeticException</td>
+                </tr>
+                <tr>
+                    <td>Recoverable conditions</td>
+                    <td>Programming errors</td>
+                </tr>
+            </table>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>CheckedVsUnchecked.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> CheckedVsUnchecked {
+    <span class="comment">// Checked exception - must declare with throws</span>
+    <span class="keyword">public void</span> readFile() <span class="keyword">throws</span> IOException {
+        FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>);
+    }
+    
+    <span class="comment">// Unchecked exception - no declaration needed</span>
+    <span class="keyword">public void</span> divide(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">int</span> result = a / b;  <span class="comment">// May throw ArithmeticException</span>
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        CheckedVsUnchecked demo = <span class="keyword">new</span> CheckedVsUnchecked();
+        
+        <span class="comment">// Must handle checked exception</span>
+        <span class="keyword">try</span> {
+            demo.readFile();
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"File error"</span>);
+        }
+        
+        <span class="comment">// Unchecked - can handle but not required</span>
+        demo.divide(<span class="number">10</span>, <span class="number">2</span>);
+    }
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>If a method throws a checked exception, the calling code must either handle it with try-catch or declare it with throws. Unchecked exceptions do not have this requirement.</p>
+            </div>
+        </section>
+
+        <!-- Java I/O Basics -->
+        <section id="io" class="content-section">
+            <h2>Java I/O Basics</h2>
+
+            <h3>Definition</h3>
+            <p>Java I/O (Input/Output) is used to process the input and produce the output. Java uses the concept of streams to make I/O operations fast and efficient.</p>
+
+            <h3>Types of Streams</h3>
+            <ul>
+                <li><strong>Byte Streams:</strong> Handle I/O of raw binary data (8-bit bytes)</li>
+                <li><strong>Character Streams:</strong> Handle I/O of character data (16-bit Unicode)</li>
+            </ul>
+
+            <h3>Stream Hierarchy</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Stream Classes</span>
+                </div>
+                <pre><code><span class="comment">Byte Streams:</span>
+InputStream (abstract)
+    ├── FileInputStream
+    ├── BufferedInputStream
+    ├── DataInputStream
+    └── ObjectInputStream
+
+OutputStream (abstract)
+    ├── FileOutputStream
+    ├── BufferedOutputStream
+    ├── DataOutputStream
+    └── ObjectOutputStream
+
+<span class="comment">Character Streams:</span>
+Reader (abstract)
+    ├── FileReader
+    ├── BufferedReader
+    ├── InputStreamReader
+    └── StringReader
+
+Writer (abstract)
+    ├── FileWriter
+    ├── BufferedWriter
+    ├── OutputStreamWriter
+    └── PrintWriter</code></pre>
+            </div>
+
+            <div class="note-box">
+                <h4>Note</h4>
+                <p>Use byte streams for binary data (images, audio, video) and character streams for text data. Character streams automatically handle character encoding.</p>
+            </div>
+        </section>
+
+        <!-- Byte and Character Streams -->
+        <section id="streams" class="content-section">
+            <h2>Byte Streams and Character Streams</h2>
+
+            <h3>Byte Streams</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ByteStreamDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> ByteStreamDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Writing bytes to file</span>
+        <span class="keyword">try</span> (FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"output.dat"</span>)) {
+            <span class="keyword">byte</span>[] data = {<span class="number">65</span>, <span class="number">66</span>, <span class="number">67</span>, <span class="number">68</span>, <span class="number">69</span>};  <span class="comment">// A, B, C, D, E</span>
+            fos.write(data);
+            System.out.println(<span class="string">"Data written successfully"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"Error: "</span> + e.getMessage());
+        }
+        
+        <span class="comment">// Reading bytes from file</span>
+        <span class="keyword">try</span> (FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"output.dat"</span>)) {
+            <span class="keyword">int</span> data;
+            <span class="keyword">while</span> ((data = fis.read()) != -<span class="number">1</span>) {
+                System.out.print((<span class="keyword">char</span>) data);  <span class="comment">// Prints: ABCDE</span>
+            }
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"Error: "</span> + e.getMessage());
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Character Streams</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>CharStreamDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> CharStreamDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Writing characters to file</span>
+        <span class="keyword">try</span> (FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"output.txt"</span>)) {
+            fw.write(<span class="string">"Hello, Java I/O!\n"</span>);
+            fw.write(<span class="string">"Learning character streams."</span>);
+            System.out.println(<span class="string">"Written to file"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"Error: "</span> + e.getMessage());
+        }
+        
+        <span class="comment">// Reading characters from file</span>
+        <span class="keyword">try</span> (FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"output.txt"</span>)) {
+            <span class="keyword">int</span> ch;
+            <span class="keyword">while</span> ((ch = fr.read()) != -<span class="number">1</span>) {
+                System.out.print((<span class="keyword">char</span>) ch);
+            }
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"Error: "</span> + e.getMessage());
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Buffered Streams (Efficient I/O)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>BufferedStreamDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> BufferedStreamDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// BufferedWriter - efficient writing</span>
+        <span class="keyword">try</span> (BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(
+                                  <span class="keyword">new</span> FileWriter(<span class="string">"buffered.txt"</span>))) {
+            bw.write(<span class="string">"Line 1"</span>);
+            bw.newLine();  <span class="comment">// Platform-independent newline</span>
+            bw.write(<span class="string">"Line 2"</span>);
+            bw.newLine();
+            bw.write(<span class="string">"Line 3"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+        
+        <span class="comment">// BufferedReader - efficient reading</span>
+        <span class="keyword">try</span> (BufferedReader br = <span class="keyword">new</span> BufferedReader(
+                                  <span class="keyword">new</span> FileReader(<span class="string">"buffered.txt"</span>))) {
+            String line;
+            <span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) {
+                System.out.println(line);
+            }
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>Byte Streams</th>
+                    <th>Character Streams</th>
+                </tr>
+                <tr>
+                    <td>Handle raw binary data</td>
+                    <td>Handle character data</td>
+                </tr>
+                <tr>
+                    <td>8-bit (1 byte) at a time</td>
+                    <td>16-bit (2 bytes) Unicode at a time</td>
+                </tr>
+                <tr>
+                    <td>InputStream, OutputStream</td>
+                    <td>Reader, Writer</td>
+                </tr>
+                <tr>
+                    <td>Used for images, audio, video</td>
+                    <td>Used for text files</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- File Reading and Writing -->
+        <section id="file" class="content-section">
+            <h2>File Reading and Writing</h2>
+
+            <h3>File Class</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>FileDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.File;
+
+<span class="keyword">public class</span> FileDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        File file = <span class="keyword">new</span> File(<span class="string">"test.txt"</span>);
+        
+        <span class="comment">// File information</span>
+        System.out.println(<span class="string">"Exists: "</span> + file.exists());
+        System.out.println(<span class="string">"Name: "</span> + file.getName());
+        System.out.println(<span class="string">"Path: "</span> + file.getAbsolutePath());
+        System.out.println(<span class="string">"Is File: "</span> + file.isFile());
+        System.out.println(<span class="string">"Is Directory: "</span> + file.isDirectory());
+        System.out.println(<span class="string">"Can Read: "</span> + file.canRead());
+        System.out.println(<span class="string">"Can Write: "</span> + file.canWrite());
+        System.out.println(<span class="string">"Size: "</span> + file.length() + <span class="string">" bytes"</span>);
+        
+        <span class="comment">// Create new file</span>
+        <span class="keyword">try</span> {
+            <span class="keyword">if</span> (file.createNewFile()) {
+                System.out.println(<span class="string">"File created"</span>);
+            }
+        } <span class="keyword">catch</span> (Exception e) {
+            e.printStackTrace();
+        }
+        
+        <span class="comment">// Create directory</span>
+        File dir = <span class="keyword">new</span> File(<span class="string">"myFolder"</span>);
+        dir.mkdir();  <span class="comment">// Creates single directory</span>
+        
+        <span class="comment">// List files in directory</span>
+        File folder = <span class="keyword">new</span> File(<span class="string">"."</span>);
+        String[] files = folder.list();
+        <span class="keyword">for</span> (String f : files) {
+            System.out.println(f);
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Complete File Operations Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>FileOperations.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> FileOperations {
+    <span class="keyword">public static void</span> main(String[] args) {
+        String filename = <span class="string">"students.txt"</span>;
+        
+        <span class="comment">// Write to file</span>
+        <span class="keyword">try</span> (PrintWriter writer = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> FileWriter(filename))) {
+            writer.println(<span class="string">"John,20,CS"</span>);
+            writer.println(<span class="string">"Jane,21,IT"</span>);
+            writer.println(<span class="string">"Bob,22,ECE"</span>);
+            System.out.println(<span class="string">"Data written successfully"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+        
+        <span class="comment">// Read from file</span>
+        System.out.println(<span class="string">"\nReading file:"</span>);
+        <span class="keyword">try</span> (BufferedReader reader = <span class="keyword">new</span> BufferedReader(
+                                       <span class="keyword">new</span> FileReader(filename))) {
+            String line;
+            <span class="keyword">while</span> ((line = reader.readLine()) != <span class="keyword">null</span>) {
+                String[] parts = line.split(<span class="string">","</span>);
+                System.out.println(<span class="string">"Name: "</span> + parts[<span class="number">0</span>] + 
+                                   <span class="string">", Age: "</span> + parts[<span class="number">1</span>] + 
+                                   <span class="string">", Dept: "</span> + parts[<span class="number">2</span>]);
+            }
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+        
+        <span class="comment">// Append to file</span>
+        <span class="keyword">try</span> (FileWriter fw = <span class="keyword">new</span> FileWriter(filename, <span class="keyword">true</span>)) {  <span class="comment">// true = append mode</span>
+            fw.write(<span class="string">"Alice,23,ME\n"</span>);
+            System.out.println(<span class="string">"\nData appended"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>Warning</h4>
+                <p>Always close streams after use to release system resources. Use try-with-resources (Java 7+) to automatically close streams.</p>
+            </div>
+        </section>
+
+        <!-- Multithreading -->
+        <section id="threads" class="content-section">
+            <h2>Multithreading in Java</h2>
+
+            <h3>Definition</h3>
+            <p>Multithreading is a feature that allows concurrent execution of two or more parts of a program to maximize CPU utilization. Each part of such a program is called a thread.</p>
+
+            <h3>Thread Lifecycle</h3>
+            <ol>
+                <li><strong>New:</strong> Thread is created but not yet started</li>
+                <li><strong>Runnable:</strong> Thread is ready to run and waiting for CPU</li>
+                <li><strong>Running:</strong> Thread is executing</li>
+                <li><strong>Blocked/Waiting:</strong> Thread is waiting for a resource or another thread</li>
+                <li><strong>Terminated:</strong> Thread has completed execution</li>
+            </ol>
+
+            <h3>Creating Threads</h3>
+            <p>There are two ways to create a thread:</p>
+
+            <h4>Method 1: Extending Thread Class</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ExtendThread.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> MyThread <span class="keyword">extends</span> Thread {
+    <span class="keyword">private</span> String threadName;
+    
+    <span class="keyword">public</span> MyThread(String name) {
+        <span class="keyword">this</span>.threadName = name;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> run() {
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
+            System.out.println(threadName + <span class="string">": "</span> + i);
+            <span class="keyword">try</span> {
+                Thread.sleep(<span class="number">500</span>);  <span class="comment">// Sleep for 500 milliseconds</span>
+            } <span class="keyword">catch</span> (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+<span class="keyword">public class</span> ExtendThread {
+    <span class="keyword">public static void</span> main(String[] args) {
+        MyThread t1 = <span class="keyword">new</span> MyThread(<span class="string">"Thread-1"</span>);
+        MyThread t2 = <span class="keyword">new</span> MyThread(<span class="string">"Thread-2"</span>);
+        
+        t1.start();  <span class="comment">// Starts the thread</span>
+        t2.start();
+        
+        System.out.println(<span class="string">"Main thread finished"</span>);
+    }
+}</code></pre>
+            </div>
+
+            <h4>Method 2: Implementing Runnable Interface</h4>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ImplementRunnable.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> MyRunnable <span class="keyword">implements</span> Runnable {
+    <span class="keyword">private</span> String threadName;
+    
+    <span class="keyword">public</span> MyRunnable(String name) {
+        <span class="keyword">this</span>.threadName = name;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> run() {
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
+            System.out.println(threadName + <span class="string">": "</span> + i);
+            <span class="keyword">try</span> {
+                Thread.sleep(<span class="number">500</span>);
+            } <span class="keyword">catch</span> (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+<span class="keyword">public class</span> ImplementRunnable {
+    <span class="keyword">public static void</span> main(String[] args) {
+        MyRunnable r1 = <span class="keyword">new</span> MyRunnable(<span class="string">"Thread-1"</span>);
+        MyRunnable r2 = <span class="keyword">new</span> MyRunnable(<span class="string">"Thread-2"</span>);
+        
+        Thread t1 = <span class="keyword">new</span> Thread(r1);
+        Thread t2 = <span class="keyword">new</span> Thread(r2);
+        
+        t1.start();
+        t2.start();
+    }
+}</code></pre>
+            </div>
+
+            <h3>Thread Priority</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ThreadPriority.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> ThreadPriority {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Thread t1 = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+                System.out.println(<span class="string">"Low priority: "</span> + i);
+            }
+        });
+        
+        Thread t2 = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+                System.out.println(<span class="string">"High priority: "</span> + i);
+            }
+        });
+        
+        <span class="comment">// Priority values: 1 (MIN) to 10 (MAX), 5 is NORMAL</span>
+        t1.setPriority(Thread.MIN_PRIORITY);   <span class="comment">// 1</span>
+        t2.setPriority(Thread.MAX_PRIORITY);   <span class="comment">// 10</span>
+        
+        System.out.println(<span class="string">"t1 priority: "</span> + t1.getPriority());
+        System.out.println(<span class="string">"t2 priority: "</span> + t2.getPriority());
+        
+        t1.start();
+        t2.start();
+    }
+}</code></pre>
+            </div>
+
+            <h3>Thread Methods</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>start()</td>
+                    <td>Starts the thread execution</td>
+                </tr>
+                <tr>
+                    <td>run()</td>
+                    <td>Contains the code to be executed</td>
+                </tr>
+                <tr>
+                    <td>sleep(ms)</td>
+                    <td>Pauses execution for specified milliseconds</td>
+                </tr>
+                <tr>
+                    <td>join()</td>
+                    <td>Waits for thread to complete</td>
+                </tr>
+                <tr>
+                    <td>isAlive()</td>
+                    <td>Checks if thread is still running</td>
+                </tr>
+                <tr>
+                    <td>yield()</td>
+                    <td>Suggests scheduler to give chance to other threads</td>
+                </tr>
+                <tr>
+                    <td>interrupt()</td>
+                    <td>Interrupts the thread</td>
+                </tr>
+            </table>
+
+            <div class="common-mistake">
+                <h4>Common Mistake</h4>
+                <p>Calling <code>run()</code> directly instead of <code>start()</code> will not create a new thread. The code will execute in the current thread. Always use <code>start()</code> to create a new thread.</p>
+            </div>
+        </section>
+
+        <!-- Synchronization -->
+        <section id="sync" class="content-section">
+            <h2>Synchronization and Inter-thread Communication</h2>
+
+            <h3>Definition</h3>
+            <p>Synchronization is a mechanism that ensures that only one thread can access a shared resource at a time. It prevents thread interference and memory consistency errors.</p>
+
+            <h3>Synchronized Method</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SyncMethodDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> Counter {
+    <span class="keyword">private int</span> count = <span class="number">0</span>;
+    
+    <span class="comment">// Synchronized method</span>
+    <span class="keyword">public synchronized void</span> increment() {
+        count++;
+    }
+    
+    <span class="keyword">public int</span> getCount() {
+        <span class="keyword">return</span> count;
+    }
+}
+
+<span class="keyword">public class</span> SyncMethodDemo {
+    <span class="keyword">public static void</span> main(String[] args) <span class="keyword">throws</span> InterruptedException {
+        Counter counter = <span class="keyword">new</span> Counter();
+        
+        Thread t1 = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">1000</span>; i++) {
+                counter.increment();
+            }
+        });
+        
+        Thread t2 = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">1000</span>; i++) {
+                counter.increment();
+            }
+        });
+        
+        t1.start();
+        t2.start();
+        
+        t1.join();  <span class="comment">// Wait for t1 to finish</span>
+        t2.join();  <span class="comment">// Wait for t2 to finish</span>
+        
+        System.out.println(<span class="string">"Count: "</span> + counter.getCount());  <span class="comment">// Always 2000</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Synchronized Block</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SyncBlockDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> BankAccount {
+    <span class="keyword">private double</span> balance;
+    
+    <span class="keyword">public</span> BankAccount(<span class="keyword">double</span> initialBalance) {
+        <span class="keyword">this</span>.balance = initialBalance;
+    }
+    
+    <span class="keyword">public void</span> withdraw(<span class="keyword">double</span> amount) {
+        <span class="comment">// Synchronized block - locks on 'this' object</span>
+        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {
+            <span class="keyword">if</span> (balance >= amount) {
+                System.out.println(Thread.currentThread().getName() + 
+                                   <span class="string">" withdrawing: "</span> + amount);
+                balance -= amount;
+                System.out.println(<span class="string">"Balance: "</span> + balance);
+            } <span class="keyword">else</span> {
+                System.out.println(<span class="string">"Insufficient funds"</span>);
+            }
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Inter-thread Communication</h3>
+            <p>Java provides methods for threads to communicate with each other:</p>
+            <ul>
+                <li><strong>wait():</strong> Causes current thread to wait until another thread calls notify()</li>
+                <li><strong>notify():</strong> Wakes up a single thread that is waiting</li>
+                <li><strong>notifyAll():</strong> Wakes up all waiting threads</li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ProducerConsumer.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> SharedQueue {
+    <span class="keyword">private int</span> data;
+    <span class="keyword">private boolean</span> hasData = <span class="keyword">false</span>;
+    
+    <span class="keyword">public synchronized void</span> produce(<span class="keyword">int</span> value) <span class="keyword">throws</span> InterruptedException {
+        <span class="keyword">while</span> (hasData) {
+            wait();  <span class="comment">// Wait until data is consumed</span>
+        }
+        data = value;
+        System.out.println(<span class="string">"Produced: "</span> + value);
+        hasData = <span class="keyword">true</span>;
+        notify();  <span class="comment">// Notify consumer</span>
+    }
+    
+    <span class="keyword">public synchronized int</span> consume() <span class="keyword">throws</span> InterruptedException {
+        <span class="keyword">while</span> (!hasData) {
+            wait();  <span class="comment">// Wait until data is produced</span>
+        }
+        System.out.println(<span class="string">"Consumed: "</span> + data);
+        hasData = <span class="keyword">false</span>;
+        notify();  <span class="comment">// Notify producer</span>
+        <span class="keyword">return</span> data;
+    }
+}
+
+<span class="keyword">public class</span> ProducerConsumer {
+    <span class="keyword">public static void</span> main(String[] args) {
+        SharedQueue queue = <span class="keyword">new</span> SharedQueue();
+        
+        <span class="comment">// Producer thread</span>
+        Thread producer = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
+                <span class="keyword">try</span> {
+                    queue.produce(i);
+                    Thread.sleep(<span class="number">100</span>);
+                } <span class="keyword">catch</span> (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        
+        <span class="comment">// Consumer thread</span>
+        Thread consumer = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
+                <span class="keyword">try</span> {
+                    queue.consume();
+                    Thread.sleep(<span class="number">200</span>);
+                } <span class="keyword">catch</span> (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        
+        producer.start();
+        consumer.start();
+    }
+}</code></pre>
+            </div>
+
+            <div class="exam-tip">
+                <h4>Exam Tip</h4>
+                <p>Remember: <code>wait()</code>, <code>notify()</code>, and <code>notifyAll()</code> must be called from within a synchronized context (synchronized method or block). They are methods of the Object class, not Thread class.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="nav-buttons">
+        <a href="unit1.html" class="nav-btn">Unit I: Java Fundamentals</a>
+        <a href="unit3.html" class="nav-btn">Unit III: Modern Java Features</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="unit1.html">Unit I - Fundamentals</a></li>
+                    <li><a href="unit2.html">Unit II - Exceptions and I/O</a></li>
+                    <li><a href="unit3.html">Unit III - Modern Features</a></li>
+                    <li><a href="unit4.html">Unit IV - Collections</a></li>
+                    <li><a href="unit5.html">Unit V - Spring Concepts</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>

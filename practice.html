@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Problems - Java Learning Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><a href="index.html">Java Hub</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unit1.html">Unit I</a></li>
+            <li><a href="unit2.html">Unit II</a></li>
+            <li><a href="unit3.html">Unit III</a></li>
+            <li><a href="unit4.html">Unit IV</a></li>
+            <li><a href="unit5.html">Unit V</a></li>
+            <li><a href="mcq.html">MCQ</a></li>
+            <li><a href="practice.html" class="active">Practice</a></li>
+            <li><a href="theory.html">Theory</a></li>
+            <li><a href="errors.html">Errors</a></li>
+        </ul>
+    </nav>
+
+    <header class="unit-header">
+        <h1>Practice Problems</h1>
+        <p>Sharpen your Java skills with hands-on coding exercises</p>
+    </header>
+
+    <nav class="topics-nav">
+        <ul>
+            <li><a href="#basic">Basic</a></li>
+            <li><a href="#intermediate">Intermediate</a></li>
+            <li><a href="#advanced">Advanced</a></li>
+            <li><a href="#more">More Problems</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Basic Problems -->
+        <section id="basic" class="content-section">
+            <h2>Basic Level</h2>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>1. Palindrome Check</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Write a program to check if a given string is a palindrome (reads same forwards and backwards).</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> Palindrome {
+    <span class="keyword">public static boolean</span> isPalindrome(String str) {
+        str = str.toLowerCase().replaceAll(<span class="string">"[^a-z0-9]"</span>, <span class="string">""</span>);
+        <span class="keyword">int</span> left = <span class="number">0</span>, right = str.length() - <span class="number">1</span>;
+        <span class="keyword">while</span> (left < right) {
+            <span class="keyword">if</span> (str.charAt(left++) != str.charAt(right--)) {
+                <span class="keyword">return false</span>;
+            }
+        }
+        <span class="keyword">return true</span>;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(isPalindrome(<span class="string">"Madam"</span>));  <span class="comment">// true</span>
+        System.out.println(isPalindrome(<span class="string">"Hello"</span>));  <span class="comment">// false</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>2. Factorial Calculation</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Write a program to calculate factorial of a number using both iteration and recursion.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> Factorial {
+    <span class="comment">// Iterative approach</span>
+    <span class="keyword">public static long</span> factorialIterative(<span class="keyword">int</span> n) {
+        <span class="keyword">long</span> result = <span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i <= n; i++) {
+            result *= i;
+        }
+        <span class="keyword">return</span> result;
+    }
+    
+    <span class="comment">// Recursive approach</span>
+    <span class="keyword">public static long</span> factorialRecursive(<span class="keyword">int</span> n) {
+        <span class="keyword">if</span> (n <= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;
+        <span class="keyword">return</span> n * factorialRecursive(n - <span class="number">1</span>);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(factorialIterative(<span class="number">5</span>));  <span class="comment">// 120</span>
+        System.out.println(factorialRecursive(<span class="number">5</span>));  <span class="comment">// 120</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>3. Prime Number Check</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Write a method to check if a number is prime.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> PrimeCheck {
+    <span class="keyword">public static boolean</span> isPrime(<span class="keyword">int</span> n) {
+        <span class="keyword">if</span> (n <= <span class="number">1</span>) <span class="keyword">return false</span>;
+        <span class="keyword">if</span> (n <= <span class="number">3</span>) <span class="keyword">return true</span>;
+        <span class="keyword">if</span> (n % <span class="number">2</span> == <span class="number">0</span> || n % <span class="number">3</span> == <span class="number">0</span>) <span class="keyword">return false</span>;
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">5</span>; i * i <= n; i += <span class="number">6</span>) {
+            <span class="keyword">if</span> (n % i == <span class="number">0</span> || n % (i + <span class="number">2</span>) == <span class="number">0</span>) {
+                <span class="keyword">return false</span>;
+            }
+        }
+        <span class="keyword">return true</span>;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(isPrime(<span class="number">17</span>));  <span class="comment">// true</span>
+        System.out.println(isPrime(<span class="number">20</span>));  <span class="comment">// false</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>4. Reverse an Array</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Write a program to reverse an array in-place.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.Arrays;
+
+<span class="keyword">public class</span> ReverseArray {
+    <span class="keyword">public static void</span> reverse(<span class="keyword">int</span>[] arr) {
+        <span class="keyword">int</span> left = <span class="number">0</span>, right = arr.length - <span class="number">1</span>;
+        <span class="keyword">while</span> (left < right) {
+            <span class="keyword">int</span> temp = arr[left];
+            arr[left++] = arr[right];
+            arr[right--] = temp;
+        }
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>};
+        reverse(arr);
+        System.out.println(Arrays.toString(arr));  <span class="comment">// [5, 4, 3, 2, 1]</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>5. Fibonacci Series</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Generate first N Fibonacci numbers.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> Fibonacci {
+    <span class="keyword">public static void</span> printFibonacci(<span class="keyword">int</span> n) {
+        <span class="keyword">long</span> a = <span class="number">0</span>, b = <span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < n; i++) {
+            System.out.print(a + <span class="string">" "</span>);
+            <span class="keyword">long</span> next = a + b;
+            a = b;
+            b = next;
+        }
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        printFibonacci(<span class="number">10</span>);  <span class="comment">// 0 1 1 2 3 5 8 13 21 34</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Intermediate Problems -->
+        <section id="intermediate" class="content-section">
+            <h2>Intermediate Level</h2>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>6. Find Duplicates in Array</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Find all duplicate elements in an array using different approaches.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> FindDuplicates {
+    <span class="keyword">public static</span> Set&lt;Integer&gt; findDuplicates(<span class="keyword">int</span>[] arr) {
+        Set&lt;Integer&gt; seen = <span class="keyword">new</span> HashSet&lt;&gt;();
+        Set&lt;Integer&gt; duplicates = <span class="keyword">new</span> HashSet&lt;&gt;();
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> num : arr) {
+            <span class="keyword">if</span> (!seen.add(num)) {
+                duplicates.add(num);
+            }
+        }
+        <span class="keyword">return</span> duplicates;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span>};
+        System.out.println(findDuplicates(arr));  <span class="comment">// [2, 3]</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>7. Custom Exception</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Create a custom exception for invalid age and use it in a Person class.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">class</span> InvalidAgeException <span class="keyword">extends</span> Exception {
+    <span class="keyword">public</span> InvalidAgeException(String message) {
+        <span class="keyword">super</span>(message);
+    }
+}
+
+<span class="keyword">class</span> Person {
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private int</span> age;
+    
+    <span class="keyword">public void</span> setAge(<span class="keyword">int</span> age) <span class="keyword">throws</span> InvalidAgeException {
+        <span class="keyword">if</span> (age < <span class="number">0</span> || age > <span class="number">150</span>) {
+            <span class="keyword">throw new</span> InvalidAgeException(<span class="string">"Age must be between 0 and 150"</span>);
+        }
+        <span class="keyword">this</span>.age = age;
+    }
+}
+
+<span class="keyword">public class</span> CustomExceptionDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Person p = <span class="keyword">new</span> Person();
+        <span class="keyword">try</span> {
+            p.setAge(-<span class="number">5</span>);
+        } <span class="keyword">catch</span> (InvalidAgeException e) {
+            System.out.println(<span class="string">"Error: "</span> + e.getMessage());
+        }
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>8. Producer-Consumer with Threads</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Implement producer-consumer pattern using wait/notify.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.LinkedList;
+<span class="keyword">import</span> java.util.Queue;
+
+<span class="keyword">class</span> Buffer {
+    <span class="keyword">private</span> Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();
+    <span class="keyword">private int</span> capacity = <span class="number">5</span>;
+    
+    <span class="keyword">public synchronized void</span> produce(<span class="keyword">int</span> item) <span class="keyword">throws</span> InterruptedException {
+        <span class="keyword">while</span> (queue.size() == capacity) {
+            wait();
+        }
+        queue.add(item);
+        System.out.println(<span class="string">"Produced: "</span> + item);
+        notifyAll();
+    }
+    
+    <span class="keyword">public synchronized int</span> consume() <span class="keyword">throws</span> InterruptedException {
+        <span class="keyword">while</span> (queue.isEmpty()) {
+            wait();
+        }
+        <span class="keyword">int</span> item = queue.poll();
+        System.out.println(<span class="string">"Consumed: "</span> + item);
+        notifyAll();
+        <span class="keyword">return</span> item;
+    }
+}
+
+<span class="keyword">public class</span> ProducerConsumer {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Buffer buffer = <span class="keyword">new</span> Buffer();
+        
+        Thread producer = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++) {
+                <span class="keyword">try</span> { buffer.produce(i); } 
+                <span class="keyword">catch</span> (InterruptedException e) { e.printStackTrace(); }
+            }
+        });
+        
+        Thread consumer = <span class="keyword">new</span> Thread(() -> {
+            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++) {
+                <span class="keyword">try</span> { buffer.consume(); } 
+                <span class="keyword">catch</span> (InterruptedException e) { e.printStackTrace(); }
+            }
+        });
+        
+        producer.start();
+        consumer.start();
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>9. Stream API - Word Frequency</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Count word frequency in a list of strings using Stream API.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+<span class="keyword">import</span> java.util.stream.*;
+
+<span class="keyword">public class</span> WordFrequency {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;String&gt; words = Arrays.asList(
+            <span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"apple"</span>, <span class="string">"orange"</span>, 
+            <span class="string">"banana"</span>, <span class="string">"apple"</span>
+        );
+        
+        Map&lt;String, Long&gt; frequency = words.stream()
+            .collect(Collectors.groupingBy(
+                word -> word,
+                Collectors.counting()
+            ));
+        
+        System.out.println(frequency);
+        <span class="comment">// {orange=1, banana=2, apple=3}</span>
+        
+        <span class="comment">// Find most frequent word</span>
+        String mostFrequent = frequency.entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse(<span class="string">""</span>);
+        
+        System.out.println(<span class="string">"Most frequent: "</span> + mostFrequent);
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>10. Comparable and Comparator</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Create a Student class with multiple sorting options.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">class</span> Student <span class="keyword">implements</span> Comparable&lt;Student&gt; {
+    String name;
+    <span class="keyword">int</span> age;
+    <span class="keyword">double</span> gpa;
+    
+    Student(String name, <span class="keyword">int</span> age, <span class="keyword">double</span> gpa) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.age = age;
+        <span class="keyword">this</span>.gpa = gpa;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public int</span> compareTo(Student other) {
+        <span class="keyword">return this</span>.name.compareTo(other.name);
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> String toString() {
+        <span class="keyword">return</span> name + <span class="string">"("</span> + age + <span class="string">", "</span> + gpa + <span class="string">")"</span>;
+    }
+}
+
+<span class="keyword">public class</span> SortingDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;Student&gt; students = <span class="keyword">new</span> ArrayList&lt;&gt;();
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Charlie"</span>, <span class="number">20</span>, <span class="number">3.5</span>));
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Alice"</span>, <span class="number">22</span>, <span class="number">3.8</span>));
+        students.add(<span class="keyword">new</span> Student(<span class="string">"Bob"</span>, <span class="number">21</span>, <span class="number">3.2</span>));
+        
+        <span class="comment">// Natural ordering (by name)</span>
+        Collections.sort(students);
+        System.out.println(<span class="string">"By name: "</span> + students);
+        
+        <span class="comment">// By age using Comparator</span>
+        students.sort(Comparator.comparingInt(s -> s.age));
+        System.out.println(<span class="string">"By age: "</span> + students);
+        
+        <span class="comment">// By GPA descending</span>
+        students.sort(Comparator.comparingDouble((Student s) -> s.gpa).reversed());
+        System.out.println(<span class="string">"By GPA (desc): "</span> + students);
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Advanced Problems -->
+        <section id="advanced" class="content-section">
+            <h2>Advanced Level</h2>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>11. LRU Cache Implementation</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Implement a Least Recently Used (LRU) cache using LinkedHashMap.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">class</span> LRUCache&lt;K, V&gt; <span class="keyword">extends</span> LinkedHashMap&lt;K, V&gt; {
+    <span class="keyword">private int</span> capacity;
+    
+    <span class="keyword">public</span> LRUCache(<span class="keyword">int</span> capacity) {
+        <span class="keyword">super</span>(capacity, <span class="number">0.75f</span>, <span class="keyword">true</span>);  <span class="comment">// accessOrder=true</span>
+        <span class="keyword">this</span>.capacity = capacity;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">protected boolean</span> removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) {
+        <span class="keyword">return</span> size() > capacity;
+    }
+}
+
+<span class="keyword">public class</span> LRUCacheDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        LRUCache&lt;Integer, String&gt; cache = <span class="keyword">new</span> LRUCache&lt;&gt;(<span class="number">3</span>);
+        
+        cache.put(<span class="number">1</span>, <span class="string">"One"</span>);
+        cache.put(<span class="number">2</span>, <span class="string">"Two"</span>);
+        cache.put(<span class="number">3</span>, <span class="string">"Three"</span>);
+        System.out.println(cache);  <span class="comment">// {1=One, 2=Two, 3=Three}</span>
+        
+        cache.get(<span class="number">1</span>);  <span class="comment">// Access 1</span>
+        cache.put(<span class="number">4</span>, <span class="string">"Four"</span>);  <span class="comment">// Evicts 2 (least recently used)</span>
+        System.out.println(cache);  <span class="comment">// {3=Three, 1=One, 4=Four}</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>12. Generic Stack Implementation</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Implement a generic stack with push, pop, peek, and isEmpty operations.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.EmptyStackException;
+
+<span class="keyword">class</span> GenericStack&lt;T&gt; {
+    <span class="keyword">private</span> ArrayList&lt;T&gt; elements = <span class="keyword">new</span> ArrayList&lt;&gt;();
+    
+    <span class="keyword">public void</span> push(T item) {
+        elements.add(item);
+    }
+    
+    <span class="keyword">public</span> T pop() {
+        <span class="keyword">if</span> (isEmpty()) {
+            <span class="keyword">throw new</span> EmptyStackException();
+        }
+        <span class="keyword">return</span> elements.remove(elements.size() - <span class="number">1</span>);
+    }
+    
+    <span class="keyword">public</span> T peek() {
+        <span class="keyword">if</span> (isEmpty()) {
+            <span class="keyword">throw new</span> EmptyStackException();
+        }
+        <span class="keyword">return</span> elements.get(elements.size() - <span class="number">1</span>);
+    }
+    
+    <span class="keyword">public boolean</span> isEmpty() {
+        <span class="keyword">return</span> elements.isEmpty();
+    }
+    
+    <span class="keyword">public int</span> size() {
+        <span class="keyword">return</span> elements.size();
+    }
+}
+
+<span class="keyword">public class</span> GenericStackDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        GenericStack&lt;String&gt; stack = <span class="keyword">new</span> GenericStack&lt;&gt;();
+        stack.push(<span class="string">"A"</span>);
+        stack.push(<span class="string">"B"</span>);
+        stack.push(<span class="string">"C"</span>);
+        
+        System.out.println(<span class="string">"Peek: "</span> + stack.peek());  <span class="comment">// C</span>
+        System.out.println(<span class="string">"Pop: "</span> + stack.pop());    <span class="comment">// C</span>
+        System.out.println(<span class="string">"Size: "</span> + stack.size());  <span class="comment">// 2</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>13. File Copy with Streams</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Copy a file using buffered streams with proper exception handling.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> FileCopy {
+    <span class="keyword">public static void</span> copyFile(String source, String dest) {
+        <span class="keyword">try</span> (
+            BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(
+                <span class="keyword">new</span> FileInputStream(source));
+            BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(
+                <span class="keyword">new</span> FileOutputStream(dest))
+        ) {
+            <span class="keyword">byte</span>[] buffer = <span class="keyword">new byte</span>[<span class="number">8192</span>];
+            <span class="keyword">int</span> bytesRead;
+            
+            <span class="keyword">while</span> ((bytesRead = bis.read(buffer)) != -<span class="number">1</span>) {
+                bos.write(buffer, <span class="number">0</span>, bytesRead);
+            }
+            
+            System.out.println(<span class="string">"File copied successfully"</span>);
+            
+        } <span class="keyword">catch</span> (FileNotFoundException e) {
+            System.err.println(<span class="string">"File not found: "</span> + e.getMessage());
+        } <span class="keyword">catch</span> (IOException e) {
+            System.err.println(<span class="string">"IO error: "</span> + e.getMessage());
+        }
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        copyFile(<span class="string">"source.txt"</span>, <span class="string">"destination.txt"</span>);
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>14. Thread-Safe Singleton</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Implement a thread-safe singleton pattern using double-checked locking.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> Singleton {
+    <span class="keyword">private static volatile</span> Singleton instance;
+    <span class="keyword">private</span> String data;
+    
+    <span class="keyword">private</span> Singleton(String data) {
+        <span class="keyword">this</span>.data = data;
+    }
+    
+    <span class="keyword">public static</span> Singleton getInstance(String data) {
+        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) {
+            <span class="keyword">synchronized</span> (Singleton.<span class="keyword">class</span>) {
+                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) {
+                    instance = <span class="keyword">new</span> Singleton(data);
+                }
+            }
+        }
+        <span class="keyword">return</span> instance;
+    }
+    
+    <span class="keyword">public</span> String getData() {
+        <span class="keyword">return</span> data;
+    }
+}
+
+<span class="comment">// Alternative: Bill Pugh Singleton (preferred)</span>
+<span class="keyword">class</span> BillPughSingleton {
+    <span class="keyword">private</span> BillPughSingleton() {}
+    
+    <span class="keyword">private static class</span> Holder {
+        <span class="keyword">private static final</span> BillPughSingleton INSTANCE = <span class="keyword">new</span> BillPughSingleton();
+    }
+    
+    <span class="keyword">public static</span> BillPughSingleton getInstance() {
+        <span class="keyword">return</span> Holder.INSTANCE;
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>15. Stream Parallel Processing</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Use parallel streams to process large data efficiently.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+<span class="keyword">import</span> java.util.stream.*;
+
+<span class="keyword">public class</span> ParallelStreamDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;Integer&gt; numbers = IntStream.rangeClosed(<span class="number">1</span>, <span class="number">1000000</span>)
+            .boxed()
+            .collect(Collectors.toList());
+        
+        <span class="comment">// Sequential sum</span>
+        <span class="keyword">long</span> start = System.currentTimeMillis();
+        <span class="keyword">long</span> seqSum = numbers.stream()
+            .mapToLong(Integer::longValue)
+            .sum();
+        <span class="keyword">long</span> seqTime = System.currentTimeMillis() - start;
+        
+        <span class="comment">// Parallel sum</span>
+        start = System.currentTimeMillis();
+        <span class="keyword">long</span> parSum = numbers.parallelStream()
+            .mapToLong(Integer::longValue)
+            .sum();
+        <span class="keyword">long</span> parTime = System.currentTimeMillis() - start;
+        
+        System.out.println(<span class="string">"Sequential: "</span> + seqSum + <span class="string">" in "</span> + seqTime + <span class="string">"ms"</span>);
+        System.out.println(<span class="string">"Parallel: "</span> + parSum + <span class="string">" in "</span> + parTime + <span class="string">"ms"</span>);
+        
+        <span class="comment">// Parallel filtering and mapping</span>
+        List&lt;Integer&gt; evenSquares = numbers.parallelStream()
+            .filter(n -> n % <span class="number">2</span> == <span class="number">0</span>)
+            .map(n -> n * n)
+            .limit(<span class="number">100</span>)
+            .collect(Collectors.toList());
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Additional Problems -->
+        <section id="more" class="content-section">
+            <h2>More Practice Problems</h2>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>16. Second Largest Element in Array</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Find the second largest element in an array without sorting.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> SecondLargest {
+    <span class="keyword">public static int</span> findSecondLargest(<span class="keyword">int</span>[] arr) {
+        <span class="keyword">if</span> (arr.length < <span class="number">2</span>) <span class="keyword">throw new</span> IllegalArgumentException(<span class="string">"Need at least 2 elements"</span>);
+        
+        <span class="keyword">int</span> first = Integer.MIN_VALUE, second = Integer.MIN_VALUE;
+        <span class="keyword">for</span> (<span class="keyword">int</span> num : arr) {
+            <span class="keyword">if</span> (num > first) {
+                second = first;
+                first = num;
+            } <span class="keyword">else if</span> (num > second && num != first) {
+                second = num;
+            }
+        }
+        <span class="keyword">return</span> second;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">12</span>, <span class="number">35</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">34</span>, <span class="number">1</span>};
+        System.out.println(<span class="string">"Second largest: "</span> + findSecondLargest(arr));  <span class="comment">// 34</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>17. Count Vowels and Consonants</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Count the number of vowels and consonants in a given string.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> VowelConsonant {
+    <span class="keyword">public static void</span> count(String str) {
+        str = str.toLowerCase();
+        <span class="keyword">int</span> vowels = <span class="number">0</span>, consonants = <span class="number">0</span>;
+        
+        <span class="keyword">for</span> (<span class="keyword">char</span> c : str.toCharArray()) {
+            <span class="keyword">if</span> (c >= <span class="string">'a'</span> && c <= <span class="string">'z'</span>) {
+                <span class="keyword">if</span> (<span class="string">"aeiou"</span>.indexOf(c) != -<span class="number">1</span>) {
+                    vowels++;
+                } <span class="keyword">else</span> {
+                    consonants++;
+                }
+            }
+        }
+        System.out.println(<span class="string">"Vowels: "</span> + vowels + <span class="string">", Consonants: "</span> + consonants);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        count(<span class="string">"Hello World"</span>);  <span class="comment">// Vowels: 3, Consonants: 7</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>18. Armstrong Number Check</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Check if a number is an Armstrong number (sum of cubes of digits equals the number).</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> Armstrong {
+    <span class="keyword">public static boolean</span> isArmstrong(<span class="keyword">int</span> num) {
+        <span class="keyword">int</span> original = num;
+        <span class="keyword">int</span> digits = String.valueOf(num).length();
+        <span class="keyword">int</span> sum = <span class="number">0</span>;
+        
+        <span class="keyword">while</span> (num > <span class="number">0</span>) {
+            <span class="keyword">int</span> digit = num % <span class="number">10</span>;
+            sum += Math.pow(digit, digits);
+            num /= <span class="number">10</span>;
+        }
+        <span class="keyword">return</span> sum == original;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(isArmstrong(<span class="number">153</span>));  <span class="comment">// true (1^3 + 5^3 + 3^3 = 153)</span>
+        System.out.println(isArmstrong(<span class="number">370</span>));  <span class="comment">// true</span>
+        System.out.println(isArmstrong(<span class="number">123</span>));  <span class="comment">// false</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>19. GCD and LCM</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Find GCD (Greatest Common Divisor) and LCM (Least Common Multiple) of two numbers.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> GcdLcm {
+    <span class="keyword">public static int</span> gcd(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">while</span> (b != <span class="number">0</span>) {
+            <span class="keyword">int</span> temp = b;
+            b = a % b;
+            a = temp;
+        }
+        <span class="keyword">return</span> a;
+    }
+    
+    <span class="keyword">public static int</span> lcm(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> (a * b) / gcd(a, b);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(<span class="string">"GCD of 12, 18: "</span> + gcd(<span class="number">12</span>, <span class="number">18</span>));  <span class="comment">// 6</span>
+        System.out.println(<span class="string">"LCM of 12, 18: "</span> + lcm(<span class="number">12</span>, <span class="number">18</span>));  <span class="comment">// 36</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>20. Matrix Addition</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Add two matrices and display the result.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> MatrixAddition {
+    <span class="keyword">public static int</span>[][] add(<span class="keyword">int</span>[][] a, <span class="keyword">int</span>[][] b) {
+        <span class="keyword">int</span> rows = a.length, cols = a[<span class="number">0</span>].length;
+        <span class="keyword">int</span>[][] result = <span class="keyword">new int</span>[rows][cols];
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < rows; i++) {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j < cols; j++) {
+                result[i][j] = a[i][j] + b[i][j];
+            }
+        }
+        <span class="keyword">return</span> result;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[][] a = {{<span class="number">1</span>, <span class="number">2</span>}, {<span class="number">3</span>, <span class="number">4</span>}};
+        <span class="keyword">int</span>[][] b = {{<span class="number">5</span>, <span class="number">6</span>}, {<span class="number">7</span>, <span class="number">8</span>}};
+        <span class="keyword">int</span>[][] sum = add(a, b);
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span>[] row : sum) {
+            System.out.println(Arrays.toString(row));  <span class="comment">// [6, 8], [10, 12]</span>
+        }
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>21. Binary Search</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Implement binary search algorithm for a sorted array.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> BinarySearch {
+    <span class="keyword">public static int</span> search(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target) {
+        <span class="keyword">int</span> left = <span class="number">0</span>, right = arr.length - <span class="number">1</span>;
+        
+        <span class="keyword">while</span> (left <= right) {
+            <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;
+            
+            <span class="keyword">if</span> (arr[mid] == target) {
+                <span class="keyword">return</span> mid;
+            } <span class="keyword">else if</span> (arr[mid] < target) {
+                left = mid + <span class="number">1</span>;
+            } <span class="keyword">else</span> {
+                right = mid - <span class="number">1</span>;
+            }
+        }
+        <span class="keyword">return</span> -<span class="number">1</span>;  <span class="comment">// Not found</span>
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">10</span>, <span class="number">40</span>};
+        System.out.println(<span class="string">"Index of 10: "</span> + search(arr, <span class="number">10</span>));  <span class="comment">// 3</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>22. Merge Two Sorted Arrays</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Merge two sorted arrays into a single sorted array.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> MergeArrays {
+    <span class="keyword">public static int</span>[] merge(<span class="keyword">int</span>[] a, <span class="keyword">int</span>[] b) {
+        <span class="keyword">int</span>[] result = <span class="keyword">new int</span>[a.length + b.length];
+        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;
+        
+        <span class="keyword">while</span> (i < a.length && j < b.length) {
+            <span class="keyword">if</span> (a[i] <= b[j]) {
+                result[k++] = a[i++];
+            } <span class="keyword">else</span> {
+                result[k++] = b[j++];
+            }
+        }
+        
+        <span class="keyword">while</span> (i < a.length) result[k++] = a[i++];
+        <span class="keyword">while</span> (j < b.length) result[k++] = b[j++];
+        
+        <span class="keyword">return</span> result;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] a = {<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>};
+        <span class="keyword">int</span>[] b = {<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>};
+        System.out.println(Arrays.toString(merge(a, b)));  <span class="comment">// [1, 2, 3, 4, 5, 6]</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>23. String Anagram Check</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Check if two strings are anagrams of each other.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> AnagramCheck {
+    <span class="keyword">public static boolean</span> isAnagram(String s1, String s2) {
+        <span class="keyword">if</span> (s1.length() != s2.length()) <span class="keyword">return false</span>;
+        
+        <span class="keyword">char</span>[] arr1 = s1.toLowerCase().toCharArray();
+        <span class="keyword">char</span>[] arr2 = s2.toLowerCase().toCharArray();
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        
+        <span class="keyword">return</span> Arrays.equals(arr1, arr2);
+    }
+    
+    <span class="comment">// Alternative using HashMap</span>
+    <span class="keyword">public static boolean</span> isAnagramMap(String s1, String s2) {
+        <span class="keyword">if</span> (s1.length() != s2.length()) <span class="keyword">return false</span>;
+        
+        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();
+        <span class="keyword">for</span> (<span class="keyword">char</span> c : s1.toLowerCase().toCharArray()) {
+            map.put(c, map.getOrDefault(c, <span class="number">0</span>) + <span class="number">1</span>);
+        }
+        <span class="keyword">for</span> (<span class="keyword">char</span> c : s2.toLowerCase().toCharArray()) {
+            <span class="keyword">if</span> (!map.containsKey(c) || map.get(c) == <span class="number">0</span>) <span class="keyword">return false</span>;
+            map.put(c, map.get(c) - <span class="number">1</span>);
+        }
+        <span class="keyword">return true</span>;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(isAnagram(<span class="string">"Listen"</span>, <span class="string">"Silent"</span>));  <span class="comment">// true</span>
+        System.out.println(isAnagram(<span class="string">"Hello"</span>, <span class="string">"World"</span>));   <span class="comment">// false</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>24. Remove Duplicates from ArrayList</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Remove duplicate elements from an ArrayList while preserving order.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> RemoveDuplicates {
+    <span class="comment">// Using LinkedHashSet</span>
+    <span class="keyword">public static</span> &lt;T&gt; List&lt;T&gt; removeDuplicates(List&lt;T&gt; list) {
+        <span class="keyword">return new</span> ArrayList&lt;&gt;(<span class="keyword">new</span> LinkedHashSet&lt;&gt;(list));
+    }
+    
+    <span class="comment">// Using Stream API</span>
+    <span class="keyword">public static</span> &lt;T&gt; List&lt;T&gt; removeDuplicatesStream(List&lt;T&gt; list) {
+        <span class="keyword">return</span> list.stream()
+            .distinct()
+            .collect(Collectors.toList());
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>));
+        System.out.println(removeDuplicates(list));  <span class="comment">// [1, 2, 3, 4]</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>25. Bank Account Class</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Create a BankAccount class with deposit, withdraw, and balance checking functionality.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> BankAccount {
+    <span class="keyword">private</span> String accountNumber;
+    <span class="keyword">private</span> String holderName;
+    <span class="keyword">private double</span> balance;
+    
+    <span class="keyword">public</span> BankAccount(String accountNumber, String holderName, <span class="keyword">double</span> initialBalance) {
+        <span class="keyword">this</span>.accountNumber = accountNumber;
+        <span class="keyword">this</span>.holderName = holderName;
+        <span class="keyword">this</span>.balance = initialBalance;
+    }
+    
+    <span class="keyword">public void</span> deposit(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (amount > <span class="number">0</span>) {
+            balance += amount;
+            System.out.println(<span class="string">"Deposited: "</span> + amount);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Invalid deposit amount"</span>);
+        }
+    }
+    
+    <span class="keyword">public void</span> withdraw(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (amount > <span class="number">0</span> && amount <= balance) {
+            balance -= amount;
+            System.out.println(<span class="string">"Withdrawn: "</span> + amount);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Insufficient balance or invalid amount"</span>);
+        }
+    }
+    
+    <span class="keyword">public double</span> getBalance() {
+        <span class="keyword">return</span> balance;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        BankAccount acc = <span class="keyword">new</span> BankAccount(<span class="string">"123456"</span>, <span class="string">"John"</span>, <span class="number">1000</span>);
+        acc.deposit(<span class="number">500</span>);
+        acc.withdraw(<span class="number">200</span>);
+        System.out.println(<span class="string">"Balance: "</span> + acc.getBalance());  <span class="comment">// 1300</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>26. Quick Sort Implementation</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Implement the Quick Sort algorithm.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> QuickSort {
+    <span class="keyword">public static void</span> quickSort(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> high) {
+        <span class="keyword">if</span> (low < high) {
+            <span class="keyword">int</span> pi = partition(arr, low, high);
+            quickSort(arr, low, pi - <span class="number">1</span>);
+            quickSort(arr, pi + <span class="number">1</span>, high);
+        }
+    }
+    
+    <span class="keyword">private static int</span> partition(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> low, <span class="keyword">int</span> high) {
+        <span class="keyword">int</span> pivot = arr[high];
+        <span class="keyword">int</span> i = low - <span class="number">1</span>;
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = low; j < high; j++) {
+            <span class="keyword">if</span> (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + <span class="number">1</span>, high);
+        <span class="keyword">return</span> i + <span class="number">1</span>;
+    }
+    
+    <span class="keyword">private static void</span> swap(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j) {
+        <span class="keyword">int</span> temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">10</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>};
+        quickSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);
+        System.out.println(Arrays.toString(arr));  <span class="comment">// [1, 5, 7, 8, 9, 10]</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>27. Linked List Implementation</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Implement a singly linked list with insert, delete, and display operations.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> LinkedList {
+    <span class="keyword">private</span> Node head;
+    
+    <span class="keyword">class</span> Node {
+        <span class="keyword">int</span> data;
+        Node next;
+        Node(<span class="keyword">int</span> data) { <span class="keyword">this</span>.data = data; }
+    }
+    
+    <span class="keyword">public void</span> insertAtEnd(<span class="keyword">int</span> data) {
+        Node newNode = <span class="keyword">new</span> Node(data);
+        <span class="keyword">if</span> (head == <span class="keyword">null</span>) {
+            head = newNode;
+            <span class="keyword">return</span>;
+        }
+        Node current = head;
+        <span class="keyword">while</span> (current.next != <span class="keyword">null</span>) {
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+    
+    <span class="keyword">public void</span> insertAtBeginning(<span class="keyword">int</span> data) {
+        Node newNode = <span class="keyword">new</span> Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+    
+    <span class="keyword">public void</span> delete(<span class="keyword">int</span> key) {
+        <span class="keyword">if</span> (head == <span class="keyword">null</span>) <span class="keyword">return</span>;
+        
+        <span class="keyword">if</span> (head.data == key) {
+            head = head.next;
+            <span class="keyword">return</span>;
+        }
+        
+        Node current = head;
+        <span class="keyword">while</span> (current.next != <span class="keyword">null</span> && current.next.data != key) {
+            current = current.next;
+        }
+        <span class="keyword">if</span> (current.next != <span class="keyword">null</span>) {
+            current.next = current.next.next;
+        }
+    }
+    
+    <span class="keyword">public void</span> display() {
+        Node current = head;
+        <span class="keyword">while</span> (current != <span class="keyword">null</span>) {
+            System.out.print(current.data + <span class="string">" -> "</span>);
+            current = current.next;
+        }
+        System.out.println(<span class="string">"null"</span>);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        LinkedList list = <span class="keyword">new</span> LinkedList();
+        list.insertAtEnd(<span class="number">1</span>);
+        list.insertAtEnd(<span class="number">2</span>);
+        list.insertAtEnd(<span class="number">3</span>);
+        list.insertAtBeginning(<span class="number">0</span>);
+        list.display();  <span class="comment">// 0 -> 1 -> 2 -> 3 -> null</span>
+        list.delete(<span class="number">2</span>);
+        list.display();  <span class="comment">// 0 -> 1 -> 3 -> null</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>28. Binary Tree Traversals</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Implement inorder, preorder, and postorder traversals of a binary tree.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> BinaryTree {
+    <span class="keyword">class</span> Node {
+        <span class="keyword">int</span> data;
+        Node left, right;
+        Node(<span class="keyword">int</span> data) { <span class="keyword">this</span>.data = data; }
+    }
+    
+    <span class="keyword">private</span> Node root;
+    
+    <span class="comment">// Inorder: Left -> Root -> Right</span>
+    <span class="keyword">public void</span> inorder(Node node) {
+        <span class="keyword">if</span> (node != <span class="keyword">null</span>) {
+            inorder(node.left);
+            System.out.print(node.data + <span class="string">" "</span>);
+            inorder(node.right);
+        }
+    }
+    
+    <span class="comment">// Preorder: Root -> Left -> Right</span>
+    <span class="keyword">public void</span> preorder(Node node) {
+        <span class="keyword">if</span> (node != <span class="keyword">null</span>) {
+            System.out.print(node.data + <span class="string">" "</span>);
+            preorder(node.left);
+            preorder(node.right);
+        }
+    }
+    
+    <span class="comment">// Postorder: Left -> Right -> Root</span>
+    <span class="keyword">public void</span> postorder(Node node) {
+        <span class="keyword">if</span> (node != <span class="keyword">null</span>) {
+            postorder(node.left);
+            postorder(node.right);
+            System.out.print(node.data + <span class="string">" "</span>);
+        }
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        BinaryTree tree = <span class="keyword">new</span> BinaryTree();
+        tree.root = tree.<span class="keyword">new</span> Node(<span class="number">1</span>);
+        tree.root.left = tree.<span class="keyword">new</span> Node(<span class="number">2</span>);
+        tree.root.right = tree.<span class="keyword">new</span> Node(<span class="number">3</span>);
+        tree.root.left.left = tree.<span class="keyword">new</span> Node(<span class="number">4</span>);
+        tree.root.left.right = tree.<span class="keyword">new</span> Node(<span class="number">5</span>);
+        
+        System.out.print(<span class="string">"Inorder: "</span>);
+        tree.inorder(tree.root);     <span class="comment">// 4 2 5 1 3</span>
+        System.out.print(<span class="string">"\nPreorder: "</span>);
+        tree.preorder(tree.root);    <span class="comment">// 1 2 4 5 3</span>
+        System.out.print(<span class="string">"\nPostorder: "</span>);
+        tree.postorder(tree.root);   <span class="comment">// 4 5 2 3 1</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>29. Student Management System</h3>
+                    <span class="difficulty hard">Hard</span>
+                </div>
+                <p>Create a Student class with CRUD operations using ArrayList.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">class</span> Student {
+    <span class="keyword">private int</span> id;
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private double</span> marks;
+    
+    <span class="keyword">public</span> Student(<span class="keyword">int</span> id, String name, <span class="keyword">double</span> marks) {
+        <span class="keyword">this</span>.id = id;
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.marks = marks;
+    }
+    
+    <span class="comment">// Getters and Setters</span>
+    <span class="keyword">public int</span> getId() { <span class="keyword">return</span> id; }
+    <span class="keyword">public</span> String getName() { <span class="keyword">return</span> name; }
+    <span class="keyword">public void</span> setName(String name) { <span class="keyword">this</span>.name = name; }
+    <span class="keyword">public double</span> getMarks() { <span class="keyword">return</span> marks; }
+    <span class="keyword">public void</span> setMarks(<span class="keyword">double</span> marks) { <span class="keyword">this</span>.marks = marks; }
+    
+    <span class="keyword">public</span> String toString() {
+        <span class="keyword">return</span> <span class="string">"Student[id="</span> + id + <span class="string">", name="</span> + name + <span class="string">", marks="</span> + marks + <span class="string">"]"</span>;
+    }
+}
+
+<span class="keyword">public class</span> StudentManagement {
+    <span class="keyword">private</span> List&lt;Student&gt; students = <span class="keyword">new</span> ArrayList&lt;&gt;();
+    
+    <span class="keyword">public void</span> addStudent(Student s) {
+        students.add(s);
+    }
+    
+    <span class="keyword">public</span> Student findById(<span class="keyword">int</span> id) {
+        <span class="keyword">return</span> students.stream()
+            .filter(s -> s.getId() == id)
+            .findFirst()
+            .orElse(<span class="keyword">null</span>);
+    }
+    
+    <span class="keyword">public void</span> updateStudent(<span class="keyword">int</span> id, String name, <span class="keyword">double</span> marks) {
+        Student s = findById(id);
+        <span class="keyword">if</span> (s != <span class="keyword">null</span>) {
+            s.setName(name);
+            s.setMarks(marks);
+        }
+    }
+    
+    <span class="keyword">public void</span> deleteStudent(<span class="keyword">int</span> id) {
+        students.removeIf(s -> s.getId() == id);
+    }
+    
+    <span class="keyword">public void</span> displayAll() {
+        students.forEach(System.out::println);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        StudentManagement sm = <span class="keyword">new</span> StudentManagement();
+        sm.addStudent(<span class="keyword">new</span> Student(<span class="number">1</span>, <span class="string">"Alice"</span>, <span class="number">85.5</span>));
+        sm.addStudent(<span class="keyword">new</span> Student(<span class="number">2</span>, <span class="string">"Bob"</span>, <span class="number">90.0</span>));
+        sm.displayAll();
+        sm.updateStudent(<span class="number">1</span>, <span class="string">"Alice Smith"</span>, <span class="number">88.0</span>);
+        sm.deleteStudent(<span class="number">2</span>);
+        System.out.println(<span class="string">"After update and delete:"</span>);
+        sm.displayAll();
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>30. File Word Counter</h3>
+                    <span class="difficulty medium">Medium</span>
+                </div>
+                <p>Read a file and count occurrences of each word.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.io.*;
+<span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> WordCounter {
+    <span class="keyword">public static</span> Map&lt;String, Integer&gt; countWords(String filename) <span class="keyword">throws</span> IOException {
+        Map&lt;String, Integer&gt; wordCount = <span class="keyword">new</span> HashMap&lt;&gt;();
+        
+        <span class="keyword">try</span> (BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(filename))) {
+            String line;
+            <span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) {
+                String[] words = line.toLowerCase().split(<span class="string">"\\W+"</span>);
+                <span class="keyword">for</span> (String word : words) {
+                    <span class="keyword">if</span> (!word.isEmpty()) {
+                        wordCount.put(word, wordCount.getOrDefault(word, <span class="number">0</span>) + <span class="number">1</span>);
+                    }
+                }
+            }
+        }
+        <span class="keyword">return</span> wordCount;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">try</span> {
+            Map&lt;String, Integer&gt; counts = countWords(<span class="string">"sample.txt"</span>);
+            counts.entrySet().stream()
+                .sorted(Map.Entry.&lt;String, Integer&gt;comparingByValue().reversed())
+                .limit(<span class="number">10</span>)
+                .forEach(e -> System.out.println(e.getKey() + <span class="string">": "</span> + e.getValue()));
+        } <span class="keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Java Hub</h3>
+                <p>Your complete guide to mastering Java programming.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Java Learning Hub. Made for Java learners.</p>
+        </div>
+    </footer>
+</body>
+</html>
