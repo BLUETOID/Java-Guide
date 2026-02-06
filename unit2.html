@@ -194,6 +194,92 @@
                 <h4>Exam Tip</h4>
                 <p>The <code>finally</code> block always executes except when <code>System.exit()</code> is called or the JVM crashes. Even if there is a return statement in try or catch, finally still executes before the method returns.</p>
             </div>
+
+            <h3>Try-with-Resources (Java 7+)</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>TryWithResources.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> TryWithResources {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Resources automatically closed after try block</span>
+        <span class="keyword">try</span> (FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>);
+             BufferedReader br = <span class="keyword">new</span> BufferedReader(fr)) {
+            
+            String line;
+            <span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) {
+                System.out.println(line);
+            }
+            
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"Error: "</span> + e.getMessage());
+        }
+        <span class="comment">// No need for finally to close resources!</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Real-World Example: File Processing with Exception Handling</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>FileProcessor.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+<span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> FileProcessor {
+    <span class="keyword">public static void</span> processFile(String filename) {
+        BufferedReader reader = <span class="keyword">null</span>;
+        <span class="keyword">try</span> {
+            reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(filename));
+            String line;
+            <span class="keyword">int</span> lineCount = <span class="number">0</span>;
+            
+            <span class="keyword">while</span> ((line = reader.readLine()) != <span class="keyword">null</span>) {
+                lineCount++;
+                <span class="keyword">try</span> {
+                    <span class="comment">// Process each line</span>
+                    <span class="keyword">int</span> number = Integer.parseInt(line.trim());
+                    System.out.println(<span class="string">"Line "</span> + lineCount + <span class="string">": "</span> + number);
+                } <span class="keyword">catch</span> (NumberFormatException e) {
+                    System.out.println(<span class="string">"Line "</span> + lineCount + <span class="string">": Invalid number format"</span>);
+                }
+            }
+            
+            System.out.println(<span class="string">"Total lines processed: "</span> + lineCount);
+            
+        } <span class="keyword">catch</span> (FileNotFoundException e) {
+            System.out.println(<span class="string">"File not found: "</span> + filename);
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"Error reading file: "</span> + e.getMessage());
+        } <span class="keyword">finally</span> {
+            <span class="comment">// Always close the reader</span>
+            <span class="keyword">if</span> (reader != <span class="keyword">null</span>) {
+                <span class="keyword">try</span> {
+                    reader.close();
+                } <span class="keyword">catch</span> (IOException e) {
+                    System.out.println(<span class="string">"Error closing file: "</span> + e.getMessage());
+                }
+            }
+        }
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        processFile(<span class="string">"data.txt"</span>);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Practice Questions</h3>
+            <div class="practice-card">
+                <p><strong>Q1:</strong> What is the difference between try-catch-finally and try-with-resources?</p>
+                <p><strong>Q2:</strong> Can we have multiple catch blocks for a single try? In what order should they be arranged?</p>
+                <p><strong>Q3:</strong> What happens if an exception occurs in the finally block?</p>
+                <p><strong>Q4:</strong> Write a program that demonstrates nested try-catch blocks.</p>
+                <p><strong>Q5:</strong> Can we have a try block without a catch block? Explain.</p>
+            </div>
         </section>
 
         <!-- throw and throws -->
@@ -362,6 +448,210 @@
                     <td>Extends RuntimeException class</td>
                 </tr>
                 <tr>
+                    <td>Recoverable errors</td>
+                    <td>Programming errors</td>
+                </tr>
+                <tr>
+                    <td>IOException, SQLException</td>
+                    <td>NullPointerException, ArithmeticException</td>
+                </tr>
+            </table>
+
+            <h3>Comprehensive Example: Exception Handling in Banking System</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>BankingSystem.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="comment">// Custom Checked Exception</span>
+<span class="keyword">class</span> InsufficientBalanceException <span class="keyword">extends</span> Exception {
+    <span class="keyword">private double</span> required;
+    <span class="keyword">private double</span> available;
+    
+    <span class="keyword">public</span> InsufficientBalanceException(<span class="keyword">double</span> required, <span class="keyword">double</span> available) {
+        <span class="keyword">super</span>(<span class="string">"Insufficient balance. Required: "</span> + required + 
+              <span class="string">", Available: "</span> + available);
+        <span class="keyword">this</span>.required = required;
+        <span class="keyword">this</span>.available = available;
+    }
+    
+    <span class="keyword">public double</span> getShortfall() {
+        <span class="keyword">return</span> required - available;
+    }
+}
+
+<span class="comment">// Custom Unchecked Exception</span>
+<span class="keyword">class</span> InvalidAccountException <span class="keyword">extends</span> RuntimeException {
+    <span class="keyword">public</span> InvalidAccountException(String message) {
+        <span class="keyword">super</span>(message);
+    }
+}
+
+<span class="keyword">class</span> Account {
+    <span class="keyword">private</span> String accountNumber;
+    <span class="keyword">private double</span> balance;
+    <span class="keyword">private boolean</span> active;
+    
+    <span class="keyword">public</span> Account(String accountNumber, <span class="keyword">double</span> initialBalance) {
+        <span class="keyword">if</span> (accountNumber == <span class="keyword">null</span> || accountNumber.trim().isEmpty()) {
+            <span class="keyword">throw new</span> InvalidAccountException(<span class="string">"Account number cannot be empty"</span>);
+        }
+        <span class="keyword">this</span>.accountNumber = accountNumber;
+        <span class="keyword">this</span>.balance = initialBalance;
+        <span class="keyword">this</span>.active = <span class="keyword">true</span>;
+    }
+    
+    <span class="keyword">public void</span> withdraw(<span class="keyword">double</span> amount) <span class="keyword">throws</span> InsufficientBalanceException {
+        <span class="keyword">if</span> (!active) {
+            <span class="keyword">throw new</span> InvalidAccountException(<span class="string">"Account is inactive"</span>);
+        }
+        
+        <span class="keyword">if</span> (amount <= <span class="number">0</span>) {
+            <span class="keyword">throw new</span> IllegalArgumentException(<span class="string">"Amount must be positive"</span>);
+        }
+        
+        <span class="keyword">if</span> (amount > balance) {
+            <span class="keyword">throw new</span> InsufficientBalanceException(amount, balance);
+        }
+        
+        balance -= amount;
+        System.out.println(<span class="string">"Withdrawn: $"</span> + amount);
+    }
+    
+    <span class="keyword">public void</span> deposit(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (!active) {
+            <span class="keyword">throw new</span> InvalidAccountException(<span class="string">"Account is inactive"</span>);
+        }
+        
+        <span class="keyword">if</span> (amount <= <span class="number">0</span>) {
+            <span class="keyword">throw new</span> IllegalArgumentException(<span class="string">"Amount must be positive"</span>);
+        }
+        
+        balance += amount;
+        System.out.println(<span class="string">"Deposited: $"</span> + amount);
+    }
+    
+    <span class="keyword">public void</span> saveToFile(String filename) <span class="keyword">throws</span> IOException {
+        <span class="keyword">try</span> (PrintWriter writer = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> FileWriter(filename))) {
+            writer.println(<span class="string">"Account: "</span> + accountNumber);
+            writer.println(<span class="string">"Balance: "</span> + balance);
+            writer.println(<span class="string">"Active: "</span> + active);
+        }
+    }
+    
+    <span class="keyword">public double</span> getBalance() {
+        <span class="keyword">return</span> balance;
+    }
+}
+
+<span class="keyword">public class</span> BankingSystem {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">try</span> {
+            <span class="comment">// Create account</span>
+            Account acc = <span class="keyword">new</span> Account(<span class="string">"ACC001"</span>, <span class="number">1000.0</span>);
+            
+            <span class="comment">// Deposit money</span>
+            acc.deposit(<span class="number">500</span>);
+            
+            <span class="comment">// Withdraw money</span>
+            acc.withdraw(<span class="number">300</span>);
+            
+            <span class="comment">// Try to withdraw more than balance (checked exception)</span>
+            acc.withdraw(<span class="number">2000</span>);
+            
+        } <span class="keyword">catch</span> (InsufficientBalanceException e) {
+            System.out.println(<span class="string">"Transaction failed: "</span> + e.getMessage());
+            System.out.println(<span class="string">"Shortfall: $"</span> + e.getShortfall());
+            
+        } <span class="keyword">catch</span> (InvalidAccountException e) {
+            System.out.println(<span class="string">"Account error: "</span> + e.getMessage());
+            
+        } <span class="keyword">catch</span> (IllegalArgumentException e) {
+            System.out.println(<span class="string">"Invalid input: "</span> + e.getMessage());
+        }
+        
+        <span class="comment">// Demonstrating unchecked exception</span>
+        <span class="keyword">try</span> {
+            Account invalidAcc = <span class="keyword">new</span> Account(<span class="string">""</span>, <span class="number">100</span>);  <span class="comment">// Throws InvalidAccountException</span>
+        } <span class="keyword">catch</span> (InvalidAccountException e) {
+            System.out.println(<span class="string">"Error creating account: "</span> + e.getMessage());
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Common Exception Types</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>CommonExceptions.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> CommonExceptions {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// 1. NullPointerException (Unchecked)</span>
+        String str = <span class="keyword">null</span>;
+        <span class="keyword">try</span> {
+            System.out.println(str.length());
+        } <span class="keyword">catch</span> (NullPointerException e) {
+            System.out.println(<span class="string">"NPE: Trying to access null object"</span>);
+        }
+        
+        <span class="comment">// 2. ArrayIndexOutOfBoundsException (Unchecked)</span>
+        <span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};
+        <span class="keyword">try</span> {
+            System.out.println(arr[<span class="number">5</span>]);
+        } <span class="keyword">catch</span> (ArrayIndexOutOfBoundsException e) {
+            System.out.println(<span class="string">"Array index out of bounds"</span>);
+        }
+        
+        <span class="comment">// 3. ArithmeticException (Unchecked)</span>
+        <span class="keyword">try</span> {
+            <span class="keyword">int</span> result = <span class="number">10</span> / <span class="number">0</span>;
+        } <span class="keyword">catch</span> (ArithmeticException e) {
+            System.out.println(<span class="string">"Cannot divide by zero"</span>);
+        }
+        
+        <span class="comment">// 4. NumberFormatException (Unchecked)</span>
+        <span class="keyword">try</span> {
+            <span class="keyword">int</span> num = Integer.parseInt(<span class="string">"abc"</span>);
+        } <span class="keyword">catch</span> (NumberFormatException e) {
+            System.out.println(<span class="string">"Invalid number format"</span>);
+        }
+        
+        <span class="comment">// 5. ClassCastException (Unchecked)</span>
+        <span class="keyword">try</span> {
+            Object obj = <span class="string">"Hello"</span>;
+            Integer num = (Integer) obj;
+        } <span class="keyword">catch</span> (ClassCastException e) {
+            System.out.println(<span class="string">"Invalid type cast"</span>);
+        }
+    }
+}</code></pre>
+            </div>
+
+            <h3>Best Practices</h3>
+            <div class="note-box">
+                <h4>Exception Handling Best Practices</h4>
+                <ul>
+                    <li><strong>Catch specific exceptions:</strong> Always catch the most specific exception type first</li>
+                    <li><strong>Don't swallow exceptions:</strong> Always log or handle exceptions appropriately</li>
+                    <li><strong>Use try-with-resources:</strong> For automatic resource management</li>
+                    <li><strong>Document exceptions:</strong> Use @throws in JavaDoc</li>
+                    <li><strong>Don't catch Throwable or Error:</strong> These represent serious problems</li>
+                    <li><strong>Clean up resources:</strong> Use finally or try-with-resources</li>
+                    <li><strong>Custom exceptions:</strong> Create meaningful custom exceptions for business logic</li>
+                </ul>
+            </div>
+
+            <h3>Practice Questions</h3>
+            <div class="practice-card">
+                <p><strong>Q1:</strong> What is the difference between throw and throws? Provide examples.</p>
+                <p><strong>Q2:</strong> Create a custom checked exception for InvalidEmailException and demonstrate its usage.</p>
+                <p><strong>Q3:</strong> Why are unchecked exceptions called runtime exceptions?</p>
+                <p><strong>Q4:</strong> Can a method throw both checked and unchecked exceptions? Demonstrate with code.</p>
+                <p><strong>Q5:</strong> What is exception propagation? How does it work in Java?</p>
+            </div>
+        </section>
                     <td>IOException, SQLException</td>
                     <td>NullPointerException, ArithmeticException</td>
                 </tr>
