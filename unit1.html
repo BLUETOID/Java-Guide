@@ -93,9 +93,88 @@
 }</code></pre>
             </div>
 
+            <h3>Understanding the Program Structure</h3>
+            <ul>
+                <li><strong>public class HelloWorld:</strong> Declares a public class named HelloWorld. Every Java application must have at least one class.</li>
+                <li><strong>public static void main(String[] args):</strong> The entry point of any Java application. JVM calls this method to start execution.</li>
+                <li><strong>System.out.println():</strong> Prints the argument to the console and moves to the next line.</li>
+                <li><strong>Comments:</strong> Lines starting with <code>//</code> are single-line comments, ignored by the compiler.</li>
+            </ul>
+
+            <h3>More Examples - Working with Variables</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>VariablesDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> VariablesDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Declaring and initializing variables</span>
+        <span class="keyword">int</span> age = <span class="number">25</span>;
+        <span class="keyword">double</span> salary = <span class="number">50000.50</span>;
+        String name = <span class="string">"John Doe"</span>;
+        <span class="keyword">boolean</span> isEmployed = <span class="keyword">true</span>;
+        
+        <span class="comment">// Printing variables</span>
+        System.out.println(<span class="string">"Name: "</span> + name);
+        System.out.println(<span class="string">"Age: "</span> + age);
+        System.out.println(<span class="string">"Salary: $"</span> + salary);
+        System.out.println(<span class="string">"Employed: "</span> + isEmployed);
+        
+        <span class="comment">// Performing operations</span>
+        <span class="keyword">int</span> yearsToRetirement = <span class="number">60</span> - age;
+        System.out.println(<span class="string">"Years to retirement: "</span> + yearsToRetirement);
+    }
+}</code></pre>
+            </div>
+
+            <h3>Example: User Input and Processing</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>UserInputDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">public class</span> UserInputDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);
+        
+        <span class="comment">// Reading user input</span>
+        System.out.print(<span class="string">"Enter your name: "</span>);
+        String name = scanner.nextLine();
+        
+        System.out.print(<span class="string">"Enter your age: "</span>);
+        <span class="keyword">int</span> age = scanner.nextInt();
+        
+        <span class="comment">// Processing and displaying</span>
+        System.out.println(<span class="string">"\\nWelcome, "</span> + name + <span class="string">"!"</span>);
+        System.out.println(<span class="string">"You are "</span> + age + <span class="string">" years old."</span>);
+        
+        <span class="keyword">if</span> (age >= <span class="number">18</span>) {
+            System.out.println(<span class="string">"You are an adult."</span>);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"You are a minor."</span>);
+        }
+        
+        scanner.close();
+    }
+}</code></pre>
+            </div>
+
             <div class="note-box">
-                <h4>Note</h4>
-                <p>The filename must match the public class name exactly (case-sensitive) and have the <code>.java</code> extension. For example, <code>HelloWorld.java</code> for <code>public class HelloWorld</code>.</p>
+                <h4>Important Notes</h4>
+                <ul>
+                    <li>The filename must match the public class name exactly (case-sensitive) and have the <code>.java</code> extension.</li>
+                    <li>Java is case-sensitive: <code>HelloWorld</code> and <code>helloworld</code> are different.</li>
+                    <li>Every statement must end with a semicolon (<code>;</code>).</li>
+                    <li>Strings must be enclosed in double quotes (<code>"text"</code>), while characters use single quotes (<code>'a'</code>).</li>
+                </ul>
+            </div>
+
+            <h3>Practice Questions</h3>
+            <div class="practice-card">
+                <p><strong>Q1:</strong> Write a program that prints your name, age, and favorite programming language.</p>
+                <p><strong>Q2:</strong> Create a program that calculates and displays the area of a rectangle (length × width).</p>
+                <p><strong>Q3:</strong> Write a program that takes two numbers as input and prints their sum, difference, and product.</p>
             </div>
         </section>
 
@@ -174,9 +253,105 @@ java HelloWorld
 <span class="comment"># Output: Hello, World!</span></code></pre>
             </div>
 
+            <h3>JVM Architecture (Detailed)</h3>
+            <p>The JVM consists of three main subsystems:</p>
+            
+            <h4>1. Class Loader Subsystem</h4>
+            <ul>
+                <li><strong>Loading:</strong> Reads .class files and loads them into memory</li>
+                <li><strong>Linking:</strong> Verifies bytecode, prepares memory for static variables, and resolves symbolic references</li>
+                <li><strong>Initialization:</strong> Executes static initializers and static blocks</li>
+            </ul>
+
+            <h4>2. Runtime Data Areas</h4>
+            <ul>
+                <li><strong>Method Area:</strong> Stores class-level data (class structure, method data, static variables)</li>
+                <li><strong>Heap:</strong> Stores objects and instance variables (garbage collection happens here)</li>
+                <li><strong>Stack:</strong> Stores method calls and local variables (one stack per thread)</li>
+                <li><strong>PC Register:</strong> Holds address of current instruction being executed</li>
+                <li><strong>Native Method Stack:</strong> For native (non-Java) method calls</li>
+            </ul>
+
+            <h4>3. Execution Engine</h4>
+            <ul>
+                <li><strong>Interpreter:</strong> Executes bytecode line by line (slower)</li>
+                <li><strong>JIT Compiler:</strong> Compiles frequently used code to native machine code (faster)</li>
+                <li><strong>Garbage Collector:</strong> Automatically manages memory by removing unused objects</li>
+            </ul>
+
+            <h3>Real-World Example: How Java Code Executes</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Example.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> Example {
+    <span class="keyword">static int</span> count = <span class="number">0</span>;  <span class="comment">// Stored in Method Area</span>
+    
+    <span class="keyword">public static void</span> main(String[] args) {  <span class="comment">// Stack frame created</span>
+        <span class="keyword">int</span> x = <span class="number">10</span>;  <span class="comment">// x stored in Stack</span>
+        Example obj = <span class="keyword">new</span> Example();  <span class="comment">// obj reference in Stack, object in Heap</span>
+        obj.display(x);
+    }
+    
+    <span class="keyword">void</span> display(<span class="keyword">int</span> num) {  <span class="comment">// New stack frame created</span>
+        System.out.println(<span class="string">"Number: "</span> + num);
+        <span class="comment">// Stack frame destroyed after method completes</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Compilation and Execution Process Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Terminal Commands with Explanation</span>
+                </div>
+                <pre><code><span class="comment"># Step 1: Create Java source file</span>
+<span class="comment"># Write your code in HelloWorld.java</span>
+
+<span class="comment"># Step 2: Compile Java source file</span>
+javac HelloWorld.java
+<span class="comment"># Creates HelloWorld.class (bytecode file)</span>
+
+<span class="comment"># Step 3: View bytecode (optional)</span>
+javap -c HelloWorld
+<span class="comment"># Shows the bytecode instructions</span>
+
+<span class="comment"># Step 4: Run the compiled program</span>
+java HelloWorld
+<span class="comment"># JVM loads, verifies, and executes bytecode</span>
+<span class="comment"># Output: Hello, World!</span>
+
+<span class="comment"># The .class file can run on any platform with JVM</span>
+<span class="comment"># Windows, Linux, Mac - all use the same .class file!</span></code></pre>
+            </div>
+
+            <h3>Advantages of This Architecture</h3>
+            <ul>
+                <li><strong>Platform Independence:</strong> Same bytecode runs on all platforms</li>
+                <li><strong>Security:</strong> Bytecode verifier checks code before execution</li>
+                <li><strong>Performance:</strong> JIT compiler optimizes frequently used code</li>
+                <li><strong>Memory Management:</strong> Automatic garbage collection prevents memory leaks</li>
+                <li><strong>Dynamic Linking:</strong> Classes loaded only when needed</li>
+            </ul>
+
             <div class="exam-tip">
-                <h4>Exam Tip</h4>
-                <p>Remember: JDK = JRE + Development Tools, JRE = JVM + Libraries. The JVM is platform-dependent, but bytecode is platform-independent.</p>
+                <h4>Exam Tips</h4>
+                <ul>
+                    <li>JDK = JRE + Development Tools (javac, javadoc, jar, etc.)</li>
+                    <li>JRE = JVM + Core Libraries (java.lang, java.util, etc.)</li>
+                    <li>JVM is platform-dependent, but bytecode is platform-independent</li>
+                    <li>Bytecode verification happens during the linking phase</li>
+                    <li>Heap stores objects, Stack stores method calls and local variables</li>
+                    <li>Static variables are stored in Method Area, not Heap</li>
+                </ul>
+            </div>
+
+            <h3>Practice Questions</h3>
+            <div class="practice-card">
+                <p><strong>Q1:</strong> What is the difference between JIT compiler and interpreter in JVM?</p>
+                <p><strong>Q2:</strong> Where are static variables stored in JVM memory?</p>
+                <p><strong>Q3:</strong> Why is bytecode called platform-independent but JVM is platform-dependent?</p>
+                <p><strong>Q4:</strong> What happens during the "linking" phase of class loading?</p>
             </div>
         </section>
 
@@ -564,6 +739,144 @@ System.out.println(<span class="string">"Max: "</span> + max);  <span class="com
                 <tr><td>&lt;&lt;</td><td>Left Shift</td><td>Shifts bits left, fills with 0</td></tr>
                 <tr><td>&gt;&gt;</td><td>Right Shift</td><td>Shifts bits right, preserves sign</td></tr>
             </table>
+
+            <h3>Bitwise Operators Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>BitwiseDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> BitwiseDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span> a = <span class="number">5</span>;   <span class="comment">// Binary: 0101</span>
+        <span class="keyword">int</span> b = <span class="number">3</span>;   <span class="comment">// Binary: 0011</span>
+        
+        System.out.println(<span class="string">"a & b: "</span> + (a & b));   <span class="comment">// 1 (0001)</span>
+        System.out.println(<span class="string">"a | b: "</span> + (a | b));   <span class="comment">// 7 (0111)</span>
+        System.out.println(<span class="string">"a ^ b: "</span> + (a ^ b));   <span class="comment">// 6 (0110)</span>
+        System.out.println(<span class="string">"~a: "</span> + (~a));         <span class="comment">// -6 (inverts all bits)</span>
+        
+        <span class="comment">// Shift operators</span>
+        System.out.println(<span class="string">"a << 1: "</span> + (a << <span class="number">1</span>));  <span class="comment">// 10 (multiply by 2)</span>
+        System.out.println(<span class="string">"a >> 1: "</span> + (a >> <span class="number">1</span>));  <span class="comment">// 2 (divide by 2)</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>8. instanceof Operator</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>InstanceOfDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> InstanceOfDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        String str = <span class="string">"Hello"</span>;
+        Integer num = <span class="number">100</span>;
+        Object obj = <span class="string">"Test"</span>;
+        
+        <span class="comment">// Check object types</span>
+        System.out.println(str <span class="keyword">instanceof</span> String);    <span class="comment">// true</span>
+        System.out.println(num <span class="keyword">instanceof</span> Integer);   <span class="comment">// true</span>
+        System.out.println(obj <span class="keyword">instanceof</span> String);    <span class="comment">// true</span>
+        System.out.println(str <span class="keyword">instanceof</span> Object);    <span class="comment">// true (String is subclass of Object)</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Operator Precedence</h3>
+            <p>Operators are evaluated in a specific order when multiple operators appear in an expression:</p>
+            <table class="data-table">
+                <tr>
+                    <th>Priority</th>
+                    <th>Operators</th>
+                    <th>Associativity</th>
+                </tr>
+                <tr><td>1 (Highest)</td><td>Postfix (++, --)</td><td>Left to Right</td></tr>
+                <tr><td>2</td><td>Unary (++, --, +, -, !, ~)</td><td>Right to Left</td></tr>
+                <tr><td>3</td><td>Multiplicative (*, /, %)</td><td>Left to Right</td></tr>
+                <tr><td>4</td><td>Additive (+, -)</td><td>Left to Right</td></tr>
+                <tr><td>5</td><td>Shift (&lt;&lt;, &gt;&gt;, &gt;&gt;&gt;)</td><td>Left to Right</td></tr>
+                <tr><td>6</td><td>Relational (&lt;, &gt;, &lt;=, &gt;=, instanceof)</td><td>Left to Right</td></tr>
+                <tr><td>7</td><td>Equality (==, !=)</td><td>Left to Right</td></tr>
+                <tr><td>8</td><td>Bitwise AND (&amp;)</td><td>Left to Right</td></tr>
+                <tr><td>9</td><td>Bitwise XOR (^)</td><td>Left to Right</td></tr>
+                <tr><td>10</td><td>Bitwise OR (|)</td><td>Left to Right</td></tr>
+                <tr><td>11</td><td>Logical AND (&amp;&amp;)</td><td>Left to Right</td></tr>
+                <tr><td>12</td><td>Logical OR (||)</td><td>Left to Right</td></tr>
+                <tr><td>13</td><td>Ternary (?:)</td><td>Right to Left</td></tr>
+                <tr><td>14 (Lowest)</td><td>Assignment (=, +=, -=, etc.)</td><td>Right to Left</td></tr>
+            </table>
+
+            <h3>Complex Expressions Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>OperatorPrecedence.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> OperatorPrecedence {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Understanding precedence</span>
+        <span class="keyword">int</span> result1 = <span class="number">10</span> + <span class="number">5</span> * <span class="number">2</span>;
+        System.out.println(result1);  <span class="comment">// 20, not 30 (* has higher precedence)</span>
+        
+        <span class="comment">// Using parentheses to change order</span>
+        <span class="keyword">int</span> result2 = (<span class="number">10</span> + <span class="number">5</span>) * <span class="number">2</span>;
+        System.out.println(result2);  <span class="comment">// 30</span>
+        
+        <span class="comment">// Complex expression</span>
+        <span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">10</span>, c = <span class="number">15</span>;
+        <span class="keyword">int</span> result3 = a + b * c / <span class="number">3</span> - <span class="number">2</span>;
+        System.out.println(result3);  <span class="comment">// 5 + (10*15/3) - 2 = 5 + 50 - 2 = 53</span>
+        
+        <span class="comment">// Combining logical operators</span>
+        <span class="keyword">boolean</span> flag = (a < b) && (b < c) || (a > c);
+        System.out.println(flag);  <span class="comment">// true</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Common Pitfalls and Best Practices</h3>
+            <div class="note-box">
+                <h4>Important Points</h4>
+                <ul>
+                    <li><strong>Division by Zero:</strong> Integer division by zero throws ArithmeticException; floating-point returns Infinity or NaN</li>
+                    <li><strong>Integer Division:</strong> <code>5/2</code> returns <code>2</code>, not <code>2.5</code> (use <code>5.0/2</code> for decimal result)</li>
+                    <li><strong>Increment Operators:</strong> Use parentheses for clarity: <code>(++a)</code> vs <code>(a++)</code></li>
+                    <li><strong>Comparing Objects:</strong> Use <code>.equals()</code> for content comparison, not <code>==</code> (which compares references)</li>
+                    <li><strong>Short-Circuit Evaluation:</strong> <code>&&</code> and <code>||</code> stop evaluating once result is determined</li>
+                </ul>
+            </div>
+
+            <h3>Short-Circuit Evaluation Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ShortCircuit.java</span>
+                </div>
+                <pre><code><span class="keyword">public class</span> ShortCircuit {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span> x = <span class="number">5</span>;
+        
+        <span class="comment">// && stops if first condition is false</span>
+        <span class="keyword">if</span> (x < <span class="number">3</span> && ++x > <span class="number">4</span>) {
+            System.out.println(<span class="string">"True"</span>);
+        }
+        System.out.println(<span class="string">"x = "</span> + x);  <span class="comment">// x = 5 (++x was not executed)</span>
+        
+        <span class="comment">// || stops if first condition is true</span>
+        <span class="keyword">if</span> (x > <span class="number">3</span> || ++x > <span class="number">6</span>) {
+            System.out.println(<span class="string">"True"</span>);
+        }
+        System.out.println(<span class="string">"x = "</span> + x);  <span class="comment">// x = 5 (++x was not executed)</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Practice Questions</h3>
+            <div class="practice-card">
+                <p><strong>Q1:</strong> What is the output of: <code>int x = 5; System.out.println(x++ + ++x);</code></p>
+                <p><strong>Q2:</strong> Calculate the result: <code>int result = 10 + 5 * 2 / 4 - 1;</code></p>
+                <p><strong>Q3:</strong> What's the difference between <code>&</code> and <code>&&</code> operators?</p>
+                <p><strong>Q4:</strong> Write a program to swap two numbers without using a third variable (use XOR).</p>
+                <p><strong>Q5:</strong> What is the output of: <code>5 % -3</code> and <code>-5 % 3</code>?</p>
+            </div>
 
             <div class="exam-tip">
                 <h4>Exam Tip</h4>
