@@ -1554,6 +1554,323 @@ System.out.println(<span class="string">"Max: "</span> + max);  <span class="com
                 </tr>
             </table>
 
+            <h3>Detailed Example: Bank Account System</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>BankAccountSystem.java</span>
+                </div>
+                <pre><code><span class="comment">// Demonstrating all OOP principles</span>
+
+<span class="comment">// Abstraction using abstract class</span>
+<span class="keyword">abstract class</span> Account {
+    <span class="keyword">protected</span> String accountNumber;
+    <span class="keyword">protected</span> String holderName;
+    <span class="keyword">protected double</span> balance;
+    
+    <span class="keyword">public</span> Account(String accountNumber, String holderName, <span class="keyword">double</span> initialBalance) {
+        <span class="keyword">this</span>.accountNumber = accountNumber;
+        <span class="keyword">this</span>.holderName = holderName;
+        <span class="keyword">this</span>.balance = initialBalance;
+    }
+    
+    <span class="comment">// Abstract method (must be implemented by subclasses)</span>
+    <span class="keyword">public abstract void</span> calculateInterest();
+    
+    <span class="comment">// Concrete method</span>
+    <span class="keyword">public void</span> deposit(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (amount > <span class="number">0</span>) {
+            balance += amount;
+            System.out.println(<span class="string">"Deposited: $"</span> + amount);
+        }
+    }
+    
+    <span class="keyword">public void</span> withdraw(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (amount > <span class="number">0</span> && amount <= balance) {
+            balance -= amount;
+            System.out.println(<span class="string">"Withdrawn: $"</span> + amount);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Insufficient balance"</span>);
+        }
+    }
+    
+    <span class="keyword">public double</span> getBalance() {
+        <span class="keyword">return</span> balance;
+    }
+}
+
+<span class="comment">// Inheritance and Polymorphism</span>
+<span class="keyword">class</span> SavingsAccount <span class="keyword">extends</span> Account {
+    <span class="keyword">private double</span> interestRate;
+    
+    <span class="keyword">public</span> SavingsAccount(String accountNumber, String holderName, <span class="keyword">double</span> balance, <span class="keyword">double</span> interestRate) {
+        <span class="keyword">super</span>(accountNumber, holderName, balance);
+        <span class="keyword">this</span>.interestRate = interestRate;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> calculateInterest() {
+        <span class="keyword">double</span> interest = balance * interestRate / <span class="number">100</span>;
+        balance += interest;
+        System.out.println(<span class="string">"Interest added: $"</span> + interest);
+    }
+}
+
+<span class="keyword">class</span> CurrentAccount <span class="keyword">extends</span> Account {
+    <span class="keyword">private double</span> overdraftLimit;
+    
+    <span class="keyword">public</span> CurrentAccount(String accountNumber, String holderName, <span class="keyword">double</span> balance, <span class="keyword">double</span> overdraftLimit) {
+        <span class="keyword">super</span>(accountNumber, holderName, balance);
+        <span class="keyword">this</span>.overdraftLimit = overdraftLimit;
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> withdraw(<span class="keyword">double</span> amount) {
+        <span class="keyword">if</span> (amount > <span class="number">0</span> && amount <= (balance + overdraftLimit)) {
+            balance -= amount;
+            System.out.println(<span class="string">"Withdrawn: $"</span> + amount);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"Exceeds overdraft limit"</span>);
+        }
+    }
+    
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> calculateInterest() {
+        <span class="comment">// No interest for current accounts</span>
+        System.out.println(<span class="string">"No interest for current accounts"</span>);
+    }
+}
+
+<span class="keyword">public class</span> BankAccountSystem {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Polymorphism: Parent reference to child object</span>
+        Account savings = <span class="keyword">new</span> SavingsAccount(<span class="string">"SAV001"</span>, <span class="string">"John Doe"</span>, <span class="number">1000</span>, <span class="number">5.0</span>);
+        Account current = <span class="keyword">new</span> CurrentAccount(<span class="string">"CUR001"</span>, <span class="string">"Jane Smith"</span>, <span class="number">500</span>, <span class="number">200</span>);
+        
+        <span class="comment">// Demonstrating polymorphism</span>
+        savings.deposit(<span class="number">500</span>);
+        savings.calculateInterest();
+        System.out.println(<span class="string">"Savings Balance: $"</span> + savings.getBalance());
+        
+        current.withdraw(<span class="number">600</span>);  <span class="comment">// Uses overdraft</span>
+        System.out.println(<span class="string">"Current Balance: $"</span> + current.getBalance());
+    }
+}</code></pre>
+            </div>
+
+            <h3>Access Modifiers in Detail</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Modifier</th>
+                    <th>Class</th>
+                    <th>Package</th>
+                    <th>Subclass</th>
+                    <th>World</th>
+                </tr>
+                <tr>
+                    <td>public</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>protected</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>default (no modifier)</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>private</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                </tr>
+            </table>
+
+            <h3>Method Overloading vs Overriding</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>PolymorphismDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> Calculator {
+    <span class="comment">// Method Overloading (Compile-time Polymorphism)</span>
+    <span class="keyword">public int</span> add(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="keyword">public int</span> add(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c) {
+        <span class="keyword">return</span> a + b + c;
+    }
+    
+    <span class="keyword">public double</span> add(<span class="keyword">double</span> a, <span class="keyword">double</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+}
+
+<span class="keyword">class</span> Shape {
+    <span class="keyword">public void</span> draw() {
+        System.out.println(<span class="string">"Drawing a shape"</span>);
+    }
+}
+
+<span class="keyword">class</span> Circle <span class="keyword">extends</span> Shape {
+    <span class="comment">// Method Overriding (Runtime Polymorphism)</span>
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> draw() {
+        System.out.println(<span class="string">"Drawing a circle"</span>);
+    }
+}
+
+<span class="keyword">class</span> Rectangle <span class="keyword">extends</span> Shape {
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> draw() {
+        System.out.println(<span class="string">"Drawing a rectangle"</span>);
+    }
+}
+
+<span class="keyword">public class</span> PolymorphismDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="comment">// Overloading example</span>
+        Calculator calc = <span class="keyword">new</span> Calculator();
+        System.out.println(calc.add(<span class="number">5</span>, <span class="number">3</span>));           <span class="comment">// 8</span>
+        System.out.println(calc.add(<span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>));        <span class="comment">// 10</span>
+        System.out.println(calc.add(<span class="number">5.5</span>, <span class="number">3.2</span>));      <span class="comment">// 8.7</span>
+        
+        <span class="comment">// Overriding example (Runtime Polymorphism)</span>
+        Shape shape1 = <span class="keyword">new</span> Circle();
+        Shape shape2 = <span class="keyword">new</span> Rectangle();
+        
+        shape1.draw();  <span class="comment">// Drawing a circle</span>
+        shape2.draw();  <span class="comment">// Drawing a rectangle</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>this and super Keywords</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ThisSuperDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> Parent {
+    <span class="keyword">int</span> value = <span class="number">100</span>;
+    
+    <span class="keyword">public</span> Parent() {
+        System.out.println(<span class="string">"Parent constructor"</span>);
+    }
+    
+    <span class="keyword">public void</span> display() {
+        System.out.println(<span class="string">"Parent display: "</span> + value);
+    }
+}
+
+<span class="keyword">class</span> Child <span class="keyword">extends</span> Parent {
+    <span class="keyword">int</span> value = <span class="number">200</span>;
+    
+    <span class="keyword">public</span> Child() {
+        <span class="keyword">super</span>();  <span class="comment">// Calls parent constructor</span>
+        System.out.println(<span class="string">"Child constructor"</span>);
+    }
+    
+    <span class="keyword">public void</span> display() {
+        System.out.println(<span class="string">"Child value: "</span> + <span class="keyword">this</span>.value);      <span class="comment">// 200</span>
+        System.out.println(<span class="string">"Parent value: "</span> + <span class="keyword">super</span>.value);   <span class="comment">// 100</span>
+        <span class="keyword">super</span>.display();  <span class="comment">// Calls parent method</span>
+    }
+}
+
+<span class="keyword">public class</span> ThisSuperDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Child child = <span class="keyword">new</span> Child();
+        child.display();
+    }
+}</code></pre>
+            </div>
+
+            <h3>Static vs Instance Members</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>StaticDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">class</span> Counter {
+    <span class="comment">// Static variable (shared by all instances)</span>
+    <span class="keyword">static int</span> count = <span class="number">0</span>;
+    
+    <span class="comment">// Instance variable (unique to each instance)</span>
+    <span class="keyword">int</span> id;
+    
+    <span class="keyword">public</span> Counter() {
+        count++;  <span class="comment">// Increment shared counter</span>
+        id = count;  <span class="comment">// Assign unique id</span>
+    }
+    
+    <span class="comment">// Static method</span>
+    <span class="keyword">public static int</span> getCount() {
+        <span class="keyword">return</span> count;
+    }
+    
+    <span class="comment">// Instance method</span>
+    <span class="keyword">public void</span> display() {
+        System.out.println(<span class="string">"Object ID: "</span> + id + <span class="string">", Total objects: "</span> + count);
+    }
+}
+
+<span class="keyword">public class</span> StaticDemo {
+    <span class="keyword">public static void</span> main(String[] args) {
+        Counter c1 = <span class="keyword">new</span> Counter();
+        Counter c2 = <span class="keyword">new</span> Counter();
+        Counter c3 = <span class="keyword">new</span> Counter();
+        
+        c1.display();  <span class="comment">// Object ID: 1, Total objects: 3</span>
+        c2.display();  <span class="comment">// Object ID: 2, Total objects: 3</span>
+        c3.display();  <span class="comment">// Object ID: 3, Total objects: 3</span>
+        
+        System.out.println(<span class="string">"Total created: "</span> + Counter.getCount());  <span class="comment">// 3</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>final Keyword</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>FinalDemo.java</span>
+                </div>
+                <pre><code><span class="keyword">final class</span> FinalClass {  <span class="comment">// Cannot be extended</span>
+    <span class="keyword">final int</span> MAX_VALUE = <span class="number">100</span>;  <span class="comment">// Constant (cannot be changed)</span>
+    
+    <span class="keyword">final void</span> display() {  <span class="comment">// Cannot be overridden</span>
+        System.out.println(<span class="string">"Final method"</span>);
+    }
+}
+
+<span class="keyword">class</span> Example {
+    <span class="keyword">final int</span> x;  <span class="comment">// Blank final variable</span>
+    
+    <span class="keyword">public</span> Example(<span class="keyword">int</span> x) {
+        <span class="keyword">this</span>.x = x;  <span class="comment">// Must be initialized in constructor</span>
+    }
+}</code></pre>
+            </div>
+
+            <h3>Practice Questions</h3>
+            <div class="practice-card">
+                <p><strong>Q1:</strong> Create a class hierarchy for Vehicle → Car, Bike with appropriate properties and methods.</p>
+                <p><strong>Q2:</strong> Implement a Shape class with calculateArea() method, then create Circle and Rectangle subclasses.</p>
+                <p><strong>Q3:</strong> What's the difference between method overloading and method overriding? Provide examples.</p>
+                <p><strong>Q4:</strong> Explain the use of 'this' and 'super' keywords with examples.</p>
+                <p><strong>Q5:</strong> When would you use an abstract class vs an interface?</p>
+                <p><strong>Q6:</strong> Create an Employee class with encapsulation (private fields, public getters/setters).</p>
+                <p><strong>Q7:</strong> What is the output if you call a static method using an object reference? Is it allowed?</p>
+            </div>
+
             <div class="exam-tip">
                 <h4>Exam Tip</h4>
                 <p>Remember: Java supports single inheritance for classes but multiple inheritance through interfaces. From Java 8, interfaces can have default and static methods with implementations.</p>

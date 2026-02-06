@@ -204,7 +204,220 @@
 
             <div class="practice-card">
                 <div class="practice-header">
-                    <h3>6. Find Duplicates in Array</h3>
+                    <h3>5. Two Sum Problem</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Given an array of integers and a target sum, find two numbers that add up to the target.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public class</span> TwoSum {
+    <span class="keyword">public static int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) {
+        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < nums.length; i++) {
+            <span class="keyword">int</span> complement = target - nums[i];
+            <span class="keyword">if</span> (map.containsKey(complement)) {
+                <span class="keyword">return new int</span>[] {map.get(complement), i};
+            }
+            map.put(nums[i], i);
+        }
+        <span class="keyword">return new int</span>[] {};
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] nums = {<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>};
+        <span class="keyword">int</span>[] result = twoSum(nums, <span class="number">9</span>);
+        System.out.println(<span class="string">"Indices: "</span> + Arrays.toString(result));  <span class="comment">// [0, 1]</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>6. Find Missing Number</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Given an array containing n-1 numbers taken from 1 to n, find the missing number.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> MissingNumber {
+    <span class="keyword">public static int</span> findMissing(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> n) {
+        <span class="comment">// Sum of first n natural numbers: n*(n+1)/2</span>
+        <span class="keyword">int</span> expectedSum = n * (n + <span class="number">1</span>) / <span class="number">2</span>;
+        <span class="keyword">int</span> actualSum = <span class="number">0</span>;
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> num : arr) {
+            actualSum += num;
+        }
+        
+        <span class="keyword">return</span> expectedSum - actualSum;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>};
+        System.out.println(<span class="string">"Missing: "</span> + findMissing(arr, <span class="number">6</span>));  <span class="comment">// 3</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>7. Second Largest Element</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Find the second largest element in an array without sorting.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> SecondLargest {
+    <span class="keyword">public static int</span> findSecondLargest(<span class="keyword">int</span>[] arr) {
+        <span class="keyword">if</span> (arr.length < <span class="number">2</span>) <span class="keyword">return</span> -<span class="number">1</span>;
+        
+        <span class="keyword">int</span> largest = Integer.MIN_VALUE;
+        <span class="keyword">int</span> secondLargest = Integer.MIN_VALUE;
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> num : arr) {
+            <span class="keyword">if</span> (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } <span class="keyword">else if</span> (num > secondLargest && num != largest) {
+                secondLargest = num;
+            }
+        }
+        
+        <span class="keyword">return</span> secondLargest;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">12</span>, <span class="number">35</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">34</span>, <span class="number">1</span>};
+        System.out.println(<span class="string">"Second largest: "</span> + findSecondLargest(arr));  <span class="comment">// 34</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>8. Count Vowels and Consonants</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Write a program to count vowels and consonants in a given string.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">public class</span> VowelConsonantCounter {
+    <span class="keyword">public static void</span> countVowelsConsonants(String str) {
+        str = str.toLowerCase();
+        <span class="keyword">int</span> vowels = <span class="number">0</span>, consonants = <span class="number">0</span>;
+        
+        <span class="keyword">for</span> (<span class="keyword">char</span> ch : str.toCharArray()) {
+            <span class="keyword">if</span> (Character.isLetter(ch)) {
+                <span class="keyword">if</span> (ch == <span class="string">'a'</span> || ch == <span class="string">'e'</span> || ch == <span class="string">'i'</span> || ch == <span class="string">'o'</span> || ch == <span class="string">'u'</span>) {
+                    vowels++;
+                } <span class="keyword">else</span> {
+                    consonants++;
+                }
+            }
+        }
+        
+        System.out.println(<span class="string">"Vowels: "</span> + vowels + <span class="string">", Consonants: "</span> + consonants);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        countVowelsConsonants(<span class="string">"Hello World"</span>);  <span class="comment">// Vowels: 3, Consonants: 7</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>9. Remove Duplicates from Array</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Remove duplicate elements from a sorted array in-place.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.Arrays;
+
+<span class="keyword">public class</span> RemoveDuplicates {
+    <span class="keyword">public static int</span> removeDuplicates(<span class="keyword">int</span>[] arr) {
+        <span class="keyword">if</span> (arr.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;
+        
+        <span class="keyword">int</span> j = <span class="number">0</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i < arr.length; i++) {
+            <span class="keyword">if</span> (arr[i] != arr[j]) {
+                j++;
+                arr[j] = arr[i];
+            }
+        }
+        
+        <span class="keyword">return</span> j + <span class="number">1</span>;
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        <span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>};
+        <span class="keyword">int</span> newLength = removeDuplicates(arr);
+        System.out.println(<span class="string">"New length: "</span> + newLength);
+        System.out.println(Arrays.toString(Arrays.copyOf(arr, newLength)));
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>10. Anagram Check</h3>
+                    <span class="difficulty easy">Easy</span>
+                </div>
+                <p>Check if two strings are anagrams of each other.</p>
+                <details class="solution">
+                    <summary>View Solution</summary>
+                    <div class="code-block">
+                        <pre><code><span class="keyword">import</span> java.util.Arrays;
+
+<span class="keyword">public class</span> AnagramCheck {
+    <span class="keyword">public static boolean</span> isAnagram(String s1, String s2) {
+        <span class="keyword">if</span> (s1.length() != s2.length()) <span class="keyword">return false</span>;
+        
+        <span class="keyword">char</span>[] arr1 = s1.toLowerCase().toCharArray();
+        <span class="keyword">char</span>[] arr2 = s2.toLowerCase().toCharArray();
+        
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        
+        <span class="keyword">return</span> Arrays.equals(arr1, arr2);
+    }
+    
+    <span class="keyword">public static void</span> main(String[] args) {
+        System.out.println(isAnagram(<span class="string">"listen"</span>, <span class="string">"silent"</span>));  <span class="comment">// true</span>
+        System.out.println(isAnagram(<span class="string">"hello"</span>, <span class="string">"world"</span>));    <span class="comment">// false</span>
+    }
+}</code></pre>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Intermediate Problems -->
+        <section id="intermediate" class="content-section">
+            <h2>Intermediate Level</h2>
+
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h3>11. Find Duplicates in Array</h3>
                     <span class="difficulty medium">Medium</span>
                 </div>
                 <p>Find all duplicate elements in an array using different approaches.</p>
@@ -237,7 +450,7 @@
 
             <div class="practice-card">
                 <div class="practice-header">
-                    <h3>7. Custom Exception</h3>
+                    <h3>12. Custom Exception</h3>
                     <span class="difficulty medium">Medium</span>
                 </div>
                 <p>Create a custom exception for invalid age and use it in a Person class.</p>
@@ -278,7 +491,7 @@
 
             <div class="practice-card">
                 <div class="practice-header">
-                    <h3>8. Producer-Consumer with Threads</h3>
+                    <h3>13. Producer-Consumer with Threads</h3>
                     <span class="difficulty medium">Medium</span>
                 </div>
                 <p>Implement producer-consumer pattern using wait/notify.</p>
