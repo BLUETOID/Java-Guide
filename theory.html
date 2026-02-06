@@ -188,6 +188,120 @@
                     <p>Automatic memory management. JVM automatically reclaims memory from objects that are no longer referenced. Runs in background, cannot be forced (only requested via System.gc()). Helps prevent memory leaks.</p>
                 </div>
             </details>
+
+            <details class="theory-item">
+                <summary>16. What is the difference between String, StringBuilder, and StringBuffer?</summary>
+                <div class="answer">
+                    <p><strong>String:</strong> Immutable. Every modification creates a new object. Thread-safe by immutability.</p>
+                    <p><strong>StringBuilder:</strong> Mutable. More efficient for concatenation. Not thread-safe.</p>
+                    <p><strong>StringBuffer:</strong> Mutable and synchronized. Thread-safe but slower than StringBuilder.</p>
+                    <p><strong>Use case:</strong> String for fixed values, StringBuilder for single-threaded string manipulation, StringBuffer for multi-threaded scenarios.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>17. What is method overloading and what are its rules?</summary>
+                <div class="answer">
+                    <p>Method overloading: Same method name, different parameters in same class. Compile-time polymorphism.</p>
+                    <p><strong>Rules:</strong></p>
+                    <ul>
+                        <li>Must have different parameter list (number or types)</li>
+                        <li>Return type can be different but doesn't contribute to overloading</li>
+                        <li>Access modifiers can be different</li>
+                        <li>Can throw different exceptions</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>18. What is method overriding and what are its rules?</summary>
+                <div class="answer">
+                    <p>Method overriding: Subclass provides specific implementation of parent class method. Runtime polymorphism.</p>
+                    <p><strong>Rules:</strong></p>
+                    <ul>
+                        <li>Must have same signature as parent method</li>
+                        <li>Return type must be same or covariant</li>
+                        <li>Access modifier cannot be more restrictive</li>
+                        <li>Cannot override static, final, or private methods</li>
+                        <li>@Override annotation recommended</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>19. What is the difference between == and equals() method?</summary>
+                <div class="answer">
+                    <p><strong>== operator:</strong> Compares references (memory addresses) for objects. For primitives, compares values.</p>
+                    <p><strong>equals() method:</strong> Compares content/values of objects. Defined in Object class, can be overridden.</p>
+                    <p><strong>Example:</strong> String s1 = "Hello"; String s2 = new String("Hello");<br/>
+                    s1 == s2 returns false (different objects)<br/>
+                    s1.equals(s2) returns true (same content)</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>20. What is the purpose of the finalize() method?</summary>
+                <div class="answer">
+                    <p>Called by garbage collector before destroying object. Used for cleanup activities (close files, release resources).</p>
+                    <p><strong>Note:</strong> Not guaranteed to be called. Deprecated in Java 9. Use try-with-resources or cleaner API instead.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>21. What are access modifiers and their scope?</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>Modifier</th><th>Class</th><th>Package</th><th>Subclass</th><th>World</th></tr>
+                        <tr><td>public</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>protected</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+                        <tr><td>default</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td></tr>
+                        <tr><td>private</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>22. What is constructor chaining?</summary>
+                <div class="answer">
+                    <p>Process of calling one constructor from another constructor using this() or super().</p>
+                    <p><strong>this():</strong> Calls another constructor in same class. Must be first statement.</p>
+                    <p><strong>super():</strong> Calls parent class constructor. Must be first statement.</p>
+                    <p><strong>Use case:</strong> Avoid code duplication, initialize object in different ways.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>23. What is the difference between break and continue?</summary>
+                <div class="answer">
+                    <p><strong>break:</strong> Exits the loop completely. Control moves to statement after loop.</p>
+                    <p><strong>continue:</strong> Skips current iteration. Control moves to next iteration.</p>
+                    <p>Both can be used with labels to break/continue outer loops in nested structures.</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>24. What is instanceof operator?</summary>
+                <div class="answer">
+                    <p>Tests whether an object is an instance of a specific class or its subclasses.</p>
+                    <p><strong>Syntax:</strong> object instanceof Class</p>
+                    <p><strong>Returns:</strong> true if object is instance of Class, false otherwise</p>
+                    <p><strong>Use case:</strong> Type checking before casting, avoiding ClassCastException</p>
+                </div>
+            </details>
+
+            <details class="theory-item">
+                <summary>25. What is the difference between Array and ArrayList?</summary>
+                <div class="answer">
+                    <table class="info-table">
+                        <tr><th>Array</th><th>ArrayList</th></tr>
+                        <tr><td>Fixed size</td><td>Dynamic size</td></tr>
+                        <tr><td>Can store primitives and objects</td><td>Stores only objects (uses wrapper for primitives)</td></tr>
+                        <tr><td>Better performance</td><td>Slightly slower due to resizing</td></tr>
+                        <tr><td>length property</td><td>size() method</td></tr>
+                        <tr><td>Cannot add/remove elements</td><td>Can add/remove elements</td></tr>
+                    </table>
+                </div>
+            </details>
         </section>
 
         <!-- Unit II -->
